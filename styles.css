@@ -42,6 +42,22 @@ a{color:inherit;text-decoration:none}
 .btn.danger{background:var(--danger); color:#1a0303}
 .btn.ok{background:var(--ok); color:#02110b}
 
+/* grid สำหรับรายการประกาศ */
+.announcementsGrid {
+  grid-column: 1 / -1;           /* กินเต็มความกว้าง content */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+.announcementCard.urgent {
+  border-left: 4px solid var(--danger);
+  background:
+    linear-gradient(135deg, rgba(255,77,77,.08), rgba(0,0,0,0)),
+    rgba(17,24,38,.55);
+}
+
+
 .topbar{
   display:flex;
   align-items:center;
@@ -123,7 +139,7 @@ a{color:inherit;text-decoration:none}
   background:rgba(17,24,38,.55);
   border:1px solid var(--line);
   border-radius:var(--radius);
-  padding:14px;
+  padding:10px;
 }
 .card h2{margin:0 0 8px 0;font-size:18px}
 .card h3{margin:0 0 8px 0;font-size:16px}
@@ -186,7 +202,70 @@ a{color:inherit;text-decoration:none}
 }
 .textarea{min-height:110px; resize:vertical}
 
+/* ===== Travel layout ===== */
+.travelLayout{
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.travelTabs{
+  display: grid;
+  gap: 8px;
+}
+
+.tabBtn{
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(17,24,38,.35);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 750;
+}
+
+.tabBtn.active{
+  border-color: rgba(77,163,255,.55);
+  box-shadow: 0 0 0 3px rgba(77,163,255,.12);
+}
+
+.travelRight{
+  display: grid;
+  gap: 12px;
+}
+
+.travelCards{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 12px;
+}
+
+.mapBox{
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(10,14,20,.45);
+}
+
+.mapFrame{
+  width: 100%;
+  height: 340px;
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 980px){
+  .mapFrame{ height: 280px; }
+}
+
+
+
 @media (max-width: 980px){
   .shell{grid-template-columns:1fr}
   .sidebar{position:sticky; top:72px; z-index:10; border-right:0; border-bottom:1px solid var(--line)}
+  .travelLayout{ grid-template-columns: 1fr; }
 }

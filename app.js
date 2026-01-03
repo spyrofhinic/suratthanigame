@@ -2,6 +2,30 @@
 const $ = (sel) => document.querySelector(sel);
 const GAS_URL = "https://script.google.com/macros/s/AKfycbwgDw05SlfuW9Ozy_sTICul0JTY7Mo8dDZMY0HWqwpKd04I8oh2JtiaW1w48dI1Odq64Q/exec";
 const GAS_KEY = "AKfycbwgDw05SlfuW9Ozy_sTICul0JTY7Mo8dDZMY0HWqwpKd04I8oh2JtiaW1w48dI1Odq64Q";
+const VENUE_QUERY = "ศาลากลางจังหวัดสุราษฎร์ธานี ศูนย์ประชุม";
+const MAPS_OPEN_URL = (q) => `https://www.google.com/maps/@9.133954,99.3326335,20.75z?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D`;
+const MAPS_EMBED_URL = (q) => `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1392.726574140321!2d99.332163795104!3d9.134083831596012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30540775e49b8fdf%3A0x5e333e5a6b36bcb!2z4Lio4Liy4Lil4Liy4LiB4Lil4Liy4LiH4LiI4Lix4LiH4Lir4Lin4Lix4LiU4Liq4Li44Lij4Liy4Lip4LiO4Lij4LmM4LiY4Liy4LiZ4Li1!5e0!3m2!1sth!2sth!4v1767462212504!5m2!1sth!2sth&output=embed`;
+const mapUrl = MAPS_OPEN_URL(VENUE_QUERY);
+
+const openBtn = document.querySelector("#btnOpenMap");
+if (openBtn) openBtn.onclick = () => window.open(mapUrl, "_blank", "noopener");
+
+async function copyLink() {
+  try {
+    await navigator.clipboard.writeText(mapUrl);
+    alert("คัดลอกลิงก์แผนที่แล้ว");
+  } catch {
+    prompt("คัดลอกลิงก์นี้:", mapUrl);
+  }
+}
+
+const copyBtn1 = document.querySelector("#btnCopyMap");
+if (copyBtn1) copyBtn1.onclick = copyLink;
+
+const copyBtn2 = document.querySelector("#btnCopyMap2");
+if (copyBtn2) copyBtn2.onclick = copyLink;
+
+
 
 async function fetchSheet(name, params = {}) {
   const url = new URL(GAS_URL);
@@ -322,6 +346,8 @@ function renderAnnouncements() {
 
       ${card("ประกาศ #1 (ด่วน)", `
         <div class="row">
+${announcementCard1()}
+        ${announcementCard2()}
           <span class="badge live">ด่วน</span>
           <span class="badge">อัปเดต 08:40</span>
           <span class="badge">กลุ่ม: นักกีฬา+ทีมงาน</span>
@@ -589,20 +615,124 @@ function renderTravel() {
     <div class="grid">
       <div class="card kv">
         <h2>Travel</h2>
-        <div class="muted">แยกต้นทาง: สนามบิน / รถไฟ / บขส / รถยนต์</div>
+        <div class="muted">แยกต้นทาง: สนามบิน / รถไฟ / บขส / รถยนต์ • เส้นทาง/เวลา/ค่าใช้จ่าย</div>
       </div>
-      ${card("เลือกต้นทาง", `
-        <div class="row">
-          <button class="btn small">จากสนามบิน</button>
-          <button class="btn small ghost">จากรถไฟ</button>
-          <button class="btn small ghost">จาก บขส</button>
-          <button class="btn small ghost">รถยนต์</button>
+
+      <div class="travelLayout">
+        <!-- LEFT: Source selector -->
+        <div class="card travelLeft">
+          <h3 style="margin:0 0 10px 0">เลือกต้นทาง</h3>
+
+          <div class="travelTabs">
+            <button class="tabBtn active" data-src="airport">✈️ สนามบิน</button>
+            <button class="tabBtn" data-src="train">🚆 รถไฟ</button>
+            <button class="tabBtn" data-src="bus">🚌 บขส</button>
+            <button class="tabBtn" data-src="car">🚗 รถยนต์</button>
+          </div>
+
+          <div class="muted" style="font-size:12px;margin-top:10px">
+            เลือกต้นทางเพื่อดูเส้นทางแนะนำ / จุดลงรถ / เวลา / ค่าใช้จ่าย
+          </div>
         </div>
-        <p class="muted" style="margin-top:10px">ของจริง: ใส่ Step-by-step + เวลา/ค่าใช้จ่ายแบบช่วง</p>
-      `)}
+
+        <!-- RIGHT: Detail area -->
+        <div class="travelRight">
+          <div class="travelHeader card">
+            <div class="row" style="justify-content:space-between">
+              <div>
+                <h3 style="margin:0">จากสนามบินสุราษฎร์ฯ → Venue</h3>
+                <div class="muted" style="font-size:12px;margin-top:4px">
+                  ศูนย์ประชุมฯ ศาลากลางสุราษฎร์ธานี
+                </div>
+              </div>
+              <button class="btn small" id="btnOpenMap">เปิดแผนที่จริง</button>
+<button class="btn small ghost" id="btnCopyMap">คัดลอกลิงก์</button>
+            </div>
+          </div>
+
+          <div class="travelCards">
+            ${card("ตัวเลือกแนะนำ", `
+              <div class="row">
+                <span class="badge">รถตู้/แท็กซี่</span>
+                <span class="badge">เร็ว</span>
+                <span class="badge">สะดวก</span>
+              </div>
+              <p class="muted" style="margin-top:8px">
+                เวลา: ~40–60 นาที • ค่าใช้จ่าย: ~XXX–XXX บาท (Placeholder)
+              </p>
+            `)}
+
+            ${card("Step-by-step", `
+              <ol style="margin:0; padding-left:18px">
+                <li>ออกจากอาคารผู้โดยสาร → จุดรับรถ</li>
+                <li>แจ้งปลายทาง: “ศาลากลางสุราษฎร์ฯ / ศูนย์ประชุมฯ”</li>
+                <li>ถึงจุดลงทะเบียน: ชั้น 1 โซน A</li>
+              </ol>
+              <div class="row" style="margin-top:10px">
+                <button class="btn small">เปิดแผนที่ (จำลอง)</button>
+                <button class="btn small ghost">แชร์เส้นทาง</button>
+              </div>
+            `)}
+
+            ${card("จุดสำคัญ", `
+              <ul style="margin:0; padding-left:18px">
+                <li>Drop-off แนะนำ: ประตูหน้าอาคาร</li>
+                <li>Parking: โซน B (ถ้ามี)</li>
+                <li>Help Desk: หน้าลงทะเบียน</li>
+              </ul>
+            `)}
+
+            ${card("หมายเหตุ", `
+              <p class="muted" style="margin:0">
+                ใส่ข้อมูลจริงได้ภายหลัง: ตารางรถตู้, เบอร์ติดต่อ, เวลาเร่งด่วน
+              </p>
+            `)}
+${card("แผนที่ (Google Maps)", `
+  <div class="mapBox">
+    <iframe
+      class="mapFrame"
+      src="${MAPS_EMBED_URL(VENUE_QUERY)}"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <div class="row" style="margin-top:10px">
+    <a class="btn small" href="${MAPS_OPEN_URL(VENUE_QUERY)}" target="_blank" rel="noopener">เปิดแผนที่จริง</a>
+    <button class="btn small ghost" id="btnCopyMap2">คัดลอกลิงก์</button>
+  </div>
+  <div class="muted" style="font-size:12px;margin-top:8px">
+    *ถ้า Embed ไม่ขึ้น ให้เปิดแผนที่จริง (บางเครือข่ายบล็อค iframe)
+  </div>
+`)}
+
+          </div>
+        </div>
+      </div>
     </div>
   `);
+
+  // ---- Simple tab behavior (prototype) ----
+  const tabs = document.querySelectorAll(".tabBtn");
+  const header = document.querySelector(".travelHeader h3");
+
+  tabs.forEach(btn => {
+    btn.onclick = () => {
+      tabs.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const src = btn.dataset.src;
+      const mapTitle = {
+        airport: "จากสนามบินสุราษฎร์ฯ → Venue",
+        train: "จากสถานีรถไฟ → Venue",
+        bus: "จาก บขส → Venue",
+        car: "เดินทางด้วยรถยนต์ → Venue",
+      };
+      header.textContent = mapTitle[src] || "Travel → Venue";
+    };
+  });
 }
+
 
 function renderStay(){ mount(`<div class="grid"><div class="card kv"><h2>ที่พัก</h2><div class="muted">รายการที่พัก + ระยะทาง + เบอร์ + แผนที่ (Placeholder)</div></div>${card("ตัวอย่างที่พัก", `<div class="row"><span class="badge">ใกล้สนาม</span><span class="badge">ช่วงราคา</span></div><p class="muted">Hotel A • 2.1 กม. • โทร • แผนที่</p>`)} </div>`); }
 function renderFood(){ mount(`<div class="grid"><div class="card kv"><h2>ร้านอาหาร</h2><div class="muted">จัดหมวด เช้า/กลางวัน/เย็น/มื้อดึก (Placeholder)</div></div>${card("ตัวอย่างร้าน", `<div class="row"><span class="badge">เช้า</span><span class="badge">ใกล้สนาม</span></div><p class="muted">ร้าน A • เวลาเปิด • แผนที่</p>`)} </div>`); }
