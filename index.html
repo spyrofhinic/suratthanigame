@@ -1,0 +1,92 @@
+<!-- /index.html -->
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Suratthani Games 41 • Esports Portal (Prototype)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">STG41</div>
+      <div class="brandText">
+        <div class="title">สุราษฎร์ธานีเกมส์ ครั้งที่ 41 • อีสปอร์ต</div>
+        <div class="subtitle">13–16 พฤษภาคม 2569 • ศูนย์ประชุมฯ ศาลากลางสุราษฎร์ธานี</div>
+      </div>
+    </div>
+
+    <nav class="topActions">
+      <button class="btn ghost" id="btnLogout" title="ออกจากระบบ">ออกจากระบบ</button>
+      <button class="btn" id="btnHelp" title="ช่วยเหลือ">ช่วยเหลือ</button>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <!-- LEFT: Sidebar (role-based) -->
+    <aside class="sidebar" id="sidebar">
+      <div class="rolePill" id="rolePill">ยังไม่ได้เข้าสู่ระบบ</div>
+
+      <div class="navGroup">
+        <div class="navTitle">เมนูหลัก</div>
+        <a class="navItem" href="#/" data-route="/">Dashboard</a>
+        <a class="navItem" href="#/announcements" data-route="/announcements">ประกาศด่วน</a>
+        <a class="navItem only-athlete" href="#/my-schedule" data-route="/my-schedule">ตารางของฉัน</a>
+        <a class="navItem" href="#/call-time" data-route="/call-time">Call Time</a>
+        <a class="navItem" href="#/matches" data-route="/matches">Matches</a>
+        <a class="navItem" href="#/results" data-route="/results">Results</a>
+      </div>
+
+      <div class="navGroup">
+        <div class="navTitle">สถานที่ & เดินทาง</div>
+        <a class="navItem" href="#/venue" data-route="/venue">Venue</a>
+        <a class="navItem" href="#/travel" data-route="/travel">Travel</a>
+        <a class="navItem" href="#/stay" data-route="/stay">ที่พัก</a>
+        <a class="navItem" href="#/food" data-route="/food">ร้านอาหาร</a>
+      </div>
+
+      <div class="navGroup">
+        <div class="navTitle">เอกสาร & กติกา</div>
+        <a class="navItem" href="#/rules" data-route="/rules">Rules</a>
+        <a class="navItem" href="#/documents" data-route="/documents">Documents</a>
+      </div>
+
+      <div class="navGroup">
+        <div class="navTitle">สนับสนุนหน้างาน</div>
+        <a class="navItem" href="#/incidents" data-route="/incidents">Incidents</a>
+        <a class="navItem" href="#/contacts" data-route="/contacts">Contacts</a>
+        <a class="navItem" href="#/faq" data-route="/faq">FAQ</a>
+      </div>
+
+      <div class="navGroup only-staff">
+        <div class="navTitle">Staff Tools</div>
+        <a class="navItem" href="#/staff/run-of-show" data-route="/staff/run-of-show">Run-of-show</a>
+        <a class="navItem" href="#/staff/check-in-manager" data-route="/staff/check-in-manager">Check-in Manager</a>
+        <a class="navItem" href="#/staff/call-time-manager" data-route="/staff/call-time-manager">Call Time Manager</a>
+        <a class="navItem" href="#/staff/match-ops" data-route="/staff/match-ops">Match Ops</a>
+        <a class="navItem" href="#/staff/results-manager" data-route="/staff/results-manager">Results Manager</a>
+        <a class="navItem" href="#/staff/incidents-queue" data-route="/staff/incidents-queue">Incidents Queue</a>
+        <a class="navItem" href="#/staff/documents-manager" data-route="/staff/documents-manager">Documents Manager</a>
+      </div>
+
+      <div class="sidebarFoot">
+        <div class="muted">Prototype • HTML/CSS/JS • ไม่เชื่อมฐานข้อมูล</div>
+      </div>
+    </aside>
+
+    <!-- RIGHT: Content -->
+    <section class="content">
+      <!-- Router outlet -->
+      <div id="view"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>© สุราษฎร์ธานีเกมส์ ครั้งที่ 41 • ประเภทกีฬาอีสปอร์ต (Prototype)</div>
+    <div class="muted">แนะนำ: ใส่ QR Code ไปหน้า /announcements และ /venue ในหน้างาน</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
