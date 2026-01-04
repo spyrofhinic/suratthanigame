@@ -258,14 +258,57 @@ a{color:inherit;text-decoration:none}
   display: block;
 }
 
-@media (max-width: 980px){
-  .mapFrame{ height: 280px; }
+
+/* ===== Mobile Drawer Sidebar ===== */
+.overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(2px);
+  display: none;
+  z-index: 30;
 }
 
-
-
 @media (max-width: 980px){
-  .shell{grid-template-columns:1fr}
-  .sidebar{position:sticky; top:72px; z-index:10; border-right:0; border-bottom:1px solid var(--line)}
-  .travelLayout{ grid-template-columns: 1fr; }
+  /* เปลี่ยน layout เป็น 1 คอลัมน์เต็ม */
+  .shell{ grid-template-columns: 1fr; }
+  .content{ padding: 12px; max-width: 100%; }
+  .travelLayout{ grid-template-columns: 1fr !important; }
+.mapFrame{ height: 280px; }
+
+  /* Sidebar เป็น drawer ซ้าย */
+  .sidebar{
+    position: fixed;
+    top: 72px;              /* สูงเท่า topbar โดยประมาณ */
+    left: 0;
+    width: min(86vw, 340px);
+    height: calc(100vh - 72px);
+    overflow: auto;
+    transform: translateX(-110%);
+    transition: transform .18s ease;
+    z-index: 40;
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
+  }
+
+  /* เปิด drawer */
+  body.sidebar-open .sidebar{ transform: translateX(0); }
+  body.sidebar-open .overlay{ display: block; }
+
+  /* ปุ่มบน topbar ให้กดง่ายขึ้น */
+  .topActions .btn{ padding: 10px 12px; border-radius: 12px; }
+
+  /* grid การ์ดให้เป็น 1 คอลัมน์ */
+  .grid{ grid-template-columns: 1fr; }
+
+  /* ตารางไม่ล้น: ให้เลื่อนได้ */
+  .table{ display: block; overflow-x: auto; white-space: nowrap; }
 }
+
+/* จอเล็กมาก */
+@media (max-width: 420px){
+  .title{ font-size: 14px; }
+  .subtitle{ display:none; }
+  .logo{ width:40px; height:40px; border-radius: 12px; }
+}
+
