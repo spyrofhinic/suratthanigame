@@ -1,95 +1,1502 @@
-<!-- /index.html -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Suratthani Games 41 • Esports Portal (Prototype)</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายงานนักกีฬาแยกตามจังหวัด</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Thai Sans Serif', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1F4788 0%, #2C3E50 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            padding: 30px 20px;
+            background: #F8F9FA;
+            border-bottom: 2px solid #E0E0E0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card .number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card .label {
+            font-size: 13px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .content {
+            padding: 30px 20px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            color: #1F4788;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            font-weight: bold;
+        }
+        
+        .summary-table {
+            width: 100%;
+            margin-bottom: 40px;
+            border-collapse: collapse;
+        }
+        
+        .summary-table thead {
+            background: #2C3E50;
+            color: white;
+        }
+        
+        .summary-table th {
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .summary-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+        
+        .summary-table tbody tr:hover {
+            background: #F5F5F5;
+        }
+        
+        .summary-table tbody tr:nth-child(odd) {
+            background: #FAFAFA;
+        }
+        
+        .rank {
+            font-weight: bold;
+            color: #667eea;
+            width: 40px;
+        }
+        
+        .province-name {
+            font-weight: 500;
+            color: #1F4788;
+        }
+        
+        .count {
+            text-align: center;
+            font-weight: bold;
+            color: #764ba2;
+        }
+        
+        .total-row {
+            background: #2C3E50 !important;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .total-row td {
+            color: white;
+        }
+        
+        .detail-section {
+            margin-bottom: 30px;
+        }
+        
+        .province-card {
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .province-header {
+            padding: 15px 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .province-count {
+            background: rgba(255,255,255,0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .athletes-list {
+            background: white;
+            padding: 15px 20px;
+        }
+        
+        .athletes-list ol {
+            list-style-position: inside;
+            line-height: 1.8;
+        }
+        
+        .athletes-list li {
+            padding: 5px 0;
+            font-size: 13px;
+            color: #333;
+        }
+        
+        .search-box {
+            margin-bottom: 30px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #E0E0E0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .footer {
+            background: #F8F9FA;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            border-top: 1px solid #E0E0E0;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #E0E0E0;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 12px 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #999;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            position: relative;
+            bottom: -2px;
+        }
+        
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Bar Chart Styles */
+        .bar-chart-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .bar-label {
+            width: 180px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            flex-shrink: 0;
+        }
+        
+        .bar-container {
+            flex: 1;
+            height: 40px;
+            background: #F0F0F0;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .bar {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            transition: width 0.5s ease;
+            border-radius: 6px;
+            position: relative;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .bar-count {
+            width: 45px;
+            text-align: right;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            flex-shrink: 0;
+        }
+        
+        .rank-num {
+            width: 30px;
+            text-align: center;
+            font-weight: bold;
+            color: #667eea;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .province-header {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+            
+            .bar-label {
+                width: 120px;
+                font-size: 12px;
+            }
+            
+            .bar-count {
+                width: 35px;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="logo">STG41</div>
-      <div class="brandText">
-        <div class="title">สุราษฎร์ธานีเกมส์ ครั้งที่ 41 • อีสปอร์ต</div>
-        <div class="subtitle">13–16 พฤษภาคม 2569 • ศูนย์ประชุมฯ ศาลากลางสุราษฎร์ธานี</div>
-      </div>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📊 รายงานนักกีฬาแยกตามจังหวัด</h1>
+            <p>กีฬาเยาวชนแห่งชาติครั้งที่ 41 (สุราษฎร์ธานีเกมส์)</p>
+        </div>
+        
+        <!-- Statistics -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="number">29</div>
+                <div class="label">จังหวัด</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">201</div>
+                <div class="label">นักกีฬา</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">27/04/2026</div>
+                <div class="label">วันที่รายงาน</div>
+            </div>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab(event, 'summary')">📈 สรุป</button>
+                <button class="tab-btn" onclick="switchTab(event, 'details')">📋 รายชื่อ</button>
+                <button class="tab-btn" onclick="switchTab(event, 'chart')">📊 กราฟแถบ</button>
+            </div>
+            
+            <!-- Summary Tab -->
+            <div id="summary" class="tab-content active">
+                <h2 class="section-title">สรุปจำนวนนักกีฬาแยกตามจังหวัด</h2>
+                <table class="summary-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">ลำดับ</th>
+                            <th style="width: 70%;">จังหวัด</th>
+                            <th style="width: 20%;">จำนวนคน</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td class="rank">1</td>
+                            <td class="province-name">ชลบุรี</td>
+                            <td class="count">15</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">2</td>
+                            <td class="province-name">เชียงใหม่</td>
+                            <td class="count">15</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">3</td>
+                            <td class="province-name">กระบี่</td>
+                            <td class="count">12</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">4</td>
+                            <td class="province-name">กาญจนบุรี</td>
+                            <td class="count">12</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">5</td>
+                            <td class="province-name">สุราษฎร์ธานี</td>
+                            <td class="count">12</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">6</td>
+                            <td class="province-name">ภูเก็ต</td>
+                            <td class="count">11</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">7</td>
+                            <td class="province-name">ลำปาง</td>
+                            <td class="count">11</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">8</td>
+                            <td class="province-name">ศรีสะเกษ</td>
+                            <td class="count">11</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">9</td>
+                            <td class="province-name">หนองคาย</td>
+                            <td class="count">11</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">10</td>
+                            <td class="province-name">อ่างทอง</td>
+                            <td class="count">10</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">11</td>
+                            <td class="province-name">สุรินทร์</td>
+                            <td class="count">9</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">12</td>
+                            <td class="province-name">กรุงเทพมหานคร</td>
+                            <td class="count">8</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">13</td>
+                            <td class="province-name">นครปฐม</td>
+                            <td class="count">8</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">14</td>
+                            <td class="province-name">นนทบุรี</td>
+                            <td class="count">8</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">15</td>
+                            <td class="province-name">ปัตตานี</td>
+                            <td class="count">7</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">16</td>
+                            <td class="province-name">สุโขทัย</td>
+                            <td class="count">7</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">17</td>
+                            <td class="province-name">สตูล</td>
+                            <td class="count">6</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">18</td>
+                            <td class="province-name">สระบุรี</td>
+                            <td class="count">6</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">19</td>
+                            <td class="province-name">ปราจีนบุรี</td>
+                            <td class="count">5</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">20</td>
+                            <td class="province-name">พิษณุโลก</td>
+                            <td class="count">3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">21</td>
+                            <td class="province-name">ยะลา</td>
+                            <td class="count">3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">22</td>
+                            <td class="province-name">ขอนแก่น</td>
+                            <td class="count">2</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">23</td>
+                            <td class="province-name">นครราชสีมา</td>
+                            <td class="count">2</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">24</td>
+                            <td class="province-name">สมุทรปราการ</td>
+                            <td class="count">2</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">25</td>
+                            <td class="province-name">ชุมพร</td>
+                            <td class="count">1</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">26</td>
+                            <td class="province-name">นครพนม</td>
+                            <td class="count">1</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">27</td>
+                            <td class="province-name">นครสวรรค์</td>
+                            <td class="count">1</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">28</td>
+                            <td class="province-name">พิจิตร</td>
+                            <td class="count">1</td>
+                        </tr>
+
+                        <tr>
+                            <td class="rank">29</td>
+                            <td class="province-name">อุตรดิตถ์</td>
+                            <td class="count">1</td>
+                        </tr>
+
+                        <tr class="total-row">
+                            <td colspan="2">รวมทั้งสิ้น</td>
+                            <td class="count">201</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Details Tab -->
+            <div id="details" class="tab-content">
+                <h2 class="section-title">รายชื่อนักกีฬา</h2>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="🔍 ค้นหาจังหวัดหรือชื่อนักกีฬา..." onkeyup="filterContent()">
+                </div>
+                <div class="detail-section">
+
+                    <div class="province-card" data-province="ชลบุรี">
+                        <div class="province-header" style="background-color: #FF6B6B;">
+                            <span>ชลบุรี</span>
+                            <span class="province-count">15 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>กัญญาพัชร อ่อนนิ่ม</li>
+                                <li>จรูณโรจน์ โรจนธนธรรม</li>
+                                <li>ซาร์รา เวอร์บูม</li>
+                                <li>ณัฐกฤตา เข็มศรี</li>
+                                <li>ณัฐชานันท์ โกมลวัฒนพงศ์</li>
+                                <li>ณัฐวุฒิ นาแก้ว</li>
+                                <li>นนทชา ใยมะเดื่อ</li>
+                                <li>นันทิกานต์ ยินดีสุข</li>
+                                <li>บูรพา จำปามูล</li>
+                                <li>พรชนก ศรีทับทิม</li>
+                                <li>พิชาภพ แก้วกล่ำ</li>
+                                <li>ศุราวุฒ เวียงคำ</li>
+                                <li>สิทธิโชค ศรีบุรินทร์</li>
+                                <li>สุขกันยา วงศ์วรรณะศิริ</li>
+                                <li>เรมิกา มุสิกุล</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="เชียงใหม่">
+                        <div class="province-header" style="background-color: #4ECDC4;">
+                            <span>เชียงใหม่</span>
+                            <span class="province-count">15 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>ชลธร สรรพช่าง</li>
+                                <li>ชัญญา สายวุฒิกุล</li>
+                                <li>ฐิติพรรณ พรหมวิจิตร</li>
+                                <li>ณพัส วาวงศ์มูล</li>
+                                <li>ณัฐพล ศิริสายัณห์</li>
+                                <li>ธนกร ฟองเมฆ</li>
+                                <li>ธนดล ธิสา</li>
+                                <li>นภัทรกร มูลถี</li>
+                                <li>นาวิน นะนิตย์</li>
+                                <li>ปุญพิชชา เวียงนาค</li>
+                                <li>มนัสนันท์ พิบูลย์ลาภอุดม</li>
+                                <li>อรอุมา ทำบุญ</li>
+                                <li>อริยพงษ์ ตุ่นเครือ</li>
+                                <li>อัญนิชา ใจคำแปง</li>
+                                <li>เจอรามี่คู่บุญ เจียฟู ว่อง</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="กระบี่">
+                        <div class="province-header" style="background-color: #45B7D1;">
+                            <span>กระบี่</span>
+                            <span class="province-count">12 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>ณฐมน ซุ่นกิจ</li>
+                                <li>ทีปกร สมหวัง</li>
+                                <li>ธีรนาฏ ปริญญาพล</li>
+                                <li>ปิยะรัตน์ ขาวนวล</li>
+                                <li>ปุณฑิภาทร ศรีจรรยา</li>
+                                <li>พสิน จิตต์แจ้ง</li>
+                                <li>ภัคนันท์ ขันธ์ภักดี</li>
+                                <li>อภิสิทธิ์ ทองเนื้อสาม</li>
+                                <li>เตชินท์ สั่นสท้าน</li>
+                                <li>แก้วอัญชิษฐา วงค์สวัสดิ์</li>
+                                <li>แสงอรุณ ชมเชย</li>
+                                <li>ไวสวรรยา สาระภี</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="กาญจนบุรี">
+                        <div class="province-header" style="background-color: #FFA07A;">
+                            <span>กาญจนบุรี</span>
+                            <span class="province-count">12 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>ญานิศา รวบรวม</li>
+                                <li>ณัชชา ผิวอ่อนเลิญ</li>
+                                <li>ณัฎฐธิดา กิจประชุม</li>
+                                <li>ทัศนวรรณ เรืองศรี</li>
+                                <li>ธันย์ชนก วธาวนิชกุล</li>
+                                <li>ธีรภัทร ใบไม้</li>
+                                <li>ปรีญาภัทร กราบกราน</li>
+                                <li>พิณภาภร บัณฑิต</li>
+                                <li>รัฐธรรมนูญ มงคลเทวากุล</li>
+                                <li>สิทธิโชค สาระสาริน</li>
+                                <li>สุทธิดา เกตุอ้น</li>
+                                <li>สุธน โคตรสิม</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="สุราษฎร์ธานี">
+                        <div class="province-header" style="background-color: #98D8C8;">
+                            <span>สุราษฎร์ธานี</span>
+                            <span class="province-count">12 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>จิรัฎฐ์ เมธารินทร์</li>
+                                <li>จิราวรรณ อุตล้อม</li>
+                                <li>ชนิกานต์ บุญคล้าย</li>
+                                <li>ธนกฤต เจริญจิตร</li>
+                                <li>พนาย แสงมณี</li>
+                                <li>พรปวีณ์ อินทมาตย์</li>
+                                <li>พสิษฐ์ พุทธิมา</li>
+                                <li>พีรวิชญ์ จริยาพจน์</li>
+                                <li>วสันต์ รอดภัย</li>
+                                <li>ศักรนันทน์ พรหมเมือง</li>
+                                <li>ศุภณัฐ ณ นคร</li>
+                                <li>อภิชญา คหะวงษ์</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="ภูเก็ต">
+                        <div class="province-header" style="background-color: #F7DC6F;">
+                            <span>ภูเก็ต</span>
+                            <span class="province-count">11 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>กฤติมา สามา</li>
+                                <li>จักรภัทร มุกดา</li>
+                                <li>ชญานิษฐ์ นิลศร</li>
+                                <li>ชัชวาลย์ พลบูรณ์</li>
+                                <li>ทิมพิกา บัวหนุน</li>
+                                <li>ปฏิพัทธิ์ เตียงน้อย</li>
+                                <li>พฤกษธร สุขศรี</li>
+                                <li>วริศรา แปะปลอด</li>
+                                <li>สิริวิมล สมพูล</li>
+                                <li>สุชัญญา เกตุกาย</li>
+                                <li>อภิญญา เรียบร้อย</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="ลำปาง">
+                        <div class="province-header" style="background-color: #BB8FCE;">
+                            <span>ลำปาง</span>
+                            <span class="province-count">11 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>ณวลัญส์ ศรีทะโร</li>
+                                <li>ทักษิณ กันคำ</li>
+                                <li>นฤมล เรือนเหมย</li>
+                                <li>บุริศร์ ทองสุก</li>
+                                <li>ปพิชญา เงินฮอม</li>
+                                <li>พิชเนตร จันทร์นฤกุล</li>
+                                <li>พีรพรรฒ ภู่ระหงษ์</li>
+                                <li>พีรวิชญ์ มุณีแก้ว</li>
+                                <li>วรพล งามขำ</li>
+                                <li>วรัทยา แดงทอง</li>
+                                <li>ไอลดา ทานันท์</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="ศรีสะเกษ">
+                        <div class="province-header" style="background-color: #85C1E2;">
+                            <span>ศรีสะเกษ</span>
+                            <span class="province-count">11 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>กรรณธิดา พิสัย</li>
+                                <li>ชยากร สีห์โคตร์</li>
+                                <li>ณัฐฐาริณีย์ ใจดี</li>
+                                <li>ธนวัฒน์ เพ็งพา</li>
+                                <li>นเรศ สุขจันทร์</li>
+                                <li>ปฏิมา ณ นคร</li>
+                                <li>พิชญา แก้วฤทธิ์</li>
+                                <li>พุฒิกร สามี</li>
+                                <li>ภัทราพร จันทสาร</li>
+                                <li>ยศกร ศรีโพนทอง</li>
+                                <li>อิศราภรณ์ ศรีหะบุตร</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="หนองคาย">
+                        <div class="province-header" style="background-color: #F8B195;">
+                            <span>หนองคาย</span>
+                            <span class="province-count">11 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>กฤติน สีหไตร</li>
+                                <li>กานต์เกล้า ร้อยแสง</li>
+                                <li>จุฑารัตน์ สีแดง</li>
+                                <li>ชาญชล นิยะนุช</li>
+                                <li>ณัฐนรี งามมีศรี</li>
+                                <li>พศิน บุญเทพ</li>
+                                <li>วิธาดา นามบุปผา</li>
+                                <li>วิริทธิ์พล บุตรเสน</li>
+                                <li>ศิวกร ศรีภักดี</li>
+                                <li>สิริยากร โคตรชมภู</li>
+                                <li>หิรัญ ชินคำ</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="อ่างทอง">
+                        <div class="province-header" style="background-color: #A8E6CF;">
+                            <span>อ่างทอง</span>
+                            <span class="province-count">10 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>ชัยณรงค์ แสงอ่อน</li>
+                                <li>ธนวัฒน์ พัฒนะ</li>
+                                <li>ธนากร เที่ยงดี</li>
+                                <li>ธาวิน จั่นเพ็ชร์</li>
+                                <li>บุษญาภรณ์ ภักดี</li>
+                                <li>พีรวิชญ์ ไตรยวงค์</li>
+                                <li>พุฒิพงศ์ ไข่เจียว</li>
+                                <li>สิรธีร์ บุญมาขอม</li>
+                                <li>สุทธิดา อินไข่</li>
+                                <li>ไพลิน คุ้มเกรง</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="สุรินทร์">
+                        <div class="province-header" style="background-color: #FFD3B6;">
+                            <span>สุรินทร์</span>
+                            <span class="province-count">9 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>กันตพัฒน์ คำดี</li>
+                                <li>ก้องภพ กิจแสงทอง</li>
+                                <li>นันทะ รักงาม</li>
+                                <li>ปริษา สืบสันต์</li>
+                                <li>พอเพียง บุญสิทธิ์</li>
+                                <li>วิรุฬห์ ขำเลิศ</li>
+                                <li>สิรภัทร แย้มเดช</li>
+                                <li>เปรมบารมี บานเย็น</li>
+                                <li>โชติก ฉัตรยุทธนา</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="กรุงเทพมหานคร">
+                        <div class="province-header" style="background-color: #FFAAA5;">
+                            <span>กรุงเทพมหานคร</span>
+                            <span class="province-count">8 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>กันตพัฒน์ สินวาสนามงคล</li>
+                                <li>ธนกฤต ดลประดิษฐ</li>
+                                <li>ธิติสรณ์ เปรมพนมสรรค์</li>
+                                <li>ปุญญพัฒน์ ทำบุญ</li>
+                                <li>ภัทรพงศ์ ภาณุมาศตระกูล</li>
+                                <li>วชิรวิทย์ อินทร์แก้ว</li>
+                                <li>วัณณุวรรชน์ โยธิคาร์</li>
+                                <li>วิชชุกร ศุภประภา</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="นครปฐม">
+                        <div class="province-header" style="background-color: #FF8B94;">
+                            <span>นครปฐม</span>
+                            <span class="province-count">8 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>กรวิชญ์ ธรรมเกษา</li>
+                                <li>ฐิติพงศ์ ศรีสุขพูลทรัพย์</li>
+                                <li>ธนกาญ ศรีสะอาด</li>
+                                <li>ธรดล พันทนพิเชฐ</li>
+                                <li>พีรพล สุริยะ</li>
+                                <li>วชิราภรณ์ สระทองทา</li>
+                                <li>วีรภาพ เณรบางแก้ว</li>
+                                <li>สุรพัศ นาคคีรี</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="นนทบุรี">
+                        <div class="province-header" style="background-color: #A8D8D8;">
+                            <span>นนทบุรี</span>
+                            <span class="province-count">8 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>นนธิชา เล็กปราง</li>
+                                <li>พลภัทร แต้ยินดี</li>
+                                <li>พิมพ์พจี วีรยารุจิภาส</li>
+                                <li>พีรพัฒน์ คชินทร์</li>
+                                <li>ภูกิจ ภูษิดาอภิวัฒน์</li>
+                                <li>วิสัยทัศน์ โสภณกิจพิพัฒน์</li>
+                                <li>สาวิกา แซ่ตั้ง</li>
+                                <li>สิริกรัณย์ เสนีย์วงศ์ ณ อยุธยา</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="ปัตตานี">
+                        <div class="province-header" style="background-color: #AA96DA;">
+                            <span>ปัตตานี</span>
+                            <span class="province-count">7 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>กันธนา อักษรสมบัติ</li>
+                                <li>ซอฟาอีย์ เบ็ญอิสมาแอล</li>
+                                <li>ธัชไท ธรรมเจริญ</li>
+                                <li>พรรษา แหวนหรุ่น</li>
+                                <li>มฺูฮำหมัดฮาซีม ซาฟา</li>
+                                <li>อัสมีย์ มามะ</li>
+                                <li>อิทธิพัทธ์ นวลนิล</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="สุโขทัย">
+                        <div class="province-header" style="background-color: #FCBAD3;">
+                            <span>สุโขทัย</span>
+                            <span class="province-count">7 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>ณัฐชนน จอมประเสริฐ</li>
+                                <li>ณัฐชพร วงส์ประยูร</li>
+                                <li>ณัฐพณชัย เนตรบุตร</li>
+                                <li>ธนพัฒ วงษ์เรียน</li>
+                                <li>พีรวิชญ์ วันทาเขียว</li>
+                                <li>ภนากรณ์ รัตมานะ</li>
+                                <li>รชต แกมทอง</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="สตูล">
+                        <div class="province-header" style="background-color: #A1D5C4;">
+                            <span>สตูล</span>
+                            <span class="province-count">6 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>ณัฐพงศ์ แก้วมณี</li>
+                                <li>พีรภัทร ศักน้อย</li>
+                                <li>รัชกฤต ลัคนาวงศ์</li>
+                                <li>อานิฟ อาดำ</li>
+                                <li>อาบัชชาร์ เกษม</li>
+                                <li>อารีย์ เทพคงคา</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="สระบุรี">
+                        <div class="province-header" style="background-color: #D4A5D4;">
+                            <span>สระบุรี</span>
+                            <span class="province-count">6 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>กชวรรณ กองทอง</li>
+                                <li>กัลญาพร วงศ์มณีสถาพร</li>
+                                <li>ธนภูมิ พลอยงาม</li>
+                                <li>ปภาวดี ตุลาทอง</li>
+                                <li>รวงข้าว แสนทวี</li>
+                                <li>สุธีรา อินโต</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="ปราจีนบุรี">
+                        <div class="province-header" style="background-color: #64B5F6;">
+                            <span>ปราจีนบุรี</span>
+                            <span class="province-count">5 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>ชนัญชิดา คมกริส</li>
+                                <li>ณัฐชวัล มหพลาดิศัย</li>
+                                <li>ณิชชารีย์ นิธิวุฒิรัฐสกุล</li>
+                                <li>พัสน์นันท์ ชัยศรี</li>
+                                <li>มินดา สุขประเสริฐ</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="พิษณุโลก">
+                        <div class="province-header" style="background-color: #81C784;">
+                            <span>พิษณุโลก</span>
+                            <span class="province-count">3 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>ภัทรวดี เฮ้งจีน</li>
+                                <li>สุธิกมล ฉาบเพ็ชร</li>
+                                <li>อินทัช จิตรกำเหนิด</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="ยะลา">
+                        <div class="province-header" style="background-color: #FFB74D;">
+                            <span>ยะลา</span>
+                            <span class="province-count">3 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>ณัฏฐ์ รัตตัญญู</li>
+                                <li>นพคุณ อ่อนแก้ว</li>
+                                <li>เบญจพร ทองเหลือง</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="ขอนแก่น">
+                        <div class="province-header" style="background-color: #E57373;">
+                            <span>ขอนแก่น</span>
+                            <span class="province-count">2 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>กนกอร สีหาบุตร</li>
+                                <li>นรินทร์ ทองเมืองน้อย</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="นครราชสีมา">
+                        <div class="province-header" style="background-color: #64B5F6;">
+                            <span>นครราชสีมา</span>
+                            <span class="province-count">2 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>มิณทราดา มีใหม่</li>
+                                <li>เตชสิทธิ์ อภิชิตศักดิ์ชัย</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="สมุทรปราการ">
+                        <div class="province-header" style="background-color: #81C784;">
+                            <span>สมุทรปราการ</span>
+                            <span class="province-count">2 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>กัลยารัตน์ บุญใส</li>
+                                <li>จิรพัฒน์ พหลยุทธ</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="ชุมพร">
+                        <div class="province-header" style="background-color: #FFB74D;">
+                            <span>ชุมพร</span>
+                            <span class="province-count">1 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>อนุภาพ แก้วศรี</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="นครพนม">
+                        <div class="province-header" style="background-color: #E57373;">
+                            <span>นครพนม</span>
+                            <span class="province-count">1 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>นภัชชา ชัยประภา</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="นครสวรรค์">
+                        <div class="province-header" style="background-color: #AED581;">
+                            <span>นครสวรรค์</span>
+                            <span class="province-count">1 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>ศิริวัชรา มิ่งเจริญศิริกุล</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="พิจิตร">
+                        <div class="province-header" style="background-color: #F48FB1;">
+                            <span>พิจิตร</span>
+                            <span class="province-count">1 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>อักษรินทร์ หอมนารี</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="province-card" data-province="อุตรดิตถ์">
+                        <div class="province-header" style="background-color: #7986CB;">
+                            <span>อุตรดิตถ์</span>
+                            <span class="province-count">1 คน</span>
+                        </div>
+                        <div class="athletes-list">
+                            <ol>
+                                <li>ผักกาด สวัสดิ์ทอง</li>
+
+                            </ol>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <!-- Chart Tab -->
+            <div id="chart" class="tab-content">
+                <h2 class="section-title">กราฟแสดงจำนวนนักกีฬา (ทั้งหมด)</h2>
+                <div class="bar-chart-container">
+
+                    <div class="bar-item">
+                        <div class="rank-num">1</div>
+                        <div class="bar-label">ชลบุรี</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #FF6B6B; width: 100.0%;">
+                                15
+                            </div>
+                        </div>
+                        <div class="bar-count">15 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">2</div>
+                        <div class="bar-label">เชียงใหม่</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #4ECDC4; width: 100.0%;">
+                                15
+                            </div>
+                        </div>
+                        <div class="bar-count">15 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">3</div>
+                        <div class="bar-label">กระบี่</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #45B7D1; width: 80.0%;">
+                                12
+                            </div>
+                        </div>
+                        <div class="bar-count">12 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">4</div>
+                        <div class="bar-label">กาญจนบุรี</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #FFA07A; width: 80.0%;">
+                                12
+                            </div>
+                        </div>
+                        <div class="bar-count">12 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">5</div>
+                        <div class="bar-label">สุราษฎร์ธานี</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #98D8C8; width: 80.0%;">
+                                12
+                            </div>
+                        </div>
+                        <div class="bar-count">12 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">6</div>
+                        <div class="bar-label">ภูเก็ต</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #F7DC6F; width: 73.33333333333333%;">
+                                11
+                            </div>
+                        </div>
+                        <div class="bar-count">11 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">7</div>
+                        <div class="bar-label">ลำปาง</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #BB8FCE; width: 73.33333333333333%;">
+                                11
+                            </div>
+                        </div>
+                        <div class="bar-count">11 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">8</div>
+                        <div class="bar-label">ศรีสะเกษ</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #85C1E2; width: 73.33333333333333%;">
+                                11
+                            </div>
+                        </div>
+                        <div class="bar-count">11 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">9</div>
+                        <div class="bar-label">หนองคาย</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #F8B195; width: 73.33333333333333%;">
+                                11
+                            </div>
+                        </div>
+                        <div class="bar-count">11 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">10</div>
+                        <div class="bar-label">อ่างทอง</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #A8E6CF; width: 66.66666666666666%;">
+                                10
+                            </div>
+                        </div>
+                        <div class="bar-count">10 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">11</div>
+                        <div class="bar-label">สุรินทร์</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #FFD3B6; width: 60.0%;">
+                                9
+                            </div>
+                        </div>
+                        <div class="bar-count">9 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">12</div>
+                        <div class="bar-label">กรุงเทพมหานคร</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #FFAAA5; width: 53.333333333333336%;">
+                                8
+                            </div>
+                        </div>
+                        <div class="bar-count">8 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">13</div>
+                        <div class="bar-label">นครปฐม</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #FF8B94; width: 53.333333333333336%;">
+                                8
+                            </div>
+                        </div>
+                        <div class="bar-count">8 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">14</div>
+                        <div class="bar-label">นนทบุรี</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #A8D8D8; width: 53.333333333333336%;">
+                                8
+                            </div>
+                        </div>
+                        <div class="bar-count">8 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">15</div>
+                        <div class="bar-label">ปัตตานี</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #AA96DA; width: 46.666666666666664%;">
+                                7
+                            </div>
+                        </div>
+                        <div class="bar-count">7 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">16</div>
+                        <div class="bar-label">สุโขทัย</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #FCBAD3; width: 46.666666666666664%;">
+                                7
+                            </div>
+                        </div>
+                        <div class="bar-count">7 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">17</div>
+                        <div class="bar-label">สตูล</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #A1D5C4; width: 40.0%;">
+                                6
+                            </div>
+                        </div>
+                        <div class="bar-count">6 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">18</div>
+                        <div class="bar-label">สระบุรี</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #D4A5D4; width: 40.0%;">
+                                6
+                            </div>
+                        </div>
+                        <div class="bar-count">6 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">19</div>
+                        <div class="bar-label">ปราจีนบุรี</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #64B5F6; width: 33.33333333333333%;">
+                                5
+                            </div>
+                        </div>
+                        <div class="bar-count">5 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">20</div>
+                        <div class="bar-label">พิษณุโลก</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #81C784; width: 20.0%;">
+                                3
+                            </div>
+                        </div>
+                        <div class="bar-count">3 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">21</div>
+                        <div class="bar-label">ยะลา</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #FFB74D; width: 20.0%;">
+                                3
+                            </div>
+                        </div>
+                        <div class="bar-count">3 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">22</div>
+                        <div class="bar-label">ขอนแก่น</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #E57373; width: 13.333333333333334%;">
+                                2
+                            </div>
+                        </div>
+                        <div class="bar-count">2 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">23</div>
+                        <div class="bar-label">นครราชสีมา</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #64B5F6; width: 13.333333333333334%;">
+                                2
+                            </div>
+                        </div>
+                        <div class="bar-count">2 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">24</div>
+                        <div class="bar-label">สมุทรปราการ</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #81C784; width: 13.333333333333334%;">
+                                2
+                            </div>
+                        </div>
+                        <div class="bar-count">2 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">25</div>
+                        <div class="bar-label">ชุมพร</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #FFB74D; width: 6.666666666666667%;">
+                                1
+                            </div>
+                        </div>
+                        <div class="bar-count">1 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">26</div>
+                        <div class="bar-label">นครพนม</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #E57373; width: 6.666666666666667%;">
+                                1
+                            </div>
+                        </div>
+                        <div class="bar-count">1 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">27</div>
+                        <div class="bar-label">นครสวรรค์</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #AED581; width: 6.666666666666667%;">
+                                1
+                            </div>
+                        </div>
+                        <div class="bar-count">1 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">28</div>
+                        <div class="bar-label">พิจิตร</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #F48FB1; width: 6.666666666666667%;">
+                                1
+                            </div>
+                        </div>
+                        <div class="bar-count">1 คน</div>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="rank-num">29</div>
+                        <div class="bar-label">อุตรดิตถ์</div>
+                        <div class="bar-container">
+                            <div class="bar" style="background-color: #7986CB; width: 6.666666666666667%;">
+                                1
+                            </div>
+                        </div>
+                        <div class="bar-count">1 คน</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>รายงานอีสปอร์ต กีฬาเยาวชนแห่งชาติครั้งที่ 41</strong></p>
+            <p>แหล่งข้อมูล: อีสปอร์ต.xlsx | สร้างเมื่อ: 27/04/2026 05:25:29</p>
+        </div>
     </div>
-
-    <nav class="topActions">
-<button class="btn ghost" id="btnMenu" title="เมนู">☰</button>
-      <button class="btn ghost" id="btnLogout" title="ออกจากระบบ">ออกจากระบบ</button>
-      <button class="btn" id="btnHelp" title="ช่วยเหลือ">ช่วยเหลือ</button>
-<div class="overlay" id="overlay"></div>
-    </nav>
-  </header>
-
-  <main class="shell">
-    <!-- LEFT: Sidebar (role-based) -->
-    <aside class="sidebar" id="sidebar">
-      <div class="rolePill" id="rolePill">ยังไม่ได้เข้าสู่ระบบ</div>
-<div class="card announcementCard urgent"></div>
-
-      <div class="navGroup">
-        <div class="navTitle">เมนูหลัก</div>
-        <a class="navItem" href="#/" data-route="/">Dashboard</a>
-        <a class="navItem" href="#/announcements" data-route="/announcements">ประกาศด่วน</a>
-        <a class="navItem only-athlete" href="#/my-schedule" data-route="/my-schedule">ตารางของฉัน</a>
-        <a class="navItem" href="#/call-time" data-route="/call-time">Call Time</a>
-        <a class="navItem" href="#/matches" data-route="/matches">Matches</a>
-        <a class="navItem" href="#/results" data-route="/results">Results</a>
-      </div>
-
-      <div class="navGroup">
-        <div class="navTitle">สถานที่ & เดินทาง</div>
-        <a class="navItem" href="#/venue" data-route="/venue">Venue</a>
-        <a class="navItem" href="#/travel" data-route="/travel">Travel</a>
-        <a class="navItem" href="#/stay" data-route="/stay">ที่พัก</a>
-        <a class="navItem" href="#/food" data-route="/food">ร้านอาหาร</a>
-      </div>
-
-      <div class="navGroup">
-        <div class="navTitle">เอกสาร & กติกา</div>
-        <a class="navItem" href="#/rules" data-route="/rules">Rules</a>
-        <a class="navItem" href="#/documents" data-route="/documents">Documents</a>
-      </div>
-
-      <div class="navGroup">
-        <div class="navTitle">สนับสนุนหน้างาน</div>
-        <a class="navItem" href="#/incidents" data-route="/incidents">Incidents</a>
-        <a class="navItem" href="#/contacts" data-route="/contacts">Contacts</a>
-        <a class="navItem" href="#/faq" data-route="/faq">FAQ</a>
-      </div>
-
-      <div class="navGroup only-staff">
-        <div class="navTitle">Staff Tools</div>
-        <a class="navItem" href="#/staff/run-of-show" data-route="/staff/run-of-show">Run-of-show</a>
-        <a class="navItem" href="#/staff/check-in-manager" data-route="/staff/check-in-manager">Check-in Manager</a>
-        <a class="navItem" href="#/staff/call-time-manager" data-route="/staff/call-time-manager">Call Time Manager</a>
-        <a class="navItem" href="#/staff/match-ops" data-route="/staff/match-ops">Match Ops</a>
-        <a class="navItem" href="#/staff/results-manager" data-route="/staff/results-manager">Results Manager</a>
-        <a class="navItem" href="#/staff/incidents-queue" data-route="/staff/incidents-queue">Incidents Queue</a>
-        <a class="navItem" href="#/staff/documents-manager" data-route="/staff/documents-manager">Documents Manager</a>
-      </div>
-
-      <div class="sidebarFoot">
-        <div class="muted">Prototype • HTML/CSS/JS • ไม่เชื่อมฐานข้อมูล</div>
-      </div>
-    </aside>
-
-    <!-- RIGHT: Content -->
-    <section class="content">
-      <!-- Router outlet -->
-      <div id="view"></div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div>© สุราษฎร์ธานีเกมส์ ครั้งที่ 41 • ประเภทกีฬาอีสปอร์ต (Prototype)</div>
-    <div class="muted">แนะนำ: ใส่ QR Code ไปหน้า /announcements และ /venue ในหน้างาน</div>
-  </footer>
-
-  <script src="app.js"></script>
+    
+    <script>
+        function switchTab(evt, tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+        
+        function filterContent() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.province-card');
+            
+            cards.forEach(card => {
+                const province = card.getAttribute('data-province');
+                const athletes = card.textContent.toLowerCase();
+                
+                if (province.includes(searchTerm) || athletes.includes(searchTerm)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
