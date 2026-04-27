@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
     <title>รายงานนักกีฬาแยกตามจังหวัด</title>
     <style>
         * {
@@ -382,7 +383,8 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>📊 รายงานนักกีฬาแยกตามจังหวัด</h1>
+<img src="favicon.png" alt="Suratthani Game" width="128" height="128">
+            <h1>รายงานนักกีฬาแยกตามจังหวัด</h1>
             <p>กีฬาเยาวชนแห่งชาติครั้งที่ 41 (สุราษฎร์ธานีเกมส์)</p>
         </div>
         
@@ -1551,30 +1553,39 @@
             }
 
             const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.province-card');
+
             if (!searchTerm) {
-                // Clear all highlights if search is empty
-                document.querySelectorAll('.athlete-highlight').forEach(el => {
-                    el.classList.remove('athlete-highlight');
+                // Show all cards and clear highlights if search is empty
+                cards.forEach(card => {
+                    card.style.display = 'block';
+                    card.querySelectorAll('.athlete-highlight').forEach(el => {
+                        el.classList.remove('athlete-highlight');
+                    });
                 });
                 return;
             }
-
-            const cards = document.querySelectorAll('.province-card');
 
             // Clear all previous highlights
             document.querySelectorAll('.athlete-highlight').forEach(el => {
                 el.classList.remove('athlete-highlight');
             });
 
-            // Find and highlight matching athletes
+            // Find and highlight matching athletes, hide non-matching provinces
             cards.forEach(card => {
                 const athleteElements = card.querySelectorAll('.athletes-list li');
+                let hasMatch = false;
+
                 athleteElements.forEach(athlete => {
                     const athleteName = athlete.textContent.toLowerCase();
                     if (athleteName.includes(searchTerm)) {
                         athlete.classList.add('athlete-highlight');
+                        hasMatch = true;
                     }
                 });
+
+                // Show card if it has matches, hide otherwise
+                card.style.display = hasMatch ? 'block' : 'none';
             });
         }
     </script>
