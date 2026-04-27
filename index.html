@@ -129,6 +129,20 @@
             font-weight: 500;
             color: #1F4788;
         }
+
+        .province-link {
+            color: #667eea;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .province-link:hover {
+            color: #764ba2;
+            border-bottom-color: #667eea;
+        }
         
         .count {
             text-align: center;
@@ -188,6 +202,14 @@
             padding: 5px 0;
             font-size: 13px;
             color: #333;
+        }
+
+        .athlete-highlight {
+            background-color: #FFEB3B;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+            display: inline-block;
         }
         
         .search-box {
@@ -265,6 +287,11 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .bar-item.hidden {
+            display: none;
         }
         
         .bar-label {
@@ -315,6 +342,13 @@
             font-weight: bold;
             color: #667eea;
             flex-shrink: 0;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+            font-size: 16px;
         }
         
         @media (max-width: 768px) {
@@ -392,175 +426,175 @@
 
                         <tr>
                             <td class="rank">1</td>
-                            <td class="province-name">ชลบุรี</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('ชลบุรี'); return false;">ชลบุรี</a></td>
                             <td class="count">15</td>
                         </tr>
 
                         <tr>
                             <td class="rank">2</td>
-                            <td class="province-name">เชียงใหม่</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('เชียงใหม่'); return false;">เชียงใหม่</a></td>
                             <td class="count">15</td>
                         </tr>
 
                         <tr>
                             <td class="rank">3</td>
-                            <td class="province-name">กระบี่</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('กระบี่'); return false;">กระบี่</a></td>
                             <td class="count">12</td>
                         </tr>
 
                         <tr>
                             <td class="rank">4</td>
-                            <td class="province-name">กาญจนบุรี</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('กาญจนบุรี'); return false;">กาญจนบุรี</a></td>
                             <td class="count">12</td>
                         </tr>
 
                         <tr>
                             <td class="rank">5</td>
-                            <td class="province-name">สุราษฎร์ธานี</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('สุราษฎร์ธานี'); return false;">สุราษฎร์ธานี</a></td>
                             <td class="count">12</td>
                         </tr>
 
                         <tr>
                             <td class="rank">6</td>
-                            <td class="province-name">ภูเก็ต</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('ภูเก็ต'); return false;">ภูเก็ต</a></td>
                             <td class="count">11</td>
                         </tr>
 
                         <tr>
                             <td class="rank">7</td>
-                            <td class="province-name">ลำปาง</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('ลำปาง'); return false;">ลำปาง</a></td>
                             <td class="count">11</td>
                         </tr>
 
                         <tr>
                             <td class="rank">8</td>
-                            <td class="province-name">ศรีสะเกษ</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('ศรีสะเกษ'); return false;">ศรีสะเกษ</a></td>
                             <td class="count">11</td>
                         </tr>
 
                         <tr>
                             <td class="rank">9</td>
-                            <td class="province-name">หนองคาย</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('หนองคาย'); return false;">หนองคาย</a></td>
                             <td class="count">11</td>
                         </tr>
 
                         <tr>
                             <td class="rank">10</td>
-                            <td class="province-name">อ่างทอง</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('อ่างทอง'); return false;">อ่างทอง</a></td>
                             <td class="count">10</td>
                         </tr>
 
                         <tr>
                             <td class="rank">11</td>
-                            <td class="province-name">สุรินทร์</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('สุรินทร์'); return false;">สุรินทร์</a></td>
                             <td class="count">9</td>
                         </tr>
 
                         <tr>
                             <td class="rank">12</td>
-                            <td class="province-name">กรุงเทพมหานคร</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('กรุงเทพมหานคร'); return false;">กรุงเทพมหานคร</a></td>
                             <td class="count">8</td>
                         </tr>
 
                         <tr>
                             <td class="rank">13</td>
-                            <td class="province-name">นครปฐม</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('นครปฐม'); return false;">นครปฐม</a></td>
                             <td class="count">8</td>
                         </tr>
 
                         <tr>
                             <td class="rank">14</td>
-                            <td class="province-name">นนทบุรี</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('นนทบุรี'); return false;">นนทบุรี</a></td>
                             <td class="count">8</td>
                         </tr>
 
                         <tr>
                             <td class="rank">15</td>
-                            <td class="province-name">ปัตตานี</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('ปัตตานี'); return false;">ปัตตานี</a></td>
                             <td class="count">7</td>
                         </tr>
 
                         <tr>
                             <td class="rank">16</td>
-                            <td class="province-name">สุโขทัย</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('สุโขทัย'); return false;">สุโขทัย</a></td>
                             <td class="count">7</td>
                         </tr>
 
                         <tr>
                             <td class="rank">17</td>
-                            <td class="province-name">สตูล</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('สตูล'); return false;">สตูล</a></td>
                             <td class="count">6</td>
                         </tr>
 
                         <tr>
                             <td class="rank">18</td>
-                            <td class="province-name">สระบุรี</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('สระบุรี'); return false;">สระบุรี</a></td>
                             <td class="count">6</td>
                         </tr>
 
                         <tr>
                             <td class="rank">19</td>
-                            <td class="province-name">ปราจีนบุรี</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('ปราจีนบุรี'); return false;">ปราจีนบุรี</a></td>
                             <td class="count">5</td>
                         </tr>
 
                         <tr>
                             <td class="rank">20</td>
-                            <td class="province-name">พิษณุโลก</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('พิษณุโลก'); return false;">พิษณุโลก</a></td>
                             <td class="count">3</td>
                         </tr>
 
                         <tr>
                             <td class="rank">21</td>
-                            <td class="province-name">ยะลา</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('ยะลา'); return false;">ยะลา</a></td>
                             <td class="count">3</td>
                         </tr>
 
                         <tr>
                             <td class="rank">22</td>
-                            <td class="province-name">ขอนแก่น</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('ขอนแก่น'); return false;">ขอนแก่น</a></td>
                             <td class="count">2</td>
                         </tr>
 
                         <tr>
                             <td class="rank">23</td>
-                            <td class="province-name">นครราชสีมา</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('นครราชสีมา'); return false;">นครราชสีมา</a></td>
                             <td class="count">2</td>
                         </tr>
 
                         <tr>
                             <td class="rank">24</td>
-                            <td class="province-name">สมุทรปราการ</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('สมุทรปราการ'); return false;">สมุทรปราการ</a></td>
                             <td class="count">2</td>
                         </tr>
 
                         <tr>
                             <td class="rank">25</td>
-                            <td class="province-name">ชุมพร</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('ชุมพร'); return false;">ชุมพร</a></td>
                             <td class="count">1</td>
                         </tr>
 
                         <tr>
                             <td class="rank">26</td>
-                            <td class="province-name">นครพนม</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('นครพนม'); return false;">นครพนม</a></td>
                             <td class="count">1</td>
                         </tr>
 
                         <tr>
                             <td class="rank">27</td>
-                            <td class="province-name">นครสวรรค์</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('นครสวรรค์'); return false;">นครสวรรค์</a></td>
                             <td class="count">1</td>
                         </tr>
 
                         <tr>
                             <td class="rank">28</td>
-                            <td class="province-name">พิจิตร</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('พิจิตร'); return false;">พิจิตร</a></td>
                             <td class="count">1</td>
                         </tr>
 
                         <tr>
                             <td class="rank">29</td>
-                            <td class="province-name">อุตรดิตถ์</td>
+                            <td class="province-name"><a class="province-link" href="javascript:void(0)" onclick="goToProvince('อุตรดิตถ์'); return false;">อุตรดิตถ์</a></td>
                             <td class="count">1</td>
                         </tr>
 
@@ -576,11 +610,11 @@
             <div id="details" class="tab-content">
                 <h2 class="section-title">รายชื่อนักกีฬา</h2>
                 <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="🔍 ค้นหาจังหวัดหรือชื่อนักกีฬา..." onkeyup="filterContent()">
+                    <input type="text" id="searchInput" placeholder="🔍 ค้นหาจังหวัดหรือชื่อนักกีฬา..." onkeyup="filterDetailsContent(event)">
                 </div>
                 <div class="detail-section">
 
-                    <div class="province-card" data-province="ชลบุรี">
+                    <div class="province-card" id="province-ชลบุรี" data-province="ชลบุรี">
                         <div class="province-header" style="background-color: #FF6B6B;">
                             <span>ชลบุรี</span>
                             <span class="province-count">15 คน</span>
@@ -607,7 +641,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="เชียงใหม่">
+                    <div class="province-card" id="province-เชียงใหม่">
                         <div class="province-header" style="background-color: #4ECDC4;">
                             <span>เชียงใหม่</span>
                             <span class="province-count">15 คน</span>
@@ -634,7 +668,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="กระบี่">
+                    <div class="province-card" id="province-กระบี่">
                         <div class="province-header" style="background-color: #45B7D1;">
                             <span>กระบี่</span>
                             <span class="province-count">12 คน</span>
@@ -658,7 +692,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="กาญจนบุรี">
+                    <div class="province-card" id="province-กาญจนบุรี">
                         <div class="province-header" style="background-color: #FFA07A;">
                             <span>กาญจนบุรี</span>
                             <span class="province-count">12 คน</span>
@@ -682,7 +716,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="สุราษฎร์ธานี">
+                    <div class="province-card" id="province-สุราษฎร์ธานี">
                         <div class="province-header" style="background-color: #98D8C8;">
                             <span>สุราษฎร์ธานี</span>
                             <span class="province-count">12 คน</span>
@@ -706,7 +740,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="ภูเก็ต">
+                    <div class="province-card" id="province-ภูเก็ต">
                         <div class="province-header" style="background-color: #F7DC6F;">
                             <span>ภูเก็ต</span>
                             <span class="province-count">11 คน</span>
@@ -729,7 +763,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="ลำปาง">
+                    <div class="province-card" id="province-ลำปาง">
                         <div class="province-header" style="background-color: #BB8FCE;">
                             <span>ลำปาง</span>
                             <span class="province-count">11 คน</span>
@@ -752,7 +786,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="ศรีสะเกษ">
+                    <div class="province-card" id="province-ศรีสะเกษ">
                         <div class="province-header" style="background-color: #85C1E2;">
                             <span>ศรีสะเกษ</span>
                             <span class="province-count">11 คน</span>
@@ -775,7 +809,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="หนองคาย">
+                    <div class="province-card" id="province-หนองคาย">
                         <div class="province-header" style="background-color: #F8B195;">
                             <span>หนองคาย</span>
                             <span class="province-count">11 คน</span>
@@ -798,7 +832,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="อ่างทอง">
+                    <div class="province-card" id="province-อ่างทอง">
                         <div class="province-header" style="background-color: #A8E6CF;">
                             <span>อ่างทอง</span>
                             <span class="province-count">10 คน</span>
@@ -820,7 +854,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="สุรินทร์">
+                    <div class="province-card" id="province-สุรินทร์">
                         <div class="province-header" style="background-color: #FFD3B6;">
                             <span>สุรินทร์</span>
                             <span class="province-count">9 คน</span>
@@ -841,7 +875,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="กรุงเทพมหานคร">
+                    <div class="province-card" id="province-กรุงเทพมหานคร">
                         <div class="province-header" style="background-color: #FFAAA5;">
                             <span>กรุงเทพมหานคร</span>
                             <span class="province-count">8 คน</span>
@@ -861,7 +895,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="นครปฐม">
+                    <div class="province-card" id="province-นครปฐม">
                         <div class="province-header" style="background-color: #FF8B94;">
                             <span>นครปฐม</span>
                             <span class="province-count">8 คน</span>
@@ -881,7 +915,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="นนทบุรี">
+                    <div class="province-card" id="province-นนทบุรี">
                         <div class="province-header" style="background-color: #A8D8D8;">
                             <span>นนทบุรี</span>
                             <span class="province-count">8 คน</span>
@@ -901,7 +935,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="ปัตตานี">
+                    <div class="province-card" id="province-ปัตตานี">
                         <div class="province-header" style="background-color: #AA96DA;">
                             <span>ปัตตานี</span>
                             <span class="province-count">7 คน</span>
@@ -920,7 +954,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="สุโขทัย">
+                    <div class="province-card" id="province-สุโขทัย">
                         <div class="province-header" style="background-color: #FCBAD3;">
                             <span>สุโขทัย</span>
                             <span class="province-count">7 คน</span>
@@ -939,7 +973,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="สตูล">
+                    <div class="province-card" id="province-สตูล">
                         <div class="province-header" style="background-color: #A1D5C4;">
                             <span>สตูล</span>
                             <span class="province-count">6 คน</span>
@@ -957,7 +991,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="สระบุรี">
+                    <div class="province-card" id="province-สระบุรี">
                         <div class="province-header" style="background-color: #D4A5D4;">
                             <span>สระบุรี</span>
                             <span class="province-count">6 คน</span>
@@ -975,7 +1009,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="ปราจีนบุรี">
+                    <div class="province-card" id="province-ปราจีนบุรี">
                         <div class="province-header" style="background-color: #64B5F6;">
                             <span>ปราจีนบุรี</span>
                             <span class="province-count">5 คน</span>
@@ -992,7 +1026,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="พิษณุโลก">
+                    <div class="province-card" id="province-พิษณุโลก">
                         <div class="province-header" style="background-color: #81C784;">
                             <span>พิษณุโลก</span>
                             <span class="province-count">3 คน</span>
@@ -1007,7 +1041,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="ยะลา">
+                    <div class="province-card" id="province-ยะลา">
                         <div class="province-header" style="background-color: #FFB74D;">
                             <span>ยะลา</span>
                             <span class="province-count">3 คน</span>
@@ -1022,7 +1056,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="ขอนแก่น">
+                    <div class="province-card" id="province-ขอนแก่น">
                         <div class="province-header" style="background-color: #E57373;">
                             <span>ขอนแก่น</span>
                             <span class="province-count">2 คน</span>
@@ -1036,7 +1070,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="นครราชสีมา">
+                    <div class="province-card" id="province-นครราชสีมา">
                         <div class="province-header" style="background-color: #64B5F6;">
                             <span>นครราชสีมา</span>
                             <span class="province-count">2 คน</span>
@@ -1050,7 +1084,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="สมุทรปราการ">
+                    <div class="province-card" id="province-สมุทรปราการ">
                         <div class="province-header" style="background-color: #81C784;">
                             <span>สมุทรปราการ</span>
                             <span class="province-count">2 คน</span>
@@ -1064,7 +1098,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="ชุมพร">
+                    <div class="province-card" id="province-ชุมพร">
                         <div class="province-header" style="background-color: #FFB74D;">
                             <span>ชุมพร</span>
                             <span class="province-count">1 คน</span>
@@ -1077,7 +1111,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="นครพนม">
+                    <div class="province-card" id="province-นครพนม">
                         <div class="province-header" style="background-color: #E57373;">
                             <span>นครพนม</span>
                             <span class="province-count">1 คน</span>
@@ -1090,7 +1124,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="นครสวรรค์">
+                    <div class="province-card" id="province-นครสวรรค์">
                         <div class="province-header" style="background-color: #AED581;">
                             <span>นครสวรรค์</span>
                             <span class="province-count">1 คน</span>
@@ -1103,7 +1137,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="พิจิตร">
+                    <div class="province-card" id="province-พิจิตร">
                         <div class="province-header" style="background-color: #F48FB1;">
                             <span>พิจิตร</span>
                             <span class="province-count">1 คน</span>
@@ -1116,7 +1150,7 @@
                         </div>
                     </div>
 
-                    <div class="province-card" data-province="อุตรดิตถ์">
+                    <div class="province-card" id="province-อุตรดิตถ์">
                         <div class="province-header" style="background-color: #7986CB;">
                             <span>อุตรดิตถ์</span>
                             <span class="province-count">1 คน</span>
@@ -1135,9 +1169,12 @@
             <!-- Chart Tab -->
             <div id="chart" class="tab-content">
                 <h2 class="section-title">กราฟแสดงจำนวนนักกีฬา (ทั้งหมด)</h2>
-                <div class="bar-chart-container">
+                <div class="search-box">
+                    <input type="text" id="chartSearchInput" placeholder="🔍 ค้นหาจังหวัด..." onkeyup="filterChartContent()">
+                </div>
+                <div class="bar-chart-container" id="chartContainer">
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="ชลบุรี">
                         <div class="rank-num">1</div>
                         <div class="bar-label">ชลบุรี</div>
                         <div class="bar-container">
@@ -1148,7 +1185,7 @@
                         <div class="bar-count">15 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="เชียงใหม่">
                         <div class="rank-num">2</div>
                         <div class="bar-label">เชียงใหม่</div>
                         <div class="bar-container">
@@ -1159,7 +1196,7 @@
                         <div class="bar-count">15 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="กระบี่">
                         <div class="rank-num">3</div>
                         <div class="bar-label">กระบี่</div>
                         <div class="bar-container">
@@ -1170,7 +1207,7 @@
                         <div class="bar-count">12 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="กาญจนบุรี">
                         <div class="rank-num">4</div>
                         <div class="bar-label">กาญจนบุรี</div>
                         <div class="bar-container">
@@ -1181,7 +1218,7 @@
                         <div class="bar-count">12 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="สุราษฎร์ธานี">
                         <div class="rank-num">5</div>
                         <div class="bar-label">สุราษฎร์ธานี</div>
                         <div class="bar-container">
@@ -1192,7 +1229,7 @@
                         <div class="bar-count">12 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="ภูเก็ต">
                         <div class="rank-num">6</div>
                         <div class="bar-label">ภูเก็ต</div>
                         <div class="bar-container">
@@ -1203,7 +1240,7 @@
                         <div class="bar-count">11 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="ลำปาง">
                         <div class="rank-num">7</div>
                         <div class="bar-label">ลำปาง</div>
                         <div class="bar-container">
@@ -1214,7 +1251,7 @@
                         <div class="bar-count">11 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="ศรีสะเกษ">
                         <div class="rank-num">8</div>
                         <div class="bar-label">ศรีสะเกษ</div>
                         <div class="bar-container">
@@ -1225,7 +1262,7 @@
                         <div class="bar-count">11 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="หนองคาย">
                         <div class="rank-num">9</div>
                         <div class="bar-label">หนองคาย</div>
                         <div class="bar-container">
@@ -1236,7 +1273,7 @@
                         <div class="bar-count">11 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="อ่างทอง">
                         <div class="rank-num">10</div>
                         <div class="bar-label">อ่างทอง</div>
                         <div class="bar-container">
@@ -1247,7 +1284,7 @@
                         <div class="bar-count">10 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="สุรินทร์">
                         <div class="rank-num">11</div>
                         <div class="bar-label">สุรินทร์</div>
                         <div class="bar-container">
@@ -1258,7 +1295,7 @@
                         <div class="bar-count">9 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="กรุงเทพมหานคร">
                         <div class="rank-num">12</div>
                         <div class="bar-label">กรุงเทพมหานคร</div>
                         <div class="bar-container">
@@ -1269,7 +1306,7 @@
                         <div class="bar-count">8 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="นครปฐม">
                         <div class="rank-num">13</div>
                         <div class="bar-label">นครปฐม</div>
                         <div class="bar-container">
@@ -1280,7 +1317,7 @@
                         <div class="bar-count">8 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="นนทบุรี">
                         <div class="rank-num">14</div>
                         <div class="bar-label">นนทบุรี</div>
                         <div class="bar-container">
@@ -1291,7 +1328,7 @@
                         <div class="bar-count">8 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="ปัตตานี">
                         <div class="rank-num">15</div>
                         <div class="bar-label">ปัตตานี</div>
                         <div class="bar-container">
@@ -1302,7 +1339,7 @@
                         <div class="bar-count">7 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="สุโขทัย">
                         <div class="rank-num">16</div>
                         <div class="bar-label">สุโขทัย</div>
                         <div class="bar-container">
@@ -1313,7 +1350,7 @@
                         <div class="bar-count">7 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="สตูล">
                         <div class="rank-num">17</div>
                         <div class="bar-label">สตูล</div>
                         <div class="bar-container">
@@ -1324,7 +1361,7 @@
                         <div class="bar-count">6 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="สระบุรี">
                         <div class="rank-num">18</div>
                         <div class="bar-label">สระบุรี</div>
                         <div class="bar-container">
@@ -1335,7 +1372,7 @@
                         <div class="bar-count">6 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="ปราจีนบุรี">
                         <div class="rank-num">19</div>
                         <div class="bar-label">ปราจีนบุรี</div>
                         <div class="bar-container">
@@ -1346,7 +1383,7 @@
                         <div class="bar-count">5 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="พิษณุโลก">
                         <div class="rank-num">20</div>
                         <div class="bar-label">พิษณุโลก</div>
                         <div class="bar-container">
@@ -1357,7 +1394,7 @@
                         <div class="bar-count">3 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="ยะลา">
                         <div class="rank-num">21</div>
                         <div class="bar-label">ยะลา</div>
                         <div class="bar-container">
@@ -1368,7 +1405,7 @@
                         <div class="bar-count">3 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="ขอนแก่น">
                         <div class="rank-num">22</div>
                         <div class="bar-label">ขอนแก่น</div>
                         <div class="bar-container">
@@ -1379,7 +1416,7 @@
                         <div class="bar-count">2 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="นครราชสีมา">
                         <div class="rank-num">23</div>
                         <div class="bar-label">นครราชสีมา</div>
                         <div class="bar-container">
@@ -1390,7 +1427,7 @@
                         <div class="bar-count">2 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="สมุทรปราการ">
                         <div class="rank-num">24</div>
                         <div class="bar-label">สมุทรปราการ</div>
                         <div class="bar-container">
@@ -1401,7 +1438,7 @@
                         <div class="bar-count">2 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="ชุมพร">
                         <div class="rank-num">25</div>
                         <div class="bar-label">ชุมพร</div>
                         <div class="bar-container">
@@ -1412,7 +1449,7 @@
                         <div class="bar-count">1 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="นครพนม">
                         <div class="rank-num">26</div>
                         <div class="bar-label">นครพนม</div>
                         <div class="bar-container">
@@ -1423,7 +1460,7 @@
                         <div class="bar-count">1 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="นครสวรรค์">
                         <div class="rank-num">27</div>
                         <div class="bar-label">นครสวรรค์</div>
                         <div class="bar-container">
@@ -1434,7 +1471,7 @@
                         <div class="bar-count">1 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="พิจิตร">
                         <div class="rank-num">28</div>
                         <div class="bar-label">พิจิตร</div>
                         <div class="bar-container">
@@ -1445,7 +1482,7 @@
                         <div class="bar-count">1 คน</div>
                     </div>
 
-                    <div class="bar-item">
+                    <div class="bar-item" data-province="อุตรดิตถ์">
                         <div class="rank-num">29</div>
                         <div class="bar-label">อุตรดิตถ์</div>
                         <div class="bar-container">
@@ -1456,6 +1493,9 @@
                         <div class="bar-count">1 คน</div>
                     </div>
 
+                    <div class="no-results" id="noResults" style="display: none;">
+                        ไม่พบจังหวัดที่ค้นหา
+                    </div>
                 </div>
             </div>
         </div>
@@ -1463,7 +1503,7 @@
         <!-- Footer -->
         <div class="footer">
             <p><strong>รายงานอีสปอร์ต กีฬาเยาวชนแห่งชาติครั้งที่ 41</strong></p>
-            <p>แหล่งข้อมูล: อีสปอร์ต.xlsx | สร้างเมื่อ: 27/04/2026 05:25:29</p>
+            <p>แหล่งข้อมูล: อีสปอร์ต.xlsx | สร้างเมื่อ: 27/04/2026 05:45:16</p>
         </div>
     </div>
     
@@ -1472,29 +1512,69 @@
             // Hide all tabs
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.remove('active'));
-            
+
             // Remove active class from all buttons
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-            
+
             // Show selected tab
             document.getElementById(tabName).classList.add('active');
             evt.currentTarget.classList.add('active');
         }
-        
-        function filterContent() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const cards = document.querySelectorAll('.province-card');
-            
-            cards.forEach(card => {
-                const province = card.getAttribute('data-province');
-                const athletes = card.textContent.toLowerCase();
-                
-                if (province.includes(searchTerm) || athletes.includes(searchTerm)) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
+
+        function goToProvince(provinceName) {
+            // Switch to details tab
+            const tabBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.textContent.includes('รายชื่อ'));
+
+            if (tabBtn) {
+                tabBtn.click();
+            }
+
+            // Scroll to the province card
+            setTimeout(() => {
+                const provinceId = 'province-' + provinceName;
+                const provinceCard = document.getElementById(provinceId);
+                if (provinceCard) {
+                    provinceCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Add a highlight effect
+                    provinceCard.style.boxShadow = '0 0 20px rgba(102, 126, 234, 0.5)';
+                    setTimeout(() => {
+                        provinceCard.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+                    }, 2000);
                 }
+            }, 100);
+        }
+
+        function filterDetailsContent(event) {
+            if (!event || event.key !== 'Enter') {
+                return;
+            }
+
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            if (!searchTerm) {
+                // Clear all highlights if search is empty
+                document.querySelectorAll('.athlete-highlight').forEach(el => {
+                    el.classList.remove('athlete-highlight');
+                });
+                return;
+            }
+
+            const cards = document.querySelectorAll('.province-card');
+
+            // Clear all previous highlights
+            document.querySelectorAll('.athlete-highlight').forEach(el => {
+                el.classList.remove('athlete-highlight');
+            });
+
+            // Find and highlight matching athletes
+            cards.forEach(card => {
+                const athleteElements = card.querySelectorAll('.athletes-list li');
+                athleteElements.forEach(athlete => {
+                    const athleteName = athlete.textContent.toLowerCase();
+                    if (athleteName.includes(searchTerm)) {
+                        athlete.classList.add('athlete-highlight');
+                    }
+                });
             });
         }
     </script>
