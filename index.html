@@ -352,6 +352,174 @@
             font-size: 16px;
         }
         
+        /* ===== SCHEDULE TAB STYLES ===== */
+        .sched-search-wrap {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .sched-search-wrap input {
+            width: 100%;
+            padding: 12px 42px 12px 16px;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        .sched-search-wrap input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+        .sched-search-wrap .search-icon {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            font-size: 18px;
+            pointer-events: none;
+        }
+        .sched-search-results {
+            display: none;
+            margin-bottom: 20px;
+            padding: 14px 16px;
+            background: #F0F4FF;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .sched-search-results.visible { display: block; }
+        .sched-search-results h3 { font-size: 13px; color: #667eea; margin-bottom: 10px; font-weight: 600; }
+        .sched-result-item {
+            padding: 8px 10px;
+            margin-bottom: 6px;
+            background: white;
+            border-radius: 6px;
+            font-size: 13px;
+            border: 1px solid #E0E0E0;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .sched-result-item .r-date { font-weight: 700; color: #1F4788; white-space: nowrap; }
+        .sched-result-item .r-time { color: #555; white-space: nowrap; }
+        .sched-result-item .r-game { color: #764ba2; font-weight: 600; }
+        .sched-result-item .r-event { color: #333; flex: 1; }
+        .sched-no-result { text-align: center; color: #999; padding: 20px; font-size: 14px; }
+
+        .sched-day-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .sched-day-btn {
+            padding: 9px 28px;
+            border: 2px solid #E0E0E0;
+            border-radius: 20px;
+            background: white;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: #777;
+            font-family: inherit;
+            transition: all 0.2s;
+            min-width: 100px;
+            text-align: center;
+        }
+        .sched-day-btn:hover { border-color: #667eea; color: #667eea; }
+        .sched-day-btn.active {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+        }
+        .sched-day-panel { display: none; }
+        .sched-day-panel.active { display: block; }
+        .sched-day-panel .sched-table-wrap { margin-top: 4px; }
+
+        .sched-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 16px;
+            margin-bottom: 20px;
+            justify-content: center;
+            padding: 14px 16px;
+            background: #F8F9FA;
+            border-radius: 8px;
+            border: 1px solid #E0E0E0;
+        }
+        .sleg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #555; }
+        .sleg-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+        .sched-table-wrap {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid #E0E0E0;
+        }
+        .sched-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 600px; }
+        .sched-table th {
+            padding: 12px 16px;
+            background: #2C3E50;
+            color: white;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        .sched-table td {
+            padding: 0;
+            border-bottom: 1px solid #EFEFEF;
+            vertical-align: top;
+        }
+        .sched-table tbody tr:last-child td { border-bottom: none; }
+        .sched-table tbody tr:hover td { background: #FAFAFA; }
+        .sched-time-cell {
+            padding: 12px 16px;
+            font-size: 12px;
+            color: #666;
+            white-space: nowrap;
+            width: 120px;
+            border-right: 1px solid #EFEFEF;
+            vertical-align: middle;
+            font-weight: 600;
+        }
+        .sched-event-cell {
+            padding: 10px 16px;
+            vertical-align: middle;
+            border-right: 1px solid #EFEFEF;
+            line-height: 1.8;
+        }
+        .sched-event-cell:last-child { border-right: none; }
+        .sbadge {
+            display: inline-block;
+            padding: 3px 9px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1.5;
+            margin: 2px 0;
+        }
+        .sb-reg     { background: #C8E6C9; color: #1B5E20; }
+        .sb-prep    { background: #A5D6A7; color: #145214; }
+        .sb-open    { background: #FFF176; color: #5D4037; }
+        .sb-aov-m   { background: #BBDEFB; color: #0D47A1; }
+        .sb-aov-f   { background: #90CAF9; color: #0D47A1; }
+        .sb-aov-x   { background: #E3F2FD; color: #1565C0; }
+        .sb-aov-semi { background: #42A5F5; color: #E3F2FD; }
+        .sb-aov-fin  { background: #EF9F27; color: #3E1F00; }
+        .sb-sf6-m   { background: #FFCCBC; color: #BF360C; }
+        .sb-sf6-f   { background: #FFAB91; color: #BF360C; }
+        .sb-sf6-x   { background: #FBE9E7; color: #BF360C; }
+        .sb-sf6-fin { background: #D84315; color: #FBE9E7; }
+        .sb-fco-m   { background: #E8D5FB; color: #4527A0; }
+        .sb-fco-f   { background: #CE93D8; color: #311B92; }
+        .sb-fco-fin { background: #8E24AA; color: #F3E5F5; }
+        .sb-break   { background: #F0F0F0; color: #999; }
+
+        .sched-final-header { background: linear-gradient(135deg, #F9A825 0%, #F57F17 100%); color: white; }
+        /* ===== END SCHEDULE STYLES ===== */
+
         @media (max-width: 768px) {
             .stats {
                 grid-template-columns: 1fr;
@@ -399,7 +567,7 @@
                 <div class="label">นักกีฬา</div>
             </div>
             <div class="stat-card">
-                <div class="number">27/04/2026</div>
+                <div class="number">6/05/2026</div>
                 <div class="label">วันที่รายงาน</div>
             </div>
         </div>
@@ -411,6 +579,7 @@
                 <button class="tab-btn active" onclick="switchTab(event, 'summary')">📈 สรุป</button>
                 <button class="tab-btn" onclick="switchTab(event, 'details')">📋 รายชื่อ</button>
                 <button class="tab-btn" onclick="switchTab(event, 'chart')">📊 กราฟแถบ</button>
+                <button class="tab-btn" onclick="switchTab(event, 'schedule')">🗓️ ตารางแข่งขัน</button>
             </div>
             
             <!-- Summary Tab -->
@@ -1502,6 +1671,206 @@
             </div>
         </div>
         
+        <!-- Schedule Tab -->
+        <div id="schedule" class="tab-content">
+            <h2 class="section-title">🗓️ ตารางการแข่งขัน 13–16 พ.ค.</h2>
+
+            <!-- Search Box -->
+            <div class="sched-search-wrap">
+                <input type="text" id="schedSearch" placeholder="ค้นหาเกม หรือประเภทการแข่งขัน เช่น AOV, SF6, Final..." oninput="searchSchedule(this.value)">
+                <span class="search-icon">🔍</span>
+            </div>
+            <!-- Search Results -->
+            <div class="sched-search-results" id="schedResults">
+                <h3 id="schedResultTitle">ผลการค้นหา</h3>
+                <div id="schedResultList"></div>
+            </div>
+
+            <!-- Legend -->
+            <div class="sched-legend">
+                <div class="sleg"><div class="sleg-dot" style="background:#BBDEFB"></div>AOV ทีมชาย</div>
+                <div class="sleg"><div class="sleg-dot" style="background:#90CAF9"></div>AOV ทีมหญิง</div>
+                <div class="sleg"><div class="sleg-dot" style="background:#E3F2FD"></div>AOV ทีมผสม</div>
+                <div class="sleg"><div class="sleg-dot" style="background:#42A5F5"></div>AOV Semi Final</div>
+                <div class="sleg"><div class="sleg-dot" style="background:#EF9F27"></div>AOV Final</div>
+                <div class="sleg"><div class="sleg-dot" style="background:#FFCCBC"></div>SF6 บุคคลชาย</div>
+                <div class="sleg"><div class="sleg-dot" style="background:#FFAB91"></div>SF6 บุคคลหญิง</div>
+                <div class="sleg"><div class="sleg-dot" style="background:#D84315"></div>SF6 Final</div>
+                <div class="sleg"><div class="sleg-dot" style="background:#E8D5FB"></div>FC Online ชาย</div>
+                <div class="sleg"><div class="sleg-dot" style="background:#CE93D8"></div>FC Online หญิง</div>
+                <div class="sleg"><div class="sleg-dot" style="background:#8E24AA"></div>FC Online Final</div>
+            </div>
+
+            <!-- Day Tabs -->
+            <div class="sched-day-tabs">
+                <button class="sched-day-btn active" onclick="switchSchedDay('sd13',this)">13 พ.ค.</button>
+                <button class="sched-day-btn" onclick="switchSchedDay('sd14',this)">14 พ.ค.</button>
+                <button class="sched-day-btn" onclick="switchSchedDay('sd15',this)">15 พ.ค.</button>
+                <button class="sched-day-btn" onclick="switchSchedDay('sd16',this)">16 พ.ค. 🏆 Final</button>
+            </div>
+
+            <!-- DAY 13 -->
+            <div id="sd13" class="sched-day-panel active">
+                <div class="sched-table-wrap"><table class="sched-table">
+                    <thead><tr>
+                        <th style="width:120px">เวลา</th>
+                        <th style="width:32%">Arena of Valor</th>
+                        <th style="width:28%">Street Fighter 6</th>
+                        <th style="width:28%">FC Online</th>
+                    </tr></thead>
+                    <tbody>
+                        <tr><td class="sched-time-cell">09.00 – 09.30</td>
+                            <td class="sched-event-cell" colspan="3"><span class="sbadge sb-reg">ลงทะเบียน</span></td></tr>
+                        <tr><td class="sched-time-cell">09.30 – 10.00</td>
+                            <td class="sched-event-cell" colspan="3"><span class="sbadge sb-prep">เตรียมตัวแข่งขัน</span></td></tr>
+                        <tr><td class="sched-time-cell">10.00 – 10.30</td>
+                            <td class="sched-event-cell" colspan="3"><span class="sbadge sb-open">พิธีเปิดการแข่งขัน</span></td></tr>
+                        <tr><td class="sched-time-cell">10.30 – 12.00</td>
+                            <td class="sched-event-cell"><span class="sbadge sb-aov-m">ทีมชาย รอบแบ่งกลุ่ม แมทช์ 1–2</span></td>
+                            <td class="sched-event-cell"></td><td class="sched-event-cell"></td></tr>
+                        <tr><td class="sched-time-cell">10.30 – 12.30</td>
+                            <td class="sched-event-cell"><span class="sbadge sb-aov-f">ทีมหญิง รอบแบ่งกลุ่ม แมทช์ 1–2</span></td>
+                            <td class="sched-event-cell"></td><td class="sched-event-cell"></td></tr>
+                        <tr><td class="sched-time-cell">12.30 – 13.30</td>
+                            <td class="sched-event-cell"><span class="sbadge sb-break">พัก</span></td>
+                            <td class="sched-event-cell"><span class="sbadge sb-break">พัก</span></td>
+                            <td class="sched-event-cell"><span class="sbadge sb-break">พัก</span></td></tr>
+                        <tr><td class="sched-time-cell">13.30 – 15.30</td>
+                            <td class="sched-event-cell">
+                                <span class="sbadge sb-aov-m">ทีมชาย รอบแบ่งกลุ่ม แมทช์ 3–4</span><br>
+                                <span class="sbadge sb-aov-f" style="margin-top:4px">ทีมหญิง รอบแบ่งกลุ่ม แมทช์ 3–4</span>
+                            </td>
+                            <td class="sched-event-cell"><span class="sbadge sb-sf6-m">บุคคลชาย รอบแบ่งกลุ่ม</span></td>
+                            <td class="sched-event-cell"><span class="sbadge sb-fco-m">บุคคลชาย รอบแบ่งกลุ่ม</span></td></tr>
+                        <tr><td class="sched-time-cell">15.30 – 16.00</td>
+                            <td class="sched-event-cell"><span class="sbadge sb-break">พัก</span></td>
+                            <td class="sched-event-cell"></td><td class="sched-event-cell"></td></tr>
+                        <tr><td class="sched-time-cell">16.00 – 17.00</td>
+                            <td class="sched-event-cell">
+                                <span class="sbadge sb-aov-m">ทีมชาย รอบแบ่งกลุ่ม แมทช์ 5</span><br>
+                                <span class="sbadge sb-aov-f" style="margin-top:4px">ทีมหญิง รอบแบ่งกลุ่ม แมทช์ 5</span>
+                            </td>
+                            <td class="sched-event-cell"></td><td class="sched-event-cell"></td></tr>
+                        <tr><td class="sched-time-cell">17.00 – 18.00</td>
+                            <td class="sched-event-cell"><span class="sbadge sb-break">สิ้นสุดวัน</span></td>
+                            <td class="sched-event-cell"></td><td class="sched-event-cell"></td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+
+            <!-- DAY 14 -->
+            <div id="sd14" class="sched-day-panel">
+                <div class="sched-table-wrap"><table class="sched-table">
+                    <thead><tr>
+                        <th style="width:120px">เวลา</th>
+                        <th style="width:32%">Arena of Valor</th>
+                        <th style="width:28%">Street Fighter 6</th>
+                        <th style="width:28%">FC Online</th>
+                    </tr></thead>
+                    <tbody>
+                        <tr><td class="sched-time-cell">09.00 – 09.30</td>
+                            <td class="sched-event-cell" colspan="3"><span class="sbadge sb-reg">ลงทะเบียน</span></td></tr>
+                        <tr><td class="sched-time-cell">09.30 – 10.00</td>
+                            <td class="sched-event-cell" colspan="3"><span class="sbadge sb-prep">เตรียมตัวแข่งขัน</span></td></tr>
+                        <tr><td class="sched-time-cell">10.00 – 12.00</td>
+                            <td class="sched-event-cell"><span class="sbadge sb-aov-x">ทีมผสม รอบแบ่งกลุ่ม แมทช์ 1–2</span></td>
+                            <td class="sched-event-cell"><span class="sbadge sb-sf6-f">บุคคลหญิง รอบแบ่งกลุ่ม</span></td>
+                            <td class="sched-event-cell"></td></tr>
+                        <tr><td class="sched-time-cell">12.00 – 13.00</td>
+                            <td class="sched-event-cell"><span class="sbadge sb-break">พัก</span></td>
+                            <td class="sched-event-cell"></td><td class="sched-event-cell"></td></tr>
+                        <tr><td class="sched-time-cell">13.00 – 15.00</td>
+                            <td class="sched-event-cell"><span class="sbadge sb-aov-x">ทีมผสม รอบแบ่งกลุ่ม แมทช์ 3–4</span></td>
+                            <td class="sched-event-cell"></td><td class="sched-event-cell"></td></tr>
+                        <tr><td class="sched-time-cell">14.00 – 16.30</td>
+                            <td class="sched-event-cell"></td>
+                            <td class="sched-event-cell"><span class="sbadge sb-sf6-x">คู่ผสม รอบแบ่งกลุ่ม</span></td>
+                            <td class="sched-event-cell"><span class="sbadge sb-fco-f">บุคคลหญิง รอบแบ่งกลุ่ม</span></td></tr>
+                        <tr><td class="sched-time-cell">15.30 – 17.30</td>
+                            <td class="sched-event-cell"><span class="sbadge sb-aov-x">ทีมผสม รอบแบ่งกลุ่ม แมทช์ 5</span></td>
+                            <td class="sched-event-cell"></td><td class="sched-event-cell"></td></tr>
+                        <tr><td class="sched-time-cell">17.30 – 18.00</td>
+                            <td class="sched-event-cell"><span class="sbadge sb-break">สิ้นสุดวัน</span></td>
+                            <td class="sched-event-cell"></td><td class="sched-event-cell"></td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+
+            <!-- DAY 15 -->
+            <div id="sd15" class="sched-day-panel">
+                <div class="sched-table-wrap"><table class="sched-table">
+                    <thead><tr>
+                        <th style="width:120px">เวลา</th>
+                        <th style="width:32%">Arena of Valor</th>
+                        <th style="width:28%">Street Fighter 6</th>
+                        <th style="width:28%">FC Online</th>
+                    </tr></thead>
+                    <tbody>
+                        <tr><td class="sched-time-cell">09.00 – 10.00</td>
+                            <td class="sched-event-cell" colspan="3"><span class="sbadge sb-reg">ลงทะเบียน / เตรียมตัว</span></td></tr>
+                        <tr><td class="sched-time-cell">10.00 – 11.30</td>
+                            <td class="sched-event-cell"><span class="sbadge sb-aov-semi">ผสม Semi Final</span></td>
+                            <td class="sched-event-cell">
+                                <span class="sbadge sb-sf6-m">บุคคลชาย Winner Final / Loser R1</span><br>
+                                <span class="sbadge sb-sf6-f" style="margin-top:4px">บุคคลหญิง Winner Final / Loser R1</span><br>
+                                <span class="sbadge sb-sf6-x" style="margin-top:4px">ทีมผสม Winner Final – Loser R1</span>
+                            </td>
+                            <td class="sched-event-cell"><span class="sbadge sb-fco-f">บุคคลหญิง Semi Final</span></td></tr>
+                        <tr><td class="sched-time-cell">12.00 – 13.30</td>
+                            <td class="sched-event-cell"><span class="sbadge sb-aov-semi">หญิง Semi Final</span></td>
+                            <td class="sched-event-cell">
+                                <span class="sbadge sb-sf6-fin">บุคคลชาย Loser Final – Final</span><br>
+                                <span class="sbadge sb-sf6-fin" style="margin-top:4px">บุคคลหญิง Loser Final – Final</span>
+                            </td>
+                            <td class="sched-event-cell"><span class="sbadge sb-fco-m">บุคคลชาย Semi Final</span></td></tr>
+                        <tr><td class="sched-time-cell">13.30 – 14.00</td>
+                            <td class="sched-event-cell"></td>
+                            <td class="sched-event-cell"><span class="sbadge sb-sf6-fin">ทีมผสม Loser Final – Final Final</span></td>
+                            <td class="sched-event-cell"></td></tr>
+                        <tr><td class="sched-time-cell">14.00 – 15.00</td>
+                            <td class="sched-event-cell"></td>
+                            <td class="sched-event-cell"></td>
+                            <td class="sched-event-cell"><span class="sbadge sb-fco-fin">บุคคลหญิง Final</span></td></tr>
+                        <tr><td class="sched-time-cell">15.00 – 16.30</td>
+                            <td class="sched-event-cell"><span class="sbadge sb-aov-semi">ชาย Semi Final</span></td>
+                            <td class="sched-event-cell"></td><td class="sched-event-cell"></td></tr>
+                        <tr><td class="sched-time-cell">15.30 – 16.30</td>
+                            <td class="sched-event-cell"></td>
+                            <td class="sched-event-cell"></td>
+                            <td class="sched-event-cell"><span class="sbadge sb-fco-fin">บุคคลชาย Final</span></td></tr>
+                        <tr><td class="sched-time-cell">16.30 – 18.00</td>
+                            <td class="sched-event-cell"><span class="sbadge sb-break">สิ้นสุดวัน</span></td>
+                            <td class="sched-event-cell"></td><td class="sched-event-cell"></td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+
+            <!-- DAY 16 FINAL -->
+            <div id="sd16" class="sched-day-panel">
+                <div class="sched-table-wrap"><table class="sched-table">
+                    <thead><tr>
+                        <th style="width:120px">เวลา</th>
+                        <th colspan="3" class="sched-final-header" style="text-align:center">🏆 FINAL DAY — Arena of Valor รอบชิงชนะเลิศ</th>
+                    </tr></thead>
+                    <tbody>
+                        <tr><td class="sched-time-cell">09.00 – 10.00</td>
+                            <td class="sched-event-cell" colspan="3"><span class="sbadge sb-reg">ลงทะเบียน / เตรียมตัว</span></td></tr>
+                        <tr><td class="sched-time-cell">10.00 – 12.30</td>
+                            <td class="sched-event-cell" colspan="3"><span class="sbadge sb-aov-fin">AOV ทีมผสม รอบชิงชนะเลิศ</span></td></tr>
+                        <tr><td class="sched-time-cell">12.30 – 13.00</td>
+                            <td class="sched-event-cell" colspan="3"><span class="sbadge sb-break">พัก</span></td></tr>
+                        <tr><td class="sched-time-cell">13.00 – 15.30</td>
+                            <td class="sched-event-cell" colspan="3"><span class="sbadge sb-aov-fin">AOV ทีมหญิง รอบชิงชนะเลิศ</span></td></tr>
+                        <tr><td class="sched-time-cell">15.30 – 16.00</td>
+                            <td class="sched-event-cell" colspan="3"><span class="sbadge sb-break">พัก</span></td></tr>
+                        <tr><td class="sched-time-cell">16.00 – 18.00</td>
+                            <td class="sched-event-cell" colspan="3"><span class="sbadge sb-aov-fin">AOV ทีมชาย รอบชิงชนะเลิศ</span></td></tr>
+                    </tbody>
+                </table></div>
+            </div>
+        </div>
+        <!-- END SCHEDULE TAB -->
+
         <!-- Footer -->
         <div class="footer">
             <p><strong>จัดทำโดยชมรมกีฬาอีสปอร์ตสุราษฎร์ธานี</strong></p>
@@ -1546,6 +1915,88 @@
                 }
             }, 100);
         }
+
+        // ===== SCHEDULE FUNCTIONS =====
+        function switchSchedDay(id, btn) {
+            document.querySelectorAll('.sched-day-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.sched-day-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        const scheduleData = [
+            // Day 13
+            { date: '13 พ.ค.', time: '09.00 – 09.30', game: 'ทุกเกม', event: 'ลงทะเบียน', keywords: 'ลงทะเบียน register' },
+            { date: '13 พ.ค.', time: '09.30 – 10.00', game: 'ทุกเกม', event: 'เตรียมตัวแข่งขัน', keywords: 'เตรียม prep' },
+            { date: '13 พ.ค.', time: '10.00 – 10.30', game: 'ทุกเกม', event: 'พิธีเปิดการแข่งขัน', keywords: 'เปิด opening พิธี' },
+            { date: '13 พ.ค.', time: '10.30 – 12.00', game: 'Arena of Valor', event: 'AOV ทีมชาย รอบแบ่งกลุ่ม แมทช์ 1–2', keywords: 'aov arena of valor ทีมชาย ชาย แบ่งกลุ่ม' },
+            { date: '13 พ.ค.', time: '10.30 – 12.30', game: 'Arena of Valor', event: 'AOV ทีมหญิง รอบแบ่งกลุ่ม แมทช์ 1–2', keywords: 'aov arena of valor ทีมหญิง หญิง แบ่งกลุ่ม' },
+            { date: '13 พ.ค.', time: '13.30 – 15.30', game: 'Arena of Valor', event: 'AOV ทีมชาย/หญิง รอบแบ่งกลุ่ม แมทช์ 3–4', keywords: 'aov arena of valor ทีมชาย ทีมหญิง แบ่งกลุ่ม' },
+            { date: '13 พ.ค.', time: '13.30 – 15.30', game: 'Street Fighter 6', event: 'SF6 บุคคลชาย รอบแบ่งกลุ่ม', keywords: 'sf6 street fighter บุคคลชาย ชาย แบ่งกลุ่ม' },
+            { date: '13 พ.ค.', time: '13.30 – 15.30', game: 'FC Online', event: 'FC Online บุคคลชาย รอบแบ่งกลุ่ม', keywords: 'fc online บุคคลชาย ชาย แบ่งกลุ่ม' },
+            { date: '13 พ.ค.', time: '16.00 – 17.00', game: 'Arena of Valor', event: 'AOV ทีมชาย/หญิง รอบแบ่งกลุ่ม แมทช์ 5', keywords: 'aov arena of valor ทีมชาย ทีมหญิง แบ่งกลุ่ม' },
+            // Day 14
+            { date: '14 พ.ค.', time: '09.00 – 09.30', game: 'ทุกเกม', event: 'ลงทะเบียน', keywords: 'ลงทะเบียน register' },
+            { date: '14 พ.ค.', time: '09.30 – 10.00', game: 'ทุกเกม', event: 'เตรียมตัวแข่งขัน', keywords: 'เตรียม prep' },
+            { date: '14 พ.ค.', time: '10.00 – 12.00', game: 'Arena of Valor', event: 'AOV ทีมผสม รอบแบ่งกลุ่ม แมทช์ 1–2', keywords: 'aov arena of valor ทีมผสม ผสม mixed แบ่งกลุ่ม' },
+            { date: '14 พ.ค.', time: '10.00 – 12.00', game: 'Street Fighter 6', event: 'SF6 บุคคลหญิง รอบแบ่งกลุ่ม', keywords: 'sf6 street fighter บุคคลหญิง หญิง แบ่งกลุ่ม' },
+            { date: '14 พ.ค.', time: '13.00 – 15.00', game: 'Arena of Valor', event: 'AOV ทีมผสม รอบแบ่งกลุ่ม แมทช์ 3–4', keywords: 'aov arena of valor ทีมผสม ผสม แบ่งกลุ่ม' },
+            { date: '14 พ.ค.', time: '14.00 – 16.30', game: 'Street Fighter 6', event: 'SF6 คู่ผสม รอบแบ่งกลุ่ม', keywords: 'sf6 street fighter คู่ผสม ผสม mixed แบ่งกลุ่ม' },
+            { date: '14 พ.ค.', time: '14.00 – 16.30', game: 'FC Online', event: 'FC Online บุคคลหญิง รอบแบ่งกลุ่ม', keywords: 'fc online บุคคลหญิง หญิง แบ่งกลุ่ม' },
+            { date: '14 พ.ค.', time: '15.30 – 17.30', game: 'Arena of Valor', event: 'AOV ทีมผสม รอบแบ่งกลุ่ม แมทช์ 5', keywords: 'aov arena of valor ทีมผสม ผสม แบ่งกลุ่ม' },
+            // Day 15
+            { date: '15 พ.ค.', time: '10.00 – 11.30', game: 'Arena of Valor', event: 'AOV ผสม Semi Final', keywords: 'aov arena of valor semi final ผสม รอบรองชนะเลิศ' },
+            { date: '15 พ.ค.', time: '10.00 – 11.30', game: 'Street Fighter 6', event: 'SF6 บุคคลชาย Winner Final / Loser R1', keywords: 'sf6 street fighter บุคคลชาย winner loser final' },
+            { date: '15 พ.ค.', time: '10.00 – 11.30', game: 'Street Fighter 6', event: 'SF6 บุคคลหญิง Winner Final / Loser R1', keywords: 'sf6 street fighter บุคคลหญิง winner loser final' },
+            { date: '15 พ.ค.', time: '10.00 – 11.30', game: 'Street Fighter 6', event: 'SF6 ทีมผสม Winner Final – Loser R1', keywords: 'sf6 street fighter ทีมผสม ผสม winner loser' },
+            { date: '15 พ.ค.', time: '10.00 – 11.30', game: 'FC Online', event: 'FC Online บุคคลหญิง Semi Final', keywords: 'fc online บุคคลหญิง หญิง semi final รอบรอง' },
+            { date: '15 พ.ค.', time: '12.00 – 13.30', game: 'Arena of Valor', event: 'AOV หญิง Semi Final', keywords: 'aov arena of valor หญิง semi final รอบรอง' },
+            { date: '15 พ.ค.', time: '12.00 – 13.30', game: 'Street Fighter 6', event: 'SF6 บุคคลชาย/หญิง Loser Final – Final', keywords: 'sf6 street fighter loser final บุคคลชาย บุคคลหญิง' },
+            { date: '15 พ.ค.', time: '12.00 – 13.30', game: 'FC Online', event: 'FC Online บุคคลชาย Semi Final', keywords: 'fc online บุคคลชาย ชาย semi final รอบรอง' },
+            { date: '15 พ.ค.', time: '13.30 – 14.00', game: 'Street Fighter 6', event: 'SF6 ทีมผสม Loser Final – Final Final', keywords: 'sf6 street fighter ทีมผสม ผสม loser final' },
+            { date: '15 พ.ค.', time: '14.00 – 15.00', game: 'FC Online', event: 'FC Online บุคคลหญิง Final 🏆', keywords: 'fc online บุคคลหญิง หญิง final รอบชิงชนะเลิศ' },
+            { date: '15 พ.ค.', time: '15.00 – 16.30', game: 'Arena of Valor', event: 'AOV ชาย Semi Final', keywords: 'aov arena of valor ชาย semi final รอบรอง' },
+            { date: '15 พ.ค.', time: '15.30 – 16.30', game: 'FC Online', event: 'FC Online บุคคลชาย Final 🏆', keywords: 'fc online บุคคลชาย ชาย final รอบชิงชนะเลิศ' },
+            // Day 16
+            { date: '16 พ.ค. 🏆', time: '10.00 – 12.30', game: 'Arena of Valor', event: 'AOV ทีมผสม รอบชิงชนะเลิศ 🏆', keywords: 'aov arena of valor ผสม final รอบชิงชนะเลิศ ชิง' },
+            { date: '16 พ.ค. 🏆', time: '13.00 – 15.30', game: 'Arena of Valor', event: 'AOV ทีมหญิง รอบชิงชนะเลิศ 🏆', keywords: 'aov arena of valor หญิง final รอบชิงชนะเลิศ ชิง' },
+            { date: '16 พ.ค. 🏆', time: '16.00 – 18.00', game: 'Arena of Valor', event: 'AOV ทีมชาย รอบชิงชนะเลิศ 🏆', keywords: 'aov arena of valor ชาย final รอบชิงชนะเลิศ ชิง' },
+        ];
+
+        function searchSchedule(val) {
+            const term = val.trim().toLowerCase();
+            const resultsBox = document.getElementById('schedResults');
+            const resultList = document.getElementById('schedResultList');
+            const resultTitle = document.getElementById('schedResultTitle');
+            if (!term) {
+                resultsBox.classList.remove('visible');
+                resultList.innerHTML = '';
+                return;
+            }
+            const matches = scheduleData.filter(d =>
+                d.event.toLowerCase().includes(term) ||
+                d.game.toLowerCase().includes(term) ||
+                d.keywords.toLowerCase().includes(term) ||
+                d.date.includes(term) ||
+                d.time.includes(term)
+            );
+            resultsBox.classList.add('visible');
+            if (matches.length === 0) {
+                resultTitle.textContent = 'ไม่พบผลการค้นหา';
+                resultList.innerHTML = '<div class="sched-no-result">ลองค้นหาด้วยคำอื่น เช่น AOV, SF6, Final, หญิง, ชาย</div>';
+                return;
+            }
+            resultTitle.textContent = `พบ ${matches.length} รายการ สำหรับ "${val.trim()}"`;
+            resultList.innerHTML = matches.map(d =>
+                `<div class="sched-result-item">
+                    <span class="r-date">📅 ${d.date}</span>
+                    <span class="r-time">⏰ ${d.time}</span>
+                    <span class="r-game">${d.game}</span>
+                    <span class="r-event">${d.event}</span>
+                </div>`
+            ).join('');
+        }
+        // ===== END SCHEDULE FUNCTIONS =====
 
         function filterDetailsContent(event) {
             if (!event || event.key !== 'Enter') {
