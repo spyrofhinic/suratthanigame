@@ -4,7 +4,7 @@ const CACHE_NAME = 'suratgames-v1';
 const STATIC_ASSETS = [
   './',
   './index.html',
-  './style.css',
+  './styles.css',
   './app.js',
   './manifest.json',
   './favicon.ico',
