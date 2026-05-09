@@ -5,504 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
     <title>รายงานนักกีฬาแยกตามจังหวัด</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', 'Thai Sans Serif', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #1F4788 0%, #2C3E50 100%);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .header p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            padding: 30px 20px;
-            background: #F8F9FA;
-            border-bottom: 2px solid #E0E0E0;
-        }
-        
-        .stat-card {
-            text-align: center;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .stat-card .number {
-            font-size: 36px;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 5px;
-        }
-        
-        .stat-card .label {
-            font-size: 13px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .content {
-            padding: 30px 20px;
-        }
-        
-        .section-title {
-            font-size: 20px;
-            color: #1F4788;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
-            font-weight: bold;
-        }
-        
-        .summary-table {
-            width: 100%;
-            margin-bottom: 40px;
-            border-collapse: collapse;
-        }
-        
-        .summary-table thead {
-            background: #2C3E50;
-            color: white;
-        }
-        
-        .summary-table th {
-            padding: 12px 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        .summary-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #E0E0E0;
-        }
-        
-        .summary-table tbody tr:hover {
-            background: #F5F5F5;
-        }
-        
-        .summary-table tbody tr:nth-child(odd) {
-            background: #FAFAFA;
-        }
-        
-        .rank {
-            font-weight: bold;
-            color: #667eea;
-            width: 40px;
-        }
-        
-        .province-name {
-            font-weight: 500;
-            color: #1F4788;
-        }
-
-        .province-link {
-            color: #667eea;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .province-link:hover {
-            color: #764ba2;
-            border-bottom-color: #667eea;
-        }
-        
-        .count {
-            text-align: center;
-            font-weight: bold;
-            color: #764ba2;
-        }
-        
-        .total-row {
-            background: #2C3E50 !important;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .total-row td {
-            color: white;
-        }
-        
-        .detail-section {
-            margin-bottom: 30px;
-        }
-        
-        .province-card {
-            margin-bottom: 20px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .province-header {
-            padding: 15px 20px;
-            color: white;
-            font-weight: bold;
-            font-size: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .province-count {
-            background: rgba(255,255,255,0.3);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-        
-        .athletes-list {
-            background: white;
-            padding: 15px 20px;
-        }
-        
-        .athletes-list ol {
-            list-style-position: inside;
-            line-height: 1.8;
-        }
-        
-        .athletes-list li {
-            padding: 5px 0;
-            font-size: 13px;
-            color: #333;
-        }
-
-        .athlete-highlight {
-            background-color: #FFEB3B;
-            padding: 3px 6px;
-            border-radius: 3px;
-            font-weight: 600;
-            display: inline-block;
-        }
-        
-        .search-box {
-            margin-bottom: 30px;
-        }
-        
-        .search-box input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #E0E0E0;
-            border-radius: 6px;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
-        
-        .search-box input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-        
-        .footer {
-            background: #F8F9FA;
-            padding: 20px;
-            text-align: center;
-            color: #666;
-            font-size: 12px;
-            border-top: 1px solid #E0E0E0;
-        }
-        
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #E0E0E0;
-            flex-wrap: wrap;
-        }
-        
-        .tab-btn {
-            padding: 12px 20px;
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            color: #999;
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
-            position: relative;
-            bottom: -2px;
-        }
-        
-        .tab-btn.active {
-            color: #667eea;
-            border-bottom-color: #667eea;
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Schedule Styles */
-        .schedule-legend-container {
-            padding: 20px;
-            background: #F8F9FA;
-            border-bottom: 2px solid #E0E0E0;
-        }
-
-        .legend-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            background: white;
-            border-radius: 6px;
-            border-left: 3px solid #667eea;
-            font-size: 12px;
-            color: #333;
-        }
-
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 3px;
-            flex-shrink: 0;
-            border: 1px solid #ddd;
-        }
-
-        .sched-day-buttons {
-            display: flex;
-            gap: 10px;
-            padding: 20px;
-            background: white;
-            border-bottom: 1px solid #E0E0E0;
-            flex-wrap: wrap;
-        }
-
-        .sched-day-btn {
-            padding: 10px 20px;
-            border: 2px solid #ddd;
-            background: white;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            color: #333;
-        }
-
-        .sched-day-btn:hover {
-            border-color: #667eea;
-            color: #667eea;
-        }
-
-        .sched-day-btn.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-
-        .sched-day-panel {
-            display: none;
-        }
-
-        .sched-day-panel.active {
-            display: block;
-        }
-
-        .schedule-tables-container {
-            padding: 20px;
-        }
-
-        .schedule-table {
-            width: 100%;
-            margin-bottom: 30px;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .schedule-table thead {
-            background: #2C3E50;
-            color: white;
-        }
-
-        .schedule-table th {
-            padding: 12px 15px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 13px;
-        }
-
-        .schedule-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #E0E0E0;
-            font-size: 13px;
-        }
-
-        .schedule-table tbody tr:hover {
-            background: #F5F5F5;
-        }
-
-        .schedule-table tbody tr:nth-child(odd) {
-            background: #FAFAFA;
-        }
-
-        .time-badge {
-            font-weight: 600;
-            color: #667eea;
-            white-space: nowrap;
-        }
-
-        .event-name {
-            color: #333;
-            font-weight: 500;
-        }
-        
-        /* Bar Chart Styles */
-        .bar-chart-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .bar-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: opacity 0.3s ease;
-        }
-        
-        .bar-item.hidden {
-            display: none;
-        }
-        
-        .bar-label {
-            width: 180px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #333;
-            flex-shrink: 0;
-        }
-        
-        .bar-container {
-            flex: 1;
-            height: 40px;
-            background: #F0F0F0;
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-        }
-        
-        .bar {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 12px;
-            color: white;
-            font-weight: bold;
-            font-size: 13px;
-            transition: width 0.5s ease;
-            border-radius: 6px;
-            position: relative;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-        
-        .bar-count {
-            width: 45px;
-            text-align: right;
-            font-size: 14px;
-            font-weight: bold;
-            color: #333;
-            flex-shrink: 0;
-        }
-        
-        .rank-num {
-            width: 30px;
-            text-align: center;
-            font-weight: bold;
-            color: #667eea;
-            flex-shrink: 0;
-        }
-        
-        .no-results {
-            text-align: center;
-            padding: 40px 20px;
-            color: #999;
-            font-size: 16px;
-        }
-        
-        @media (max-width: 768px) {
-            .stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 24px;
-            }
-            
-            .province-header {
-                flex-direction: column;
-                gap: 8px;
-                align-items: flex-start;
-            }
-            
-            .bar-label {
-                width: 120px;
-                font-size: 12px;
-            }
-            
-            .bar-count {
-                width: 35px;
-                font-size: 12px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -524,7 +27,7 @@
                 <div class="label">นักกีฬา</div>
             </div>
             <div class="stat-card">
-                <div class="number">27/04/2026</div>
+                <div class="number">9/05/2026</div>
                 <div class="label">วันที่รายงาน</div>
             </div>
         </div>
@@ -532,11 +35,17 @@
         <!-- Content -->
         <div class="content">
             <!-- Tabs -->
+            <div class="tabs-wrapper">
             <div class="tabs">
                 <button class="tab-btn active" onclick="switchTab(event, 'summary')">📈 สรุป</button>
                 <button class="tab-btn" onclick="switchTab(event, 'details')">📋 รายชื่อ</button>
                 <button class="tab-btn" onclick="switchTab(event, 'chart')">📊 กราฟแถบ</button>
                 <button class="tab-btn" onclick="switchTab(event, 'schedule')">🗓️ ตารางแข่งขัน</button>
+                <button class="tab-btn" onclick="switchTab(event, 'transport')">🚌 การเดินทาง</button>
+                <button class="tab-btn" onclick="switchTab(event, 'aboutsurat')">🌴 สุราษฎร์ธานี</button>
+                <button class="tab-btn" onclick="switchTab(event, 'foodshopping')">🍜 อาหาร &amp; ช็อปปิ้ง</button>
+                <button class="tab-btn" onclick="switchTab(event, 'clubstaff')">👥 บุคลากรชมรม</button>
+            </div>
             </div>
             
             <!-- Summary Tab -->
@@ -738,568 +247,1628 @@
             <div id="details" class="tab-content">
                 <h2 class="section-title">รายชื่อนักกีฬา</h2>
                 <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="🔍 ค้นหาจังหวัดหรือชื่อนักกีฬา..." onkeyup="filterDetailsContent(event)">
+                    <input type="text" id="searchInput" placeholder="🔍 ค้นหาชื่อนักกีฬา, จังหวัด, ชนิดกีฬา, ประเภท..." oninput="filterDetailsContent(event)" onkeyup="filterDetailsContent(event)">
                 </div>
                 <div class="detail-section">
 
                     <div class="province-card" id="province-ชลบุรี" data-province="ชลบุรี">
                         <div class="province-header" style="background-color: #FF6B6B;">
-                            <span>ชลบุรี</span>
+                            <span>ชลบุรี <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 1)</small></span>
                             <span class="province-count">15 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>กัญญาพัชร อ่อนนิ่ม</li>
-                                <li>จรูณโรจน์ โรจนธนธรรม</li>
-                                <li>ซาร์รา เวอร์บูม</li>
-                                <li>ณัฐกฤตา เข็มศรี</li>
-                                <li>ณัฐชานันท์ โกมลวัฒนพงศ์</li>
-                                <li>ณัฐวุฒิ นาแก้ว</li>
-                                <li>นนทชา ใยมะเดื่อ</li>
-                                <li>นันทิกานต์ ยินดีสุข</li>
-                                <li>บูรพา จำปามูล</li>
-                                <li>พรชนก ศรีทับทิม</li>
-                                <li>พิชาภพ แก้วกล่ำ</li>
-                                <li>ศุราวุฒ เวียงคำ</li>
-                                <li>สิทธิโชค ศรีบุรินทร์</li>
-                                <li>สุขกันยา วงศ์วรรณะศิริ</li>
-                                <li>เรมิกา มุสิกุล</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">ณัฐชานันท์ โกมลวัฒนพงศ์</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">ณัฐวุฒิ นาแก้ว</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">พิชาภพ แก้วกล่ำ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">สิทธิโชค ศรีบุรินทร์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">ศุราวุฒ เวียงคำ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">นนทชา ใยมะเดื่อ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">จรูณโรจน์ โรจนธนธรรม</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">8</td>
+                                        <td class="athlete-name">เรมิกา มุสิกุล</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">9</td>
+                                        <td class="athlete-name">นันทิกานต์ ยินดีสุข</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">10</td>
+                                        <td class="athlete-name">สุขกันยา วงศ์วรรณะศิริ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">11</td>
+                                        <td class="athlete-name">พรชนก ศรีทับทิม</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">12</td>
+                                        <td class="athlete-name">กัญญาพัชร อ่อนนิ่ม</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">13</td>
+                                        <td class="athlete-name">ณัฐกฤตา เข็มศรี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">14</td>
+                                        <td class="athlete-name">บูรพา จำปามูล</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">คู่ผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">15</td>
+                                        <td class="athlete-name">ซาร์รา เวอร์บูม</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">คู่ผสม</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-เชียงใหม่">
+                    <div class="province-card" id="province-เชียงใหม่" data-province="เชียงใหม่">
                         <div class="province-header" style="background-color: #4ECDC4;">
-                            <span>เชียงใหม่</span>
+                            <span>เชียงใหม่ <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 5)</small></span>
                             <span class="province-count">15 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>ชลธร สรรพช่าง</li>
-                                <li>ชัญญา สายวุฒิกุล</li>
-                                <li>ฐิติพรรณ พรหมวิจิตร</li>
-                                <li>ณพัส วาวงศ์มูล</li>
-                                <li>ณัฐพล ศิริสายัณห์</li>
-                                <li>ธนกร ฟองเมฆ</li>
-                                <li>ธนดล ธิสา</li>
-                                <li>นภัทรกร มูลถี</li>
-                                <li>นาวิน นะนิตย์</li>
-                                <li>ปุญพิชชา เวียงนาค</li>
-                                <li>มนัสนันท์ พิบูลย์ลาภอุดม</li>
-                                <li>อรอุมา ทำบุญ</li>
-                                <li>อริยพงษ์ ตุ่นเครือ</li>
-                                <li>อัญนิชา ใจคำแปง</li>
-                                <li>เจอรามี่คู่บุญ เจียฟู ว่อง</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">เจอรามี่คู่บุญ เจียฟู ว่อง</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">ชัญญา สายวุฒิกุล</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">ณพัส วาวงศ์มูล</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">ณัฐพล ศิริสายัณห์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">ธนกร ฟองเมฆ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">นภัทรกร มูลถี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">อริยพงษ์ ตุ่นเครือ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">8</td>
+                                        <td class="athlete-name">ธนดล ธิสา</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">9</td>
+                                        <td class="athlete-name">ฐิติพรรณ พรหมวิจิตร</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">10</td>
+                                        <td class="athlete-name">มนัสนันท์ พิบูลย์ลาภอุดม</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">11</td>
+                                        <td class="athlete-name">ชลธร สรรพช่าง</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">12</td>
+                                        <td class="athlete-name">อัญนิชา ใจคำแปง</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">13</td>
+                                        <td class="athlete-name">อรอุมา ทำบุญ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">14</td>
+                                        <td class="athlete-name">ปุญพิชชา เวียงนาค</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">15</td>
+                                        <td class="athlete-name">นาวิน นะนิตย์</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-กระบี่">
+                    <div class="province-card" id="province-กระบี่" data-province="กระบี่">
                         <div class="province-header" style="background-color: #45B7D1;">
-                            <span>กระบี่</span>
+                            <span>กระบี่ <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 4)</small></span>
                             <span class="province-count">12 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>ณฐมน ซุ่นกิจ</li>
-                                <li>ทีปกร สมหวัง</li>
-                                <li>ธีรนาฏ ปริญญาพล</li>
-                                <li>ปิยะรัตน์ ขาวนวล</li>
-                                <li>ปุณฑิภาทร ศรีจรรยา</li>
-                                <li>พสิน จิตต์แจ้ง</li>
-                                <li>ภัคนันท์ ขันธ์ภักดี</li>
-                                <li>อภิสิทธิ์ ทองเนื้อสาม</li>
-                                <li>เตชินท์ สั่นสท้าน</li>
-                                <li>แก้วอัญชิษฐา วงค์สวัสดิ์</li>
-                                <li>แสงอรุณ ชมเชย</li>
-                                <li>ไวสวรรยา สาระภี</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">ณฐมน ซุ่นกิจ</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">ปิยะรัตน์ ขาวนวล</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">ไวสวรรยา สาระภี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">ธีรนาฏ ปริญญาพล</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">แสงอรุณ ชมเชย</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">แก้วอัญชิษฐา วงค์สวัสดิ์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">ปุณฑิภาทร ศรีจรรยา</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">8</td>
+                                        <td class="athlete-name">พสิน จิตต์แจ้ง</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">9</td>
+                                        <td class="athlete-name">เตชินท์ สั่นสท้าน</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">10</td>
+                                        <td class="athlete-name">อภิสิทธิ์ ทองเนื้อสาม</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">11</td>
+                                        <td class="athlete-name">ทีปกร สมหวัง</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">12</td>
+                                        <td class="athlete-name">ภัคนันท์ ขันธ์ภักดี</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-กาญจนบุรี">
+                    <div class="province-card" id="province-กาญจนบุรี" data-province="กาญจนบุรี">
                         <div class="province-header" style="background-color: #FFA07A;">
-                            <span>กาญจนบุรี</span>
+                            <span>กาญจนบุรี <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 2)</small></span>
                             <span class="province-count">12 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>ญานิศา รวบรวม</li>
-                                <li>ณัชชา ผิวอ่อนเลิญ</li>
-                                <li>ณัฎฐธิดา กิจประชุม</li>
-                                <li>ทัศนวรรณ เรืองศรี</li>
-                                <li>ธันย์ชนก วธาวนิชกุล</li>
-                                <li>ธีรภัทร ใบไม้</li>
-                                <li>ปรีญาภัทร กราบกราน</li>
-                                <li>พิณภาภร บัณฑิต</li>
-                                <li>รัฐธรรมนูญ มงคลเทวากุล</li>
-                                <li>สิทธิโชค สาระสาริน</li>
-                                <li>สุทธิดา เกตุอ้น</li>
-                                <li>สุธน โคตรสิม</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">ธันย์ชนก วธาวนิชกุล</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">สุทธิดา เกตุอ้น</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">พิณภาภร บัณฑิต</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">ญานิศา รวบรวม</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">ปรีญาภัทร กราบกราน</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">ณัฎฐธิดา กิจประชุม</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">ทัศนวรรณ เรืองศรี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">8</td>
+                                        <td class="athlete-name">รัฐธรรมนูญ มงคลเทวากุล</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">9</td>
+                                        <td class="athlete-name">ธีรภัทร ใบไม้</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">10</td>
+                                        <td class="athlete-name">สุธน โคตรสิม</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">11</td>
+                                        <td class="athlete-name">สิทธิโชค สาระสาริน</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">12</td>
+                                        <td class="athlete-name">ณัชชา ผิวอ่อนเลิญ</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-สุราษฎร์ธานี">
+                    <div class="province-card" id="province-สุราษฎร์ธานี" data-province="สุราษฎร์ธานี">
                         <div class="province-header" style="background-color: #98D8C8;">
-                            <span>สุราษฎร์ธานี</span>
+                            <span>สุราษฎร์ธานี <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 4)</small></span>
                             <span class="province-count">12 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>จิรัฎฐ์ เมธารินทร์</li>
-                                <li>จิราวรรณ อุตล้อม</li>
-                                <li>ชนิกานต์ บุญคล้าย</li>
-                                <li>ธนกฤต เจริญจิตร</li>
-                                <li>พนาย แสงมณี</li>
-                                <li>พรปวีณ์ อินทมาตย์</li>
-                                <li>พสิษฐ์ พุทธิมา</li>
-                                <li>พีรวิชญ์ จริยาพจน์</li>
-                                <li>วสันต์ รอดภัย</li>
-                                <li>ศักรนันทน์ พรหมเมือง</li>
-                                <li>ศุภณัฐ ณ นคร</li>
-                                <li>อภิชญา คหะวงษ์</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">วสันต์ รอดภัย</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">จิราวรรณ อุตล้อม</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">จิรัฎฐ์ เมธารินทร์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">พนาย แสงมณี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">ศักรนันทน์ พรหมเมือง</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">ธนกฤต เจริญจิตร</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">พีรวิชญ์ จริยาพจน์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">8</td>
+                                        <td class="athlete-name">ศุภณัฐ ณ นคร</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">9</td>
+                                        <td class="athlete-name">อภิชญา คหะวงษ์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">10</td>
+                                        <td class="athlete-name">พรปวีณ์ อินทมาตย์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">11</td>
+                                        <td class="athlete-name">พสิษฐ์ พุทธิมา</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">12</td>
+                                        <td class="athlete-name">ชนิกานต์ บุญคล้าย</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-ภูเก็ต">
+                    <div class="province-card" id="province-ภูเก็ต" data-province="ภูเก็ต">
                         <div class="province-header" style="background-color: #F7DC6F;">
-                            <span>ภูเก็ต</span>
+                            <span>ภูเก็ต <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 4)</small></span>
                             <span class="province-count">11 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>กฤติมา สามา</li>
-                                <li>จักรภัทร มุกดา</li>
-                                <li>ชญานิษฐ์ นิลศร</li>
-                                <li>ชัชวาลย์ พลบูรณ์</li>
-                                <li>ทิมพิกา บัวหนุน</li>
-                                <li>ปฏิพัทธิ์ เตียงน้อย</li>
-                                <li>พฤกษธร สุขศรี</li>
-                                <li>วริศรา แปะปลอด</li>
-                                <li>สิริวิมล สมพูล</li>
-                                <li>สุชัญญา เกตุกาย</li>
-                                <li>อภิญญา เรียบร้อย</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">ทิมพิกา บัวหนุน</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">สิริวิมล สมพูล</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">วริศรา แปะปลอด</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">อภิญญา เรียบร้อย</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">กฤติมา สามา</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">สุชัญญา เกตุกาย</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">ชญานิษฐ์ นิลศร</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">8</td>
+                                        <td class="athlete-name">ปฏิพัทธิ์ เตียงน้อย</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">9</td>
+                                        <td class="athlete-name">จักรภัทร มุกดา</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">10</td>
+                                        <td class="athlete-name">พฤกษธร สุขศรี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">11</td>
+                                        <td class="athlete-name">ชัชวาลย์ พลบูรณ์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-ลำปาง">
+                    <div class="province-card" id="province-ลำปาง" data-province="ลำปาง">
                         <div class="province-header" style="background-color: #BB8FCE;">
-                            <span>ลำปาง</span>
+                            <span>ลำปาง <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 5)</small></span>
                             <span class="province-count">11 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>ณวลัญส์ ศรีทะโร</li>
-                                <li>ทักษิณ กันคำ</li>
-                                <li>นฤมล เรือนเหมย</li>
-                                <li>บุริศร์ ทองสุก</li>
-                                <li>ปพิชญา เงินฮอม</li>
-                                <li>พิชเนตร จันทร์นฤกุล</li>
-                                <li>พีรพรรฒ ภู่ระหงษ์</li>
-                                <li>พีรวิชญ์ มุณีแก้ว</li>
-                                <li>วรพล งามขำ</li>
-                                <li>วรัทยา แดงทอง</li>
-                                <li>ไอลดา ทานันท์</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">นฤมล เรือนเหมย</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">ปพิชญา เงินฮอม</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">พิชเนตร จันทร์นฤกุล</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">ณวลัญส์ ศรีทะโร</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">วรัทยา แดงทอง</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">ไอลดา ทานันท์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">พีรพรรฒ ภู่ระหงษ์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">8</td>
+                                        <td class="athlete-name">วรพล งามขำ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">9</td>
+                                        <td class="athlete-name">ทักษิณ กันคำ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">10</td>
+                                        <td class="athlete-name">บุริศร์ ทองสุก</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">11</td>
+                                        <td class="athlete-name">พีรวิชญ์ มุณีแก้ว</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">คู่ผสม</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-ศรีสะเกษ">
+                    <div class="province-card" id="province-ศรีสะเกษ" data-province="ศรีสะเกษ">
                         <div class="province-header" style="background-color: #85C1E2;">
-                            <span>ศรีสะเกษ</span>
+                            <span>ศรีสะเกษ <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 3)</small></span>
                             <span class="province-count">11 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>กรรณธิดา พิสัย</li>
-                                <li>ชยากร สีห์โคตร์</li>
-                                <li>ณัฐฐาริณีย์ ใจดี</li>
-                                <li>ธนวัฒน์ เพ็งพา</li>
-                                <li>นเรศ สุขจันทร์</li>
-                                <li>ปฏิมา ณ นคร</li>
-                                <li>พิชญา แก้วฤทธิ์</li>
-                                <li>พุฒิกร สามี</li>
-                                <li>ภัทราพร จันทสาร</li>
-                                <li>ยศกร ศรีโพนทอง</li>
-                                <li>อิศราภรณ์ ศรีหะบุตร</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">ยศกร ศรีโพนทอง</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">ภัทราพร จันทสาร</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">ปฏิมา ณ นคร</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">พิชญา แก้วฤทธิ์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">ณัฐฐาริณีย์ ใจดี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">อิศราภรณ์ ศรีหะบุตร</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">กรรณธิดา พิสัย</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">8</td>
+                                        <td class="athlete-name">ชยากร สีห์โคตร์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">9</td>
+                                        <td class="athlete-name">ธนวัฒน์ เพ็งพา</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">10</td>
+                                        <td class="athlete-name">นเรศ สุขจันทร์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">11</td>
+                                        <td class="athlete-name">พุฒิกร สามี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-หนองคาย">
+                    <div class="province-card" id="province-หนองคาย" data-province="หนองคาย">
                         <div class="province-header" style="background-color: #F8B195;">
-                            <span>หนองคาย</span>
+                            <span>หนองคาย <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 3)</small></span>
                             <span class="province-count">11 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>กฤติน สีหไตร</li>
-                                <li>กานต์เกล้า ร้อยแสง</li>
-                                <li>จุฑารัตน์ สีแดง</li>
-                                <li>ชาญชล นิยะนุช</li>
-                                <li>ณัฐนรี งามมีศรี</li>
-                                <li>พศิน บุญเทพ</li>
-                                <li>วิธาดา นามบุปผา</li>
-                                <li>วิริทธิ์พล บุตรเสน</li>
-                                <li>ศิวกร ศรีภักดี</li>
-                                <li>สิริยากร โคตรชมภู</li>
-                                <li>หิรัญ ชินคำ</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">หิรัญ ชินคำ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">ศิวกร ศรีภักดี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">กฤติน สีหไตร</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">พศิน บุญเทพ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">ชาญชล นิยะนุช</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">วิริทธิ์พล บุตรเสน</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">จุฑารัตน์ สีแดง</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">8</td>
+                                        <td class="athlete-name">วิธาดา นามบุปผา</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">9</td>
+                                        <td class="athlete-name">สิริยากร โคตรชมภู</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">10</td>
+                                        <td class="athlete-name">กานต์เกล้า ร้อยแสง</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">11</td>
+                                        <td class="athlete-name">ณัฐนรี งามมีศรี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-อ่างทอง">
+                    <div class="province-card" id="province-อ่างทอง" data-province="อ่างทอง">
                         <div class="province-header" style="background-color: #A8E6CF;">
-                            <span>อ่างทอง</span>
+                            <span>อ่างทอง <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 2)</small></span>
                             <span class="province-count">10 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>ชัยณรงค์ แสงอ่อน</li>
-                                <li>ธนวัฒน์ พัฒนะ</li>
-                                <li>ธนากร เที่ยงดี</li>
-                                <li>ธาวิน จั่นเพ็ชร์</li>
-                                <li>บุษญาภรณ์ ภักดี</li>
-                                <li>พีรวิชญ์ ไตรยวงค์</li>
-                                <li>พุฒิพงศ์ ไข่เจียว</li>
-                                <li>สิรธีร์ บุญมาขอม</li>
-                                <li>สุทธิดา อินไข่</li>
-                                <li>ไพลิน คุ้มเกรง</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">ธนวัฒน์ พัฒนะ</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">ชัยณรงค์ แสงอ่อน</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">ธนากร เที่ยงดี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">ธาวิน จั่นเพ็ชร์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">พุฒิพงศ์ ไข่เจียว</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">สิรธีร์ บุญมาขอม</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">พีรวิชญ์ ไตรยวงค์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">8</td>
+                                        <td class="athlete-name">สุทธิดา อินไข่</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">9</td>
+                                        <td class="athlete-name">ไพลิน คุ้มเกรง</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">10</td>
+                                        <td class="athlete-name">บุษญาภรณ์ ภักดี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-สุรินทร์">
-                        <div class="province-header" style="background-color: #FFD3B6;">
-                            <span>สุรินทร์</span>
+                    <div class="province-card" id="province-สุรินทร์" data-province="สุรินทร์">
+                        <div class="province-header" style="background-color: #FFB3BA;">
+                            <span>สุรินทร์ <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 3)</small></span>
                             <span class="province-count">9 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>กันตพัฒน์ คำดี</li>
-                                <li>ก้องภพ กิจแสงทอง</li>
-                                <li>นันทะ รักงาม</li>
-                                <li>ปริษา สืบสันต์</li>
-                                <li>พอเพียง บุญสิทธิ์</li>
-                                <li>วิรุฬห์ ขำเลิศ</li>
-                                <li>สิรภัทร แย้มเดช</li>
-                                <li>เปรมบารมี บานเย็น</li>
-                                <li>โชติก ฉัตรยุทธนา</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">ปริษา สืบสันต์</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">นันทะ รักงาม</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">พอเพียง บุญสิทธิ์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">ก้องภพ กิจแสงทอง</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">กันตพัฒน์ คำดี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">เปรมบารมี บานเย็น</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">วิรุฬห์ ขำเลิศ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">8</td>
+                                        <td class="athlete-name">โชติก ฉัตรยุทธนา</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">9</td>
+                                        <td class="athlete-name">สิรภัทร แย้มเดช</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">คู่ผสม</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-กรุงเทพมหานคร">
-                        <div class="province-header" style="background-color: #FFAAA5;">
-                            <span>กรุงเทพมหานคร</span>
+                    <div class="province-card" id="province-กรุงเทพมหานคร" data-province="กรุงเทพมหานคร">
+                        <div class="province-header" style="background-color: #87CEEB;">
+                            <span>กรุงเทพมหานคร <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 1)</small></span>
                             <span class="province-count">8 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>กันตพัฒน์ สินวาสนามงคล</li>
-                                <li>ธนกฤต ดลประดิษฐ</li>
-                                <li>ธิติสรณ์ เปรมพนมสรรค์</li>
-                                <li>ปุญญพัฒน์ ทำบุญ</li>
-                                <li>ภัทรพงศ์ ภาณุมาศตระกูล</li>
-                                <li>วชิรวิทย์ อินทร์แก้ว</li>
-                                <li>วัณณุวรรชน์ โยธิคาร์</li>
-                                <li>วิชชุกร ศุภประภา</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">วชิรวิทย์ อินทร์แก้ว</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">วัณณุวรรชน์ โยธิคาร์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">ธนกฤต ดลประดิษฐ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">วิชชุกร ศุภประภา</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">ปุญญพัฒน์ ทำบุญ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">กันตพัฒน์ สินวาสนามงคล</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">ภัทรพงศ์ ภาณุมาศตระกูล</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">8</td>
+                                        <td class="athlete-name">ธิติสรณ์ เปรมพนมสรรค์</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-นครปฐม">
-                        <div class="province-header" style="background-color: #FF8B94;">
-                            <span>นครปฐม</span>
+                    <div class="province-card" id="province-นครปฐม" data-province="นครปฐม">
+                        <div class="province-header" style="background-color: #DDA0DD;">
+                            <span>นครปฐม <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 2)</small></span>
                             <span class="province-count">8 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>กรวิชญ์ ธรรมเกษา</li>
-                                <li>ฐิติพงศ์ ศรีสุขพูลทรัพย์</li>
-                                <li>ธนกาญ ศรีสะอาด</li>
-                                <li>ธรดล พันทนพิเชฐ</li>
-                                <li>พีรพล สุริยะ</li>
-                                <li>วชิราภรณ์ สระทองทา</li>
-                                <li>วีรภาพ เณรบางแก้ว</li>
-                                <li>สุรพัศ นาคคีรี</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">สุรพัศ นาคคีรี</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">ฐิติพงศ์ ศรีสุขพูลทรัพย์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">ธนกาญ ศรีสะอาด</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">กรวิชญ์ ธรรมเกษา</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">วีรภาพ เณรบางแก้ว</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">พีรพล สุริยะ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">วชิราภรณ์ สระทองทา</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">8</td>
+                                        <td class="athlete-name">ธรดล พันทนพิเชฐ</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">คู่ผสม</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-นนทบุรี">
-                        <div class="province-header" style="background-color: #A8D8D8;">
-                            <span>นนทบุรี</span>
+                    <div class="province-card" id="province-นนทบุรี" data-province="นนทบุรี">
+                        <div class="province-header" style="background-color: #98FB98;">
+                            <span>นนทบุรี <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 1)</small></span>
                             <span class="province-count">8 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>นนธิชา เล็กปราง</li>
-                                <li>พลภัทร แต้ยินดี</li>
-                                <li>พิมพ์พจี วีรยารุจิภาส</li>
-                                <li>พีรพัฒน์ คชินทร์</li>
-                                <li>ภูกิจ ภูษิดาอภิวัฒน์</li>
-                                <li>วิสัยทัศน์ โสภณกิจพิพัฒน์</li>
-                                <li>สาวิกา แซ่ตั้ง</li>
-                                <li>สิริกรัณย์ เสนีย์วงศ์ ณ อยุธยา</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">ภูกิจ ภูษิดาอภิวัฒน์</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">นนธิชา เล็กปราง</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">วิสัยทัศน์ โสภณกิจพิพัฒน์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">สาวิกา แซ่ตั้ง</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">พลภัทร แต้ยินดี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">พีรพัฒน์ คชินทร์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">สิริกรัณย์ เสนีย์วงศ์ ณ อยุธยา</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมผสม</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">8</td>
+                                        <td class="athlete-name">พิมพ์พจี วีรยารุจิภาส</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-ปัตตานี">
-                        <div class="province-header" style="background-color: #AA96DA;">
-                            <span>ปัตตานี</span>
+                    <div class="province-card" id="province-ปัตตานี" data-province="ปัตตานี">
+                        <div class="province-header" style="background-color: #F0E68C;">
+                            <span>ปัตตานี <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 4)</small></span>
                             <span class="province-count">7 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>กันธนา อักษรสมบัติ</li>
-                                <li>ซอฟาอีย์ เบ็ญอิสมาแอล</li>
-                                <li>ธัชไท ธรรมเจริญ</li>
-                                <li>พรรษา แหวนหรุ่น</li>
-                                <li>มฺูฮำหมัดฮาซีม ซาฟา</li>
-                                <li>อัสมีย์ มามะ</li>
-                                <li>อิทธิพัทธ์ นวลนิล</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">ธัชไท ธรรมเจริญ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">พรรษา แหวนหรุ่น</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">กันธนา อักษรสมบัติ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">อัสมีย์ มามะ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">อิทธิพัทธ์ นวลนิล</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">มฺูฮำหมัดฮาซีม ซาฟา</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">ซอฟาอีย์ เบ็ญอิสมาแอล</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-สุโขทัย">
-                        <div class="province-header" style="background-color: #FCBAD3;">
-                            <span>สุโขทัย</span>
+                    <div class="province-card" id="province-สุโขทัย" data-province="สุโขทัย">
+                        <div class="province-header" style="background-color: #E6E6FA;">
+                            <span>สุโขทัย <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 5)</small></span>
                             <span class="province-count">7 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>ณัฐชนน จอมประเสริฐ</li>
-                                <li>ณัฐชพร วงส์ประยูร</li>
-                                <li>ณัฐพณชัย เนตรบุตร</li>
-                                <li>ธนพัฒ วงษ์เรียน</li>
-                                <li>พีรวิชญ์ วันทาเขียว</li>
-                                <li>ภนากรณ์ รัตมานะ</li>
-                                <li>รชต แกมทอง</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">พีรวิชญ์ วันทาเขียว</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">ภนากรณ์ รัตมานะ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">รชต แกมทอง</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">ณัฐพณชัย เนตรบุตร</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">ณัฐชนน จอมประเสริฐ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">ธนพัฒ วงษ์เรียน</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">7</td>
+                                        <td class="athlete-name">ณัฐชพร วงส์ประยูร</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">คู่ผสม</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-สตูล">
-                        <div class="province-header" style="background-color: #A1D5C4;">
-                            <span>สตูล</span>
+                    <div class="province-card" id="province-สตูล" data-province="สตูล">
+                        <div class="province-header" style="background-color: #FFDAB9;">
+                            <span>สตูล <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 4)</small></span>
                             <span class="province-count">6 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>ณัฐพงศ์ แก้วมณี</li>
-                                <li>พีรภัทร ศักน้อย</li>
-                                <li>รัชกฤต ลัคนาวงศ์</li>
-                                <li>อานิฟ อาดำ</li>
-                                <li>อาบัชชาร์ เกษม</li>
-                                <li>อารีย์ เทพคงคา</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">รัชกฤต ลัคนาวงศ์</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">อารีย์ เทพคงคา</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">อานิฟ อาดำ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">พีรภัทร ศักน้อย</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">ณัฐพงศ์ แก้วมณี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">อาบัชชาร์ เกษม</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมชาย</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-สระบุรี">
-                        <div class="province-header" style="background-color: #D4A5D4;">
-                            <span>สระบุรี</span>
+                    <div class="province-card" id="province-สระบุรี" data-province="สระบุรี">
+                        <div class="province-header" style="background-color: #B0E0E6;">
+                            <span>สระบุรี <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 2)</small></span>
                             <span class="province-count">6 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>กชวรรณ กองทอง</li>
-                                <li>กัลญาพร วงศ์มณีสถาพร</li>
-                                <li>ธนภูมิ พลอยงาม</li>
-                                <li>ปภาวดี ตุลาทอง</li>
-                                <li>รวงข้าว แสนทวี</li>
-                                <li>สุธีรา อินโต</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">กชวรรณ กองทอง</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">กัลญาพร วงศ์มณีสถาพร</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">รวงข้าว แสนทวี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">สุธีรา อินโต</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">ปภาวดี ตุลาทอง</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">6</td>
+                                        <td class="athlete-name">ธนภูมิ พลอยงาม</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-ปราจีนบุรี">
-                        <div class="province-header" style="background-color: #64B5F6;">
-                            <span>ปราจีนบุรี</span>
+                    <div class="province-card" id="province-ปราจีนบุรี" data-province="ปราจีนบุรี">
+                        <div class="province-header" style="background-color: #FFFACD;">
+                            <span>ปราจีนบุรี <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 1)</small></span>
                             <span class="province-count">5 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>ชนัญชิดา คมกริส</li>
-                                <li>ณัฐชวัล มหพลาดิศัย</li>
-                                <li>ณิชชารีย์ นิธิวุฒิรัฐสกุล</li>
-                                <li>พัสน์นันท์ ชัยศรี</li>
-                                <li>มินดา สุขประเสริฐ</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">พัสน์นันท์ ชัยศรี</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">ชนัญชิดา คมกริส</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">มินดา สุขประเสริฐ</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">4</td>
+                                        <td class="athlete-name">ณัฐชวัล มหพลาดิศัย</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">5</td>
+                                        <td class="athlete-name">ณิชชารีย์ นิธิวุฒิรัฐสกุล</td>
+                                        <td><span class="game-badge" style="background:#E8F8E8;color:#2CA02C;border:1px solid #2CA02C33;">⚔️ ROV</span></td>
+                                        <td class="athlete-cat">ทีมหญิง</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-พิษณุโลก">
-                        <div class="province-header" style="background-color: #81C784;">
-                            <span>พิษณุโลก</span>
+                    <div class="province-card" id="province-พิษณุโลก" data-province="พิษณุโลก">
+                        <div class="province-header" style="background-color: #FFE4E1;">
+                            <span>พิษณุโลก <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 5)</small></span>
                             <span class="province-count">3 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>ภัทรวดี เฮ้งจีน</li>
-                                <li>สุธิกมล ฉาบเพ็ชร</li>
-                                <li>อินทัช จิตรกำเหนิด</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">สุธิกมล ฉาบเพ็ชร</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">อินทัช จิตรกำเหนิด</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">ภัทรวดี เฮ้งจีน</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-ยะลา">
-                        <div class="province-header" style="background-color: #FFB74D;">
-                            <span>ยะลา</span>
+                    <div class="province-card" id="province-ยะลา" data-province="ยะลา">
+                        <div class="province-header" style="background-color: #E0FFFF;">
+                            <span>ยะลา <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 4)</small></span>
                             <span class="province-count">3 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>ณัฏฐ์ รัตตัญญู</li>
-                                <li>นพคุณ อ่อนแก้ว</li>
-                                <li>เบญจพร ทองเหลือง</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">ณัฏฐ์ รัตตัญญู</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">เบญจพร ทองเหลือง</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">3</td>
+                                        <td class="athlete-name">นพคุณ อ่อนแก้ว</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">คู่ผสม</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-ขอนแก่น">
-                        <div class="province-header" style="background-color: #E57373;">
-                            <span>ขอนแก่น</span>
+                    <div class="province-card" id="province-ขอนแก่น" data-province="ขอนแก่น">
+                        <div class="province-header" style="background-color: #F5DEB3;">
+                            <span>ขอนแก่น <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 3)</small></span>
                             <span class="province-count">2 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>กนกอร สีหาบุตร</li>
-                                <li>นรินทร์ ทองเมืองน้อย</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">นรินทร์ ทองเมืองน้อย</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">กนกอร สีหาบุตร</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-นครราชสีมา">
-                        <div class="province-header" style="background-color: #64B5F6;">
-                            <span>นครราชสีมา</span>
+                    <div class="province-card" id="province-นครราชสีมา" data-province="นครราชสีมา">
+                        <div class="province-header" style="background-color: #FFF0F5;">
+                            <span>นครราชสีมา <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 3)</small></span>
                             <span class="province-count">2 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>มิณทราดา มีใหม่</li>
-                                <li>เตชสิทธิ์ อภิชิตศักดิ์ชัย</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">เตชสิทธิ์ อภิชิตศักดิ์ชัย</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">มิณทราดา มีใหม่</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-สมุทรปราการ">
-                        <div class="province-header" style="background-color: #81C784;">
-                            <span>สมุทรปราการ</span>
+                    <div class="province-card" id="province-สมุทรปราการ" data-province="สมุทรปราการ">
+                        <div class="province-header" style="background-color: #E6E6FA;">
+                            <span>สมุทรปราการ <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 1)</small></span>
                             <span class="province-count">2 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>กัลยารัตน์ บุญใส</li>
-                                <li>จิรพัฒน์ พหลยุทธ</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">จิรพัฒน์ พหลยุทธ</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">2</td>
+                                        <td class="athlete-name">กัลยารัตน์ บุญใส</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-ชุมพร">
-                        <div class="province-header" style="background-color: #FFB74D;">
-                            <span>ชุมพร</span>
+                    <div class="province-card" id="province-ชุมพร" data-province="ชุมพร">
+                        <div class="province-header" style="background-color: #FAFAD2;">
+                            <span>ชุมพร <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 4)</small></span>
                             <span class="province-count">1 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>อนุภาพ แก้วศรี</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">อนุภาพ แก้วศรี</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-นครพนม">
-                        <div class="province-header" style="background-color: #E57373;">
-                            <span>นครพนม</span>
+                    <div class="province-card" id="province-นครพนม" data-province="นครพนม">
+                        <div class="province-header" style="background-color: #F0FFF0;">
+                            <span>นครพนม <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 3)</small></span>
                             <span class="province-count">1 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>นภัชชา ชัยประภา</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">นภัชชา ชัยประภา</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-นครสวรรค์">
-                        <div class="province-header" style="background-color: #AED581;">
-                            <span>นครสวรรค์</span>
+                    <div class="province-card" id="province-นครสวรรค์" data-province="นครสวรรค์">
+                        <div class="province-header" style="background-color: #FFF5EE;">
+                            <span>นครสวรรค์ <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 2)</small></span>
                             <span class="province-count">1 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>ศิริวัชรา มิ่งเจริญศิริกุล</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">ศิริวัชรา มิ่งเจริญศิริกุล</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-พิจิตร">
-                        <div class="province-header" style="background-color: #F48FB1;">
-                            <span>พิจิตร</span>
+                    <div class="province-card" id="province-พิจิตร" data-province="พิจิตร">
+                        <div class="province-header" style="background-color: #F0F8FF;">
+                            <span>พิจิตร <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 5)</small></span>
                             <span class="province-count">1 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>อักษรินทร์ หอมนารี</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">อักษรินทร์ หอมนารี</td>
+                                        <td><span class="game-badge" style="background:#E8F4FD;color:#1F78B4;border:1px solid #1F78B433;">⚽ FC Online</span></td>
+                                        <td class="athlete-cat">บุคคลชาย</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="province-card" id="province-อุตรดิตถ์">
-                        <div class="province-header" style="background-color: #7986CB;">
-                            <span>อุตรดิตถ์</span>
+                    <div class="province-card" id="province-อุตรดิตถ์" data-province="อุตรดิตถ์">
+                        <div class="province-header" style="background-color: #FDF5E6;">
+                            <span>อุตรดิตถ์ <small style="opacity:0.8;font-weight:normal;font-size:13px;">(ภาค 5)</small></span>
                             <span class="province-count">1 คน</span>
                         </div>
                         <div class="athletes-list">
-                            <ol>
-                                <li>ผักกาด สวัสดิ์ทอง</li>
-
-                            </ol>
+                            <table class="athlete-table">
+                                <thead><tr><th>#</th><th>ชื่อ-สกุล</th><th>ชนิดกีฬา</th><th>ประเภท</th></tr></thead>
+                                <tbody>
+                                    <tr class="athlete-row">
+                                        <td class="athlete-num">1</td>
+                                        <td class="athlete-name">ผักกาด สวัสดิ์ทอง</td>
+                                        <td><span class="game-badge" style="background:#FDECEA;color:#D62728;border:1px solid #D6272833;">👊 Street Fighter 6</span></td>
+                                        <td class="athlete-cat">บุคคลหญิง</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-
                 </div>
             </div>
             
             <!-- Chart Tab -->
             <div id="chart" class="tab-content">
                 <h2 class="section-title">กราฟแสดงจำนวนนักกีฬา (ทั้งหมด)</h2>
-                <div class="search-box">
-                    <input type="text" id="chartSearchInput" placeholder="🔍 ค้นหาจังหวัด..." onkeyup="filterChartContent()">
-                </div>
+                
                 <div class="bar-chart-container" id="chartContainer">
 
                     <div class="bar-item" data-province="ชลบุรี">
@@ -1631,6 +2200,29 @@
         <!-- SCHEDULE TAB -->
         <div id="schedule" class="tab-content">
            
+<div class="transport-hero">
+    <div class="about-hero-emoji"></div>
+    <h2>ติดตามรับชมช่องทางการถ่ายทอดสดได้ที่</h2>
+    <p class="about-hero-sub"></p>
+    <div class="about-hero-badges"><span class="about-badge">
+        <a href="https://www.facebook.com/SuratthaniESportClub" target="_blank" rel="noopener noreferrer">
+            
+                <img src="images/logo/SuratthaniEsport_Logo_New.png" alt="Suratthani Game"><br>
+                Facebook ชมรมกีฬาอีสปอร์ตสุราษฎร์ธานี
+                </a>
+            </span>
+        
+            <span class="about-badge">
+        <a href="https://www.facebook.com/TSports7Official" target="_blank" rel="noopener noreferrer">
+            
+                <img src="images/logo/T_Sports_7.png" alt="Suratthani Game"><br>
+                Facebook และ Youtube T Sports 7
+                </a>
+            </span>
+        
+    </div>
+</div>
+
 
             <!-- Day Selection Buttons -->
             <div class="sched-day-buttons">
@@ -2063,6 +2655,244 @@
             </div>
         </div>
         
+            <!-- Transport Tab -->
+            <div id="transport" class="tab-content">
+
+                <!-- Hero Banner -->
+                <div class="transport-hero">
+                    <h2>🚌 การเดินทางมาร่วมงาน</h2>
+                    <p>ข้อมูลเส้นทางและรูปภาพสถานที่จัดการแข่งขัน</p>
+                </div>
+
+                <!-- Info Cards -->
+                <div class="transport-info-cards">
+                    <div class="transport-info-card">
+                        <div class="icon">📍</div>
+                        <h4>สถานที่จัดงาน</h4>
+                        <p>ศูนย์ประชุมราชการภาคใต้ตอนบน ศาลากลางจังหวัดสุราษฎร์ธานี</p>
+                    </div>
+                    <div class="transport-info-card">
+                        <div class="icon">🗓️</div>
+                        <h4>วันที่จัดงาน</h4>
+                        <p>13 – 16 พฤษภาคม 2026</p>
+                    </div>
+                    <div class="transport-info-card">
+                        <div class="icon">🚗</div>
+                        <h4>รถยนต์ส่วนตัว</h4>
+                        <p>มีลานจอดรถบริเวณหน้าสนาม<br>ศาลากลาง</p>
+                    </div>
+                    <div class="transport-info-card">
+                        <div class="icon">🚉</div>
+                        <h4>รถโดยสาร</h4>
+                        <p>สถานีรถไฟ<br>ห่างจากสถานที่จัดงาน 14 กม.</p>
+                    </div>
+                    <div class="transport-info-card">
+                        <div class="icon">✈️</div>
+                        <h4>จากสนามบิน</h4>
+                        <p>สนามบินสุราษฎร์ธานี<br>ห่างจากสถานที่จัดงาน 28 กม.</p>
+                    </div>
+                </div>
+
+                <!-- Photo Gallery -->
+                <div class="gallery-section-title">🚍 การเดินทางจากสถานีรถต่างๆ (กดที่รูปเพื่อดูภาพเต็ม)</div>
+                <div class="transport-gallery" id="transportGallery">
+                    <!-- Cards generated by JS -->
+                </div>
+
+                <div class="gallery-section-title" style="margin-top:10px;">🗺️ แผนที่การเดินทาง</div>
+                <div style="border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.1); margin-bottom:30px;">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d246.20168821637276!2d99.33252883991314!3d9.133957924332282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3054070067267f7b%3A0xccc9b0368e78a1e9!2z4Lit4Liy4LiE4Liy4Lij4Lio4Li54LiZ4Lii4LmM4LiB4Lil4Liy4LiH4LiB4Liy4Lij4Lib4Lij4Liw4LiK4Li44Lih4Liq4Lix4Lih4Lih4LiZ4Liy4Lig4Liy4LiE4LmD4LiV4LmJ4LiV4Lit4LiZ4Lia4LiZ!5e0!3m2!1sth!2sth!4v1778247986139!5m2!1sth!2sth"
+                        width="100%" height="380"
+                        style="border:0; display:block;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+            </div>
+
+            <!-- Transport Tab -->
+            <div id="aboutsurat" class="tab-content">
+                <!-- Info Cards Row -->
+                <div class="about-info-row">
+                    <div class="about-info-card">
+                        <div class="about-info-icon">📍</div>
+                        <h4>ที่ตั้ง</h4>
+                        <p>ภาคใต้ตอนบน ติดอ่าวไทย พื้นที่ 12,891 ตร.กม.</p>
+                    </div>
+                    <div class="about-info-card">
+                        <div class="about-info-icon">👥</div>
+                        <h4>ประชากร</h4>
+                        <p>ประมาณ 1.06 ล้านคน (ใหญ่ที่สุดในภาคใต้)</p>
+                    </div>
+                    <div class="about-info-card">
+                        <div class="about-info-icon">🏛️</div>
+                        <h4>ประวัติศาสตร์</h4>
+                        <p>เมืองโบราณ อาณาจักรไชยา ศูนย์กลางพุทธศาสนา</p>
+                    </div>
+                    <div class="about-info-card">
+                        <div class="about-info-icon">🌿</div>
+                        <h4>เศรษฐกิจ</h4>
+                        <p>ยางพารา ปาล์มน้ำมัน ประมง และการท่องเที่ยว</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Section Title -->
+                <div class="gallery-section-title">🖼️ ภาพจังหวัดสุราษฎร์ธานี (กดที่รูปเพื่อดูภาพเต็ม)</div>
+
+                <!-- Photo Gallery -->
+                <div class="about-gallery" id="aboutGallery">
+                    <!-- Cards generated by JS -->
+                </div>
+
+                <!-- Highlights Section -->
+                <div class="about-highlights">
+                    <div class="about-section-header">
+                        <h3>✨ ไฮไลต์สุราษฎร์ธานีเกมส์ครั้งที่ 41</h3>
+                    </div>
+                    <div class="highlights-grid">
+                        <div class="highlight-card highlight-blue">
+                            <div class="highlight-num">41</div>
+                            <div class="highlight-label">ครั้ง กีฬาเยาวชนแห่งชาติ</div>
+                        </div>
+                        <div class="highlight-card highlight-purple">
+                            <div class="highlight-num">13–16</div>
+                            <div class="highlight-label">พฤษภาคม 2568</div>
+                        </div>
+                        <div class="highlight-card highlight-green">
+                            <div class="highlight-num">3</div>
+                            <div class="highlight-label">ชนิดกีฬาอีสปอร์ต</div>
+                        </div>
+                        <div class="highlight-card highlight-orange">
+                            <div class="highlight-num">201</div>
+                            <div class="highlight-label">นักกีฬา 29 จังหวัด</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        <!-- Food & Shopping Tab -->
+        <div id="foodshopping" class="tab-content">
+
+            <!-- Hero Banner -->
+            <div class="food-hero">
+                <div class="food-hero-emoji">🍜🛍️</div>
+                <h2>อาหารและแหล่งช็อปปิ้งในสุราษฎร์ธานี</h2>
+                <p class="food-hero-sub">สัมผัสรสชาติอาหารใต้แท้ และช็อปปิ้งของฝากประจำจังหวัด</p>
+                <p class="food-hero-sub">ติดต่อลงร้านได้ที่ facebook สุราษฎร์ธานี 4.0</p>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="food-filter-bar">
+                <button class="food-filter-btn active" onclick="filterFoodGallery('all', this)">🌟 ทั้งหมด</button>
+                <button class="food-filter-btn" onclick="filterFoodGallery('food', this)">🍽️ อาหาร</button>
+                <button class="food-filter-btn" onclick="filterFoodGallery('shopping', this)">🛒 ช็อปปิ้ง</button>
+                <button class="food-filter-btn" onclick="filterFoodGallery('cafe', this)">☕ ร้านกาแฟ</button>
+            </div>
+
+            <!-- Gallery Title -->
+            <div class="gallery-section-title">📸 แกลเลอรีอาหารและสถานที่ (กดที่รูปเพื่อดูภาพเต็ม)</div>
+
+            <!-- Food Gallery Grid -->
+            <div class="food-gallery" id="foodGallery">
+                <!-- Cards generated by JS -->
+            </div>
+
+            <!-- Info Cards Row -->
+            <div class="food-info-section">
+                <h3 class="food-section-header">📍 แหล่งช็อปปิ้งและตลาดสำคัญ</h3>
+                <div class="food-info-cards">
+                    <div class="food-info-card">
+                        <div class="food-info-icon">⛩️</div>
+                        <h4>ตลาดศาลเจ้า</h4>
+                        <p>ตลาดนัดยามค่ำ แหล่งรวมสตรีทฟู๊ดกลางเมือง ราคาถูก</p>
+                    </div>
+                    <div class="food-info-card">
+                        <div class="food-info-icon">☀️</div>
+                        <h4>ตลาดซันนี่มาร์เก็ต</h4>
+                        <p>ตลาดกลางคืนข้างสหไทย แหล่งสตรีทฟู๊ดกลางเมือง มีลานให้นั่งกิน</p>
+                    </div>
+                    <div class="food-info-card">
+                        <div class="food-info-icon">🐟</div>
+                        <h4>โลตัสสุราษฎร์ธานี</h4>
+                        <p>แหล่งรวมของกิน และอุปกรณ์เครื่องมือย่านท่ากูบ</p>
+                    </div>
+                    <div class="food-info-card">
+                        <div class="food-info-icon">🛍️</div>
+                        <h4>Central Suratthani</h4>
+                        <p>ห้างสรรพสินค้าใจกลางเมือง ร้านค้า ร้านอาหาร และโรงภาพยนตร์</p>
+                    </div>
+                    <div class="food-info-card">
+                        <div class="food-info-icon">🍤</div>
+                        <h4>ถนนคนเดินดอนนก</h4>
+                        <p>ตลาดเย็น อาหารพื้นเมือง ของฝาก ของที่ระลึก</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Club Staff Tab -->
+        <div id="clubstaff" class="tab-content">
+
+            <!-- Hero Banner -->
+            <div class="clubstaff-hero">
+                <h2>👥 บุคลากรชมรมกีฬาอีสปอร์ตสุราษฎร์ธานี</h2>
+                <p>คณะกรรมการและเจ้าหน้าที่ผู้ดูแลชมรม<br>
+                กีฬาเยาวชนแห่งชาติครั้งที่ 41 สุราษฎร์ธานีเกมส์</p>
+            </div>
+
+
+            <!-- Club Photo Section -->
+            <div class="clubstaff-section-title">📸 ภาพบุคลากรชมรม</div>
+            <div class="clubstaff-photo-section">
+                <div class="clubstaff-photo-frame" onclick="openClubStaffLightbox()" style="cursor:zoom-in;">
+                    <img 
+                        id="clubStaffImg"
+                        src="images/SuratEsportClub.jpg" 
+                        alt="บุคลากรชมรมกีฬาอีสปอร์ตสุราษฎร์ธานี"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        loading="lazy">
+                    <div class="clubstaff-photo-placeholder" style="display:none;">
+                        <span>🖼️</span>
+                        <span>ภาพบุคลากรชมรมกีฬาอีสปอร์ตสุราษฎร์ธานี</span>
+                        <span style="font-size:11px;color:#bbb;">images/SuratEsportClub.jpg</span>
+                    </div>
+                    <div style="position:absolute;bottom:10px;right:12px;background:rgba(0,0,0,0.45);color:white;font-size:12px;padding:4px 10px;border-radius:20px;pointer-events:none;">🔍 กดเพื่อดูภาพเต็ม</div>
+                </div>
+                <div class="clubstaff-photo-label">
+                    คณะกรรมการและบุคลากรชมรมกีฬาอีสปอร์ตจังหวัดสุราษฎร์ธานี
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="clubstaff-section-title">📣 ช่องทางติดตามชมรม</div>
+            <div class="transport-hero" style="margin-bottom: 0;">
+                <h2 style="font-size:18px; margin-bottom:10px;">ติดตามและรับข่าวสารได้ที่</h2>
+                <div class="about-hero-badges">
+                    <span class="about-badge">
+                        <a href="https://www.facebook.com/SuratthaniESportClub" target="_blank" rel="noopener noreferrer">
+                            <img src="images/logo/SuratthaniEsport_Logo_New.png" alt="Suratthani Esport" style="max-height:60px;"><br>
+                            Facebook ชมรมกีฬาอีสปอร์ตสุราษฎร์ธานี
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Lightbox -->
+        <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+            <span class="lightbox-close" onclick="closeLightboxForce()">&#x2715;</span>
+            <span class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1); event.stopPropagation();">&#8249;</span>
+            <img class="lightbox-img" id="lightboxImg" src="" alt="">
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+            <span class="lightbox-nav lightbox-next" onclick="lightboxNav(1); event.stopPropagation();">&#8250;</span>
+        </div>
+
         <!-- Footer -->
         <div class="footer">
             <p><strong>จัดทำโดยชมรมกีฬาอีสปอร์ตสุราษฎร์ธานี</strong></p>
@@ -2070,93 +2900,6 @@
         </div>
     </div>
     
-    <script>
-        function switchTab(evt, tabName) {
-            // Hide all tabs
-            const tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(tab => tab.classList.remove('active'));
-
-            // Remove active class from all buttons
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            // Show selected tab
-            document.getElementById(tabName).classList.add('active');
-            evt.currentTarget.classList.add('active');
-        }
-
-        function goToProvince(provinceName) {
-            // Switch to details tab
-            const tabBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.textContent.includes('รายชื่อ'));
-
-            if (tabBtn) {
-                tabBtn.click();
-            }
-
-            // Scroll to the province card
-            setTimeout(() => {
-                const provinceId = 'province-' + provinceName;
-                const provinceCard = document.getElementById(provinceId);
-                if (provinceCard) {
-                    provinceCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Add a highlight effect
-                    provinceCard.style.boxShadow = '0 0 20px rgba(102, 126, 234, 0.5)';
-                    setTimeout(() => {
-                        provinceCard.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-                    }, 2000);
-                }
-            }, 100);
-        }
-
-        function filterDetailsContent(event) {
-            if (!event || event.key !== 'Enter') {
-                return;
-            }
-
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-            const cards = document.querySelectorAll('.province-card');
-
-            if (!searchTerm) {
-                // Show all cards and clear highlights if search is empty
-                cards.forEach(card => {
-                    card.style.display = 'block';
-                    card.querySelectorAll('.athlete-highlight').forEach(el => {
-                        el.classList.remove('athlete-highlight');
-                    });
-                });
-                return;
-            }
-
-            // Clear all previous highlights
-            document.querySelectorAll('.athlete-highlight').forEach(el => {
-                el.classList.remove('athlete-highlight');
-            });
-
-            // Find and highlight matching athletes, hide non-matching provinces
-            cards.forEach(card => {
-                const athleteElements = card.querySelectorAll('.athletes-list li');
-                let hasMatch = false;
-
-                athleteElements.forEach(athlete => {
-                    const athleteName = athlete.textContent.toLowerCase();
-                    if (athleteName.includes(searchTerm)) {
-                        athlete.classList.add('athlete-highlight');
-                        hasMatch = true;
-                    }
-                });
-
-                // Show card if it has matches, hide otherwise
-                card.style.display = hasMatch ? 'block' : 'none';
-            });
-        }
-
-        // Schedule Functions
-        function switchSchedDay(id, btn) {
-            document.querySelectorAll('.sched-day-panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.sched-day-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            btn.classList.add('active');
-        }
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
