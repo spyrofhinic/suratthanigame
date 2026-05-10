@@ -1909,6 +1909,178 @@
             
             <!-- Chart Tab -->
             <div id="chart" class="tab-content">
+                <!-- ตารางสรุปอันดับจังหวัดแยกตามประเภทกีฬา -->
+                <h2 class="section-title" style="margin-top:30px;">สรุปอันดับจังหวัดแยกตามประเภทกีฬา</h2>
+                <p style="margin-bottom:16px; color:#555; font-size:14px;">ข้อมูลจากการแข่งขันกีฬาเยาวชนแห่งชาติ ครั้งที่ 41 สุราษฎร์ธานีเกมส์</p>
+
+                <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:16px;">
+                    <div style="display:flex; align-items:center; gap:7px; font-size:13px; color:#555;">
+                        <span style="width:11px;height:11px;border-radius:50%;background:#2196F3;display:inline-block;"></span> Arena of Valor
+                    </div>
+                    <div style="display:flex; align-items:center; gap:7px; font-size:13px; color:#555;">
+                        <span style="width:11px;height:11px;border-radius:50%;background:#e53935;display:inline-block;"></span> Street Fighter 6
+                    </div>
+                    <div style="display:flex; align-items:center; gap:7px; font-size:13px; color:#555;">
+                        <span style="width:11px;height:11px;border-radius:50%;background:#43a047;display:inline-block;"></span> FC Online
+                    </div>
+                </div>
+
+                <div style="overflow-x:auto; border-radius:12px; border:1px solid #e0e6f0; box-shadow:0 2px 12px rgba(31,71,136,0.07); margin-bottom:24px;">
+                <table style="width:100%; border-collapse:collapse; min-width:680px; font-family:inherit; font-size:14px;">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="background:#1F4788; color:#fff; padding:10px 12px; text-align:center; border-right:1px solid rgba(255,255,255,0.15);">อันดับ</th>
+                            <th colspan="3" style="background:#1a3a70; color:#90caf9; padding:9px 12px; text-align:center; border-right:2px solid rgba(255,255,255,0.2); font-size:12px; letter-spacing:1px;">⚔️ Arena of Valor</th>
+                            <th colspan="3" style="background:#7f0000; color:#ef9a9a; padding:9px 12px; text-align:center; border-right:2px solid rgba(255,255,255,0.2); font-size:12px; letter-spacing:1px;">👊 Street Fighter 6</th>
+                            <th colspan="2" style="background:#1b5e20; color:#a5d6a7; padding:9px 12px; text-align:center; font-size:12px; letter-spacing:1px;">⚽ FC Online</th>
+                        </tr>
+                        <tr>
+                            <th style="background:#e3f2fd; color:#1565c0; padding:9px 10px; text-align:center; font-size:12px; font-weight:600;">ทีมชาย</th>
+                            <th style="background:#e3f2fd; color:#1565c0; padding:9px 10px; text-align:center; font-size:12px; font-weight:600;">ทีมหญิง</th>
+                            <th style="background:#e3f2fd; color:#1565c0; padding:9px 10px; text-align:center; font-size:12px; font-weight:600; border-right:2px solid #bdbdbd;">ทีมผสม</th>
+                            <th style="background:#ffebee; color:#c62828; padding:9px 10px; text-align:center; font-size:12px; font-weight:600;">บุคคลชาย</th>
+                            <th style="background:#ffebee; color:#c62828; padding:9px 10px; text-align:center; font-size:12px; font-weight:600;">บุคคลหญิง</th>
+                            <th style="background:#ffebee; color:#c62828; padding:9px 10px; text-align:center; font-size:12px; font-weight:600; border-right:2px solid #bdbdbd;">คู่ผสม</th>
+                            <th style="background:#e8f5e9; color:#2e7d32; padding:9px 10px; text-align:center; font-size:12px; font-weight:600;">บุคคลชาย</th>
+                            <th style="background:#e8f5e9; color:#2e7d32; padding:9px 10px; text-align:center; font-size:12px; font-weight:600;">บุคคลหญิง</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background:#fffde7;">
+                            <td style="text-align:center; font-weight:700; font-size:17px; color:#f9a825; padding:11px 8px;">1</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">ชลบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">ชลบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0; border-right:2px solid #e0e0e0;">ชลบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">สมุทรปราการ</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">สมุทรปราการ</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828; border-right:2px solid #e0e0e0;">สมุทรปราการ</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">กรุงเทพฯ</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">ชลบุรี</td>
+                        </tr>
+                        <tr style="background:#f9fafb;">
+                            <td style="text-align:center; font-weight:700; font-size:17px; color:#9e9e9e; padding:11px 8px;">2</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">กรุงเทพฯ</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">ปราจีนบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0; border-right:2px solid #e0e0e0;">นนทบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">กรุงเทพฯ</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">นนทบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828; border-right:2px solid #e0e0e0;">ชลบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">นนทบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">นนทบุรี</td>
+                        </tr>
+                        <tr style="background:#fff8f0;">
+                            <td style="text-align:center; font-weight:700; font-size:17px; color:#bf7d2a; padding:11px 8px;">3</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">อ่างทอง</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">กาญจนบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0; border-right:2px solid #e0e0e0;">กาญจนบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">กาญจนบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">นครปฐม</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828; border-right:2px solid #e0e0e0;">กาญจนบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">นครปฐม</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">กาญจนบุรี</td>
+                        </tr>
+                        <tr style="background:#f9fafb;">
+                            <td style="text-align:center; font-weight:600; color:#555; padding:11px 8px;">4</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">นครปฐม</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">สระบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0; border-right:2px solid #e0e0e0;">อ่างทอง</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">สระบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">กาญจนบุรี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828; border-right:2px solid #e0e0e0;">นครปฐม</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">อ่างทอง</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">นครสวรรค์</td>
+                        </tr>
+                        <tr style="background:#f9fafb;">
+                            <td style="text-align:center; font-weight:600; color:#555; padding:11px 8px;">5</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">หนองคาย</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">ศรีสะเกษ</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0; border-right:2px solid #e0e0e0;">หนองคาย</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">นครราชสีมา</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">นครราชสีมา</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828; border-right:2px solid #e0e0e0;">นครราชสีมา</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">ศรีสะเกษ</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">สุรินทร์</td>
+                        </tr>
+                        <tr style="background:#f9fafb;">
+                            <td style="text-align:center; font-weight:600; color:#555; padding:11px 8px;">6</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">สุรินทร์</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">หนองคาย</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0; border-right:2px solid #e0e0e0;">ศรีสะเกษ</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">สุรินทร์</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">นครพนม</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828; border-right:2px solid #e0e0e0;">สุรินทร์</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">ขอนแก่น</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">ขอนแก่น</td>
+                        </tr>
+                        <tr style="background:#f9fafb;">
+                            <td style="text-align:center; font-weight:600; color:#555; padding:11px 8px;">7</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">สตูล</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">กระบี่</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0; border-right:2px solid #e0e0e0;">กระบี่</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">กระบี่</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">กระบี่</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828; border-right:2px solid #e0e0e0;">กระบี่</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">ยะลา</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">กระบี่</td>
+                        </tr>
+                        <tr style="background:#f9fafb;">
+                            <td style="text-align:center; font-weight:600; color:#555; padding:11px 8px;">8</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">ปัตตานี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">ภูเก็ต</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0; border-right:2px solid #e0e0e0;">ภูเก็ต</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">ปัตตานี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">ยะลา</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828; border-right:2px solid #e0e0e0;">ยะลา</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">ชุมพร</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">ภูเก็ต</td>
+                        </tr>
+                        <tr style="background:#f9fafb;">
+                            <td style="text-align:center; font-weight:600; color:#555; padding:11px 8px;">9</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">เชียงใหม่</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">เชียงใหม่</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0; border-right:2px solid #e0e0e0;">เชียงใหม่</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">เชียงใหม่</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">พิษณุโลก</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828; border-right:2px solid #e0e0e0;">สุโขทัย</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">เชียงใหม่</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">พิษณุโลก</td>
+                        </tr>
+                        <tr style="background:#f9fafb;">
+                            <td style="text-align:center; font-weight:600; color:#555; padding:11px 8px;">10</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">สุโขทัย</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">ลำปาง</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0; border-right:2px solid #e0e0e0;">ลำปาง</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">พิษณุโลก</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">อุตรดิตถ์</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828; border-right:2px solid #e0e0e0;">ลำปาง</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">พิจิตร</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">เชียงใหม่</td>
+                        </tr>
+                        <tr style="background:#f9fafb;">
+                            <td style="text-align:center; font-weight:600; color:#555; padding:11px 8px;">11</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0;">สุราษฎร์ธานี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#aaa;">—</td>
+                            <td style="text-align:center; padding:10px 8px; color:#1565c0; border-right:2px solid #e0e0e0;">สุราษฎร์ธานี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">สุราษฎร์ธานี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828;">สุราษฎร์ธานี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#c62828; border-right:2px solid #e0e0e0;">สุราษฎร์ธานี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">สุราษฎร์ธานี</td>
+                            <td style="text-align:center; padding:10px 8px; color:#2e7d32;">สุราษฎร์ธานี</td>
+                        </tr>
+                        <tr style="background:#1F4788;">
+                            <td style="text-align:center; color:#fff; font-weight:700; font-size:13px; padding:12px 8px;">รวม</td>
+                            <td style="text-align:center; color:#90caf9; font-weight:700; padding:12px 8px;">11</td>
+                            <td style="text-align:center; color:#90caf9; font-weight:700; padding:12px 8px;">10</td>
+                            <td style="text-align:center; color:#90caf9; font-weight:700; padding:12px 8px; border-right:2px solid rgba(255,255,255,0.2);">11</td>
+                            <td style="text-align:center; color:#ef9a9a; font-weight:700; padding:12px 8px;">11</td>
+                            <td style="text-align:center; color:#ef9a9a; font-weight:700; padding:12px 8px;">11</td>
+                            <td style="text-align:center; color:#ef9a9a; font-weight:700; padding:12px 8px; border-right:2px solid rgba(255,255,255,0.2);">11</td>
+                            <td style="text-align:center; color:#a5d6a7; font-weight:700; padding:12px 8px;">11</td>
+                            <td style="text-align:center; color:#a5d6a7; font-weight:700; padding:12px 8px;">11</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
                 <h2 class="section-title">กราฟแสดงจำนวนนักกีฬา (ทั้งหมด)</h2>
                 
                 <div class="bar-chart-container" id="chartContainer">
@@ -2236,6 +2408,8 @@
                         ไม่พบจังหวัดที่ค้นหา
                     </div>
                 </div>
+
+                
             </div>
         </div>
 
