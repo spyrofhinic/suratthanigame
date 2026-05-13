@@ -56,7 +56,7 @@
             <div class="tabs">
                 <button class="tab-btn active" onclick="switchTab(event, 'summary')">📈 สรุป</button>
                 <button class="tab-btn" onclick="switchTab(event, 'details')">📋 รายชื่อ</button>
-                <button class="tab-btn" onclick="switchTab(event, 'chart')">📊 กราฟแถบ</button>
+                <button class="tab-btn" onclick="switchTab(event, 'chart')">📊 สรุปอันดับ</button>
                 <button class="tab-btn" onclick="switchTab(event, 'schedule')">🗓️ ตารางแข่งขัน</button>
                 <button class="tab-btn" onclick="switchTab(event, 'transport')">🚌 การเดินทาง</button>
                 <button class="tab-btn" onclick="switchTab(event, 'aboutsurat')">🌴 สุราษฎร์ธานี</button>
@@ -1906,6 +1906,191 @@
                     </div>
                 </div>
             </div>
+
+              <!-- ===== ตารางคะแนนแมตช์แยกเกม ===== -->
+                <h2 class="section-title" style="margin-top:36px;">ตารางคะแนนแมตช์ แยกตามประเภทกีฬา</h2>
+                <p style="margin-bottom:16px; color:#555; font-size:14px;">อันดับ 1–2 ของแต่ละกลุ่มผ่านเข้ารอบต่อไป</p>
+
+                <!-- SUB TABS -->
+                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:18px;" id="matchTabBar">
+                  <button class="match-tab-btn active" onclick="switchMatchTab('mt-aov-m',this)">AOV ทีมชาย</button>
+                  <button class="match-tab-btn" onclick="switchMatchTab('mt-aov-f',this)">AOV ทีมหญิง</button>
+                  <button class="match-tab-btn" onclick="switchMatchTab('mt-sf6',this)">SF6 ชาย</button>
+                  <button class="match-tab-btn" onclick="switchMatchTab('mt-fc',this)">FC Online ชาย</button>
+                </div>
+
+                <!-- legend -->
+                <div style="display:flex;gap:18px;align-items:center;margin-bottom:14px;flex-wrap:wrap;">
+                  <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#555;">
+                    <span style="width:10px;height:10px;border-radius:2px;background:#22c99a;display:inline-block;"></span> ผ่านรอบ (อันดับ 1–2)
+                  </div>
+                  <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#555;">
+                    <span style="width:10px;height:10px;border-radius:2px;background:#c7d4e8;display:inline-block;opacity:.6;"></span> ตกรอบ
+                  </div>
+                </div>
+
+                <!-- AOV ทีมชาย -->
+                <div id="mt-aov-m" class="match-section">
+                  <div class="match-group-header">
+                    <span class="match-group-badge" style="background:#1F4788;">Group A</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">ทีม</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>A6 ชลบุรี</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">3</td><td class="mt-d">2</td><td class="mt-l">0</td><td>8</td><td>2</td><td class="mt-pos">+6</td><td class="mt-pts">8</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>A3 เชียงใหม่</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">2</td><td class="mt-d">3</td><td class="mt-l">0</td><td>7</td><td>3</td><td class="mt-pos">+4</td><td class="mt-pts">7</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">A4 กรุงเทพฯ</td><td>5</td><td class="mt-w">1</td><td class="mt-d">4</td><td class="mt-l">0</td><td>6</td><td>4</td><td class="mt-zero">0</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">A1 นครปฐม</td><td>5</td><td class="mt-w">1</td><td class="mt-d">3</td><td class="mt-l">1</td><td>5</td><td>5</td><td class="mt-zero">0</td><td class="mt-pts">5</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">A2 สุโขทัย</td><td>5</td><td class="mt-w">1</td><td class="mt-d">2</td><td class="mt-l">2</td><td>4</td><td>6</td><td class="mt-neg">−2</td><td class="mt-pts">4</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">6</span></td><td class="mt-left">A5 ปัตตานี</td><td>5</td><td class="mt-w">0</td><td class="mt-d">0</td><td class="mt-l">5</td><td>2</td><td>8</td><td class="mt-neg">−6</td><td class="mt-pts">0</td></tr>
+                    </tbody>
+                  </table></div>
+                  <div class="match-group-header" style="margin-top:20px;">
+                    <span class="match-group-badge" style="background:#c0392b;">Group B</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">ทีม</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>B4 อ่างทอง</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>8</td><td>0</td><td class="mt-pos">+8</td><td class="mt-pts">8</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>B2 หนองคาย</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">2</td><td class="mt-d">1</td><td class="mt-l">1</td><td>5</td><td>3</td><td class="mt-pos">+2</td><td class="mt-pts">5</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">B1 สุรินทร์</td><td>4</td><td class="mt-w">1</td><td class="mt-d">2</td><td class="mt-l">1</td><td>4</td><td>4</td><td class="mt-zero">0</td><td class="mt-pts">4</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">B5 สตูล</td><td>4</td><td class="mt-w">0</td><td class="mt-d">2</td><td class="mt-l">2</td><td>2</td><td>6</td><td class="mt-neg">−4</td><td class="mt-pts">2</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">B3 สุราษฎร์ธานี</td><td>4</td><td class="mt-w">0</td><td class="mt-d">1</td><td class="mt-l">3</td><td>1</td><td>7</td><td class="mt-neg">−6</td><td class="mt-pts">1</td></tr>
+                    </tbody>
+                  </table></div>
+                </div>
+
+                <!-- AOV ทีมหญิง -->
+                <div id="mt-aov-f" class="match-section" style="display:none;">
+                  <div class="match-group-header">
+                    <span class="match-group-badge" style="background:#1F4788;">Group A</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">ทีม</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>A3 ชลบุรี</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>8</td><td>0</td><td class="mt-pos">+8</td><td class="mt-pts">8</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>A5 ปราจีนบุรี</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">3</td><td class="mt-d">0</td><td class="mt-l">1</td><td>8</td><td>0</td><td class="mt-pos">+8</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">A1 เชียงใหม่</td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>4</td><td>4</td><td class="mt-zero">0</td><td class="mt-pts">4</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">A2 ลำปาง</td><td>4</td><td class="mt-w">0</td><td class="mt-d">1</td><td class="mt-l">3</td><td>1</td><td>7</td><td class="mt-neg">−6</td><td class="mt-pts">1</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">A4 สระบุรี</td><td>4</td><td class="mt-w">0</td><td class="mt-d">1</td><td class="mt-l">3</td><td>1</td><td>7</td><td class="mt-neg">−6</td><td class="mt-pts">1</td></tr>
+                    </tbody>
+                  </table></div>
+                  <div class="match-group-header" style="margin-top:20px;">
+                    <span class="match-group-badge" style="background:#c0392b;">Group B</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">ทีม</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>B3 กระบี่</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>8</td><td>0</td><td class="mt-pos">+8</td><td class="mt-pts">8</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>B4 ภูเก็ต</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">2</td><td class="mt-d">1</td><td class="mt-l">1</td><td>5</td><td>3</td><td class="mt-pos">+2</td><td class="mt-pts">5</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">B1 กาญจนบุรี</td><td>4</td><td class="mt-w">1</td><td class="mt-d">1</td><td class="mt-l">2</td><td>3</td><td>5</td><td class="mt-neg">−2</td><td class="mt-pts">3</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">B2 ศรีสะเกษ</td><td>4</td><td class="mt-w">0</td><td class="mt-d">2</td><td class="mt-l">2</td><td>2</td><td>6</td><td class="mt-neg">−4</td><td class="mt-pts">2</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">B5 หนองคาย</td><td>4</td><td class="mt-w">0</td><td class="mt-d">2</td><td class="mt-l">2</td><td>2</td><td>6</td><td class="mt-neg">−4</td><td class="mt-pts">2</td></tr>
+                    </tbody>
+                  </table></div>
+                </div>
+
+                <!-- SF6 ชาย -->
+                <div id="mt-sf6" class="match-section" style="display:none;">
+                  <div class="match-group-header">
+                    <span class="match-group-badge" style="background:#1F4788;">Group A</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">นักกีฬา</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>A1 สุราษฎร์ธานี</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">5</td><td class="mt-d">0</td><td class="mt-l">0</td><td>20</td><td>3</td><td class="mt-pos">+17</td><td class="mt-pts">15</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>A2 กระบี่</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">1</td><td>19</td><td>14</td><td class="mt-pos">+5</td><td class="mt-pts">12</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">A4 กาญจนบุรี</td><td>5</td><td class="mt-w">3</td><td class="mt-d">0</td><td class="mt-l">2</td><td>17</td><td>10</td><td class="mt-pos">+7</td><td class="mt-pts">9</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">A6 เชียงใหม่</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>10</td><td>18</td><td class="mt-neg">−8</td><td class="mt-pts">3</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">A5 ปัตตานี</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>8</td><td>18</td><td class="mt-neg">−10</td><td class="mt-pts">3</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">6</span></td><td class="mt-left">A3 สระบุรี</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>9</td><td>20</td><td class="mt-neg">−11</td><td class="mt-pts">3</td></tr>
+                    </tbody>
+                  </table></div>
+                  <div class="match-group-header" style="margin-top:20px;">
+                    <span class="match-group-badge" style="background:#c0392b;">Group B</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">นักกีฬา</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>B3 สมุทรปราการ</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>14</td><td>3</td><td class="mt-pos">+11</td><td class="mt-pts">12</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>B4 นครราชสีมา</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>13</td><td>11</td><td class="mt-pos">+2</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">B2 กรุงเทพฯ</td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>11</td><td>13</td><td class="mt-neg">−2</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">B5 สุรินทร์</td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>10</td><td>13</td><td class="mt-neg">−3</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">B1 พิษณุโลก</td><td>4</td><td class="mt-w">0</td><td class="mt-d">0</td><td class="mt-l">4</td><td>6</td><td>14</td><td class="mt-neg">−8</td><td class="mt-pts">0</td></tr>
+                    </tbody>
+                  </table></div>
+                </div>
+
+                <!-- FC Online ชาย -->
+                <div id="mt-fc" class="match-section" style="display:none;">
+                  <div class="match-group-header">
+                    <span class="match-group-badge" style="background:#1F4788;">Group A</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">นักกีฬา</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>A4 ยะลา</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">5</td><td class="mt-d">0</td><td class="mt-l">0</td><td>30</td><td>5</td><td class="mt-pos">+25</td><td class="mt-pts">15</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>A6 เชียงใหม่</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">1</td><td>15</td><td>14</td><td class="mt-pos">+1</td><td class="mt-pts">12</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">A2 อ่างทอง</td><td>5</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">3</td><td>14</td><td>12</td><td class="mt-pos">+2</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">A5 นครปฐม</td><td>5</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">3</td><td>9</td><td>12</td><td class="mt-neg">−3</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">A1 นนทบุรี</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>12</td><td>21</td><td class="mt-neg">−9</td><td class="mt-pts">3</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">6</span></td><td class="mt-left">A3 พิจิตร</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>10</td><td>22</td><td class="mt-neg">−12</td><td class="mt-pts">3</td></tr>
+                    </tbody>
+                  </table></div>
+                  <div class="match-group-header" style="margin-top:20px;">
+                    <span class="match-group-badge" style="background:#c0392b;">Group B</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">นักกีฬา</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>B4 ศรีสะเกษ</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>16</td><td>7</td><td class="mt-pos">+9</td><td class="mt-pts">12</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>B5 กรุงเทพฯ</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">3</td><td class="mt-d">0</td><td class="mt-l">1</td><td>17</td><td>11</td><td class="mt-pos">+6</td><td class="mt-pts">9</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">B1 ขอนแก่น</td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>15</td><td>7</td><td class="mt-pos">+8</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">B3 ชุมพร</td><td>4</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">3</td><td>7</td><td>14</td><td class="mt-neg">−7</td><td class="mt-pts">3</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">B2 สุราษฎร์ธานี</td><td>4</td><td class="mt-w">0</td><td class="mt-d">0</td><td class="mt-l">4</td><td>5</td><td>17</td><td class="mt-neg">−12</td><td class="mt-pts">0</td></tr>
+                    </tbody>
+                  </table></div>
+                </div>
             
             <!-- Chart Tab -->
             <div id="chart" class="tab-content">
@@ -2081,337 +2266,7 @@
                     </tbody>
                 </table>
                 </div>
-                <h2 class="section-title">กราฟแสดงจำนวนนักกีฬา (ทั้งหมด)</h2>
-                
-                <div class="bar-chart-container" id="chartContainer">
-
-                    <div class="bar-item" data-province="ชลบุรี">
-                        <div class="rank-num">1</div>
-                        <div class="bar-label">ชลบุรี</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #FF6B6B; width: 100.0%;">
-                                15
-                            </div>
-                        </div>
-                        <div class="bar-count">15 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="เชียงใหม่">
-                        <div class="rank-num">2</div>
-                        <div class="bar-label">เชียงใหม่</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #4ECDC4; width: 100.0%;">
-                                15
-                            </div>
-                        </div>
-                        <div class="bar-count">15 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="กระบี่">
-                        <div class="rank-num">3</div>
-                        <div class="bar-label">กระบี่</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #45B7D1; width: 80.0%;">
-                                12
-                            </div>
-                        </div>
-                        <div class="bar-count">12 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="กาญจนบุรี">
-                        <div class="rank-num">4</div>
-                        <div class="bar-label">กาญจนบุรี</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #FFA07A; width: 80.0%;">
-                                12
-                            </div>
-                        </div>
-                        <div class="bar-count">12 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="สุราษฎร์ธานี">
-                        <div class="rank-num">5</div>
-                        <div class="bar-label">สุราษฎร์ธานี</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #98D8C8; width: 80.0%;">
-                                12
-                            </div>
-                        </div>
-                        <div class="bar-count">12 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="ภูเก็ต">
-                        <div class="rank-num">6</div>
-                        <div class="bar-label">ภูเก็ต</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #F7DC6F; width: 73.33333333333333%;">
-                                11
-                            </div>
-                        </div>
-                        <div class="bar-count">11 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="ลำปาง">
-                        <div class="rank-num">7</div>
-                        <div class="bar-label">ลำปาง</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #BB8FCE; width: 73.33333333333333%;">
-                                11
-                            </div>
-                        </div>
-                        <div class="bar-count">11 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="ศรีสะเกษ">
-                        <div class="rank-num">8</div>
-                        <div class="bar-label">ศรีสะเกษ</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #85C1E2; width: 73.33333333333333%;">
-                                11
-                            </div>
-                        </div>
-                        <div class="bar-count">11 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="หนองคาย">
-                        <div class="rank-num">9</div>
-                        <div class="bar-label">หนองคาย</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #F8B195; width: 73.33333333333333%;">
-                                11
-                            </div>
-                        </div>
-                        <div class="bar-count">11 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="อ่างทอง">
-                        <div class="rank-num">10</div>
-                        <div class="bar-label">อ่างทอง</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #A8E6CF; width: 66.66666666666666%;">
-                                10
-                            </div>
-                        </div>
-                        <div class="bar-count">10 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="สุรินทร์">
-                        <div class="rank-num">11</div>
-                        <div class="bar-label">สุรินทร์</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #FFD3B6; width: 60.0%;">
-                                9
-                            </div>
-                        </div>
-                        <div class="bar-count">9 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="กรุงเทพมหานคร">
-                        <div class="rank-num">12</div>
-                        <div class="bar-label">กรุงเทพมหานคร</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #FFAAA5; width: 53.333333333333336%;">
-                                8
-                            </div>
-                        </div>
-                        <div class="bar-count">8 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="นครปฐม">
-                        <div class="rank-num">13</div>
-                        <div class="bar-label">นครปฐม</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #FF8B94; width: 53.333333333333336%;">
-                                8
-                            </div>
-                        </div>
-                        <div class="bar-count">8 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="นนทบุรี">
-                        <div class="rank-num">14</div>
-                        <div class="bar-label">นนทบุรี</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #A8D8D8; width: 53.333333333333336%;">
-                                8
-                            </div>
-                        </div>
-                        <div class="bar-count">8 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="ปัตตานี">
-                        <div class="rank-num">15</div>
-                        <div class="bar-label">ปัตตานี</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #AA96DA; width: 46.666666666666664%;">
-                                7
-                            </div>
-                        </div>
-                        <div class="bar-count">7 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="สุโขทัย">
-                        <div class="rank-num">16</div>
-                        <div class="bar-label">สุโขทัย</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #FCBAD3; width: 46.666666666666664%;">
-                                7
-                            </div>
-                        </div>
-                        <div class="bar-count">7 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="สตูล">
-                        <div class="rank-num">17</div>
-                        <div class="bar-label">สตูล</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #A1D5C4; width: 40.0%;">
-                                6
-                            </div>
-                        </div>
-                        <div class="bar-count">6 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="สระบุรี">
-                        <div class="rank-num">18</div>
-                        <div class="bar-label">สระบุรี</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #D4A5D4; width: 40.0%;">
-                                6
-                            </div>
-                        </div>
-                        <div class="bar-count">6 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="ปราจีนบุรี">
-                        <div class="rank-num">19</div>
-                        <div class="bar-label">ปราจีนบุรี</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #64B5F6; width: 33.33333333333333%;">
-                                5
-                            </div>
-                        </div>
-                        <div class="bar-count">5 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="พิษณุโลก">
-                        <div class="rank-num">20</div>
-                        <div class="bar-label">พิษณุโลก</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #81C784; width: 20.0%;">
-                                3
-                            </div>
-                        </div>
-                        <div class="bar-count">3 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="ยะลา">
-                        <div class="rank-num">21</div>
-                        <div class="bar-label">ยะลา</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #FFB74D; width: 20.0%;">
-                                3
-                            </div>
-                        </div>
-                        <div class="bar-count">3 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="ขอนแก่น">
-                        <div class="rank-num">22</div>
-                        <div class="bar-label">ขอนแก่น</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #E57373; width: 13.333333333333334%;">
-                                2
-                            </div>
-                        </div>
-                        <div class="bar-count">2 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="นครราชสีมา">
-                        <div class="rank-num">23</div>
-                        <div class="bar-label">นครราชสีมา</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #64B5F6; width: 13.333333333333334%;">
-                                2
-                            </div>
-                        </div>
-                        <div class="bar-count">2 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="สมุทรปราการ">
-                        <div class="rank-num">24</div>
-                        <div class="bar-label">สมุทรปราการ</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #81C784; width: 13.333333333333334%;">
-                                2
-                            </div>
-                        </div>
-                        <div class="bar-count">2 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="ชุมพร">
-                        <div class="rank-num">25</div>
-                        <div class="bar-label">ชุมพร</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #FFB74D; width: 6.666666666666667%;">
-                                1
-                            </div>
-                        </div>
-                        <div class="bar-count">1 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="นครพนม">
-                        <div class="rank-num">26</div>
-                        <div class="bar-label">นครพนม</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #E57373; width: 6.666666666666667%;">
-                                1
-                            </div>
-                        </div>
-                        <div class="bar-count">1 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="นครสวรรค์">
-                        <div class="rank-num">27</div>
-                        <div class="bar-label">นครสวรรค์</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #AED581; width: 6.666666666666667%;">
-                                1
-                            </div>
-                        </div>
-                        <div class="bar-count">1 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="พิจิตร">
-                        <div class="rank-num">28</div>
-                        <div class="bar-label">พิจิตร</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #F48FB1; width: 6.666666666666667%;">
-                                1
-                            </div>
-                        </div>
-                        <div class="bar-count">1 คน</div>
-                    </div>
-
-                    <div class="bar-item" data-province="อุตรดิตถ์">
-                        <div class="rank-num">29</div>
-                        <div class="bar-label">อุตรดิตถ์</div>
-                        <div class="bar-container">
-                            <div class="bar" style="background-color: #7986CB; width: 6.666666666666667%;">
-                                1
-                            </div>
-                        </div>
-                        <div class="bar-count">1 คน</div>
-                    </div>
-
-                    <div class="no-results" id="noResults" style="display: none;">
-                        ไม่พบจังหวัดที่ค้นหา
-                    </div>
-                </div>
-
-                
-            </div>
-        </div>
+              
 
         <!-- SCHEDULE TAB -->
         <div id="schedule" class="tab-content">
@@ -3160,9 +3015,127 @@
         body {
             padding-bottom: env(safe-area-inset-bottom);
         }
+
+        /* ===== MATCH STANDINGS TABLES ===== */
+        .match-tab-btn {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 7px 14px;
+            border-radius: 6px;
+            border: 1.5px solid #c7d4e8;
+            background: #f0f4fb;
+            color: #1F4788;
+            cursor: pointer;
+            transition: all .18s;
+            font-family: inherit;
+        }
+        .match-tab-btn:hover { border-color: #1F4788; background: #e0eaf8; }
+        .match-tab-btn.active { background: #1F4788; border-color: #1F4788; color: #fff; }
+
+        .match-group-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 24px 0 10px;
+        }
+        .match-group-badge {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            padding: 3px 12px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .match-group-line {
+            flex: 1;
+            height: 1px;
+            background: #d0daea;
+        }
+
+        .match-table-wrap {
+            overflow-x: auto;
+            border-radius: 10px;
+            border: 1px solid #d0daea;
+            box-shadow: 0 2px 10px rgba(31,71,136,0.07);
+            margin-bottom: 6px;
+        }
+        .match-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 560px;
+            font-size: 13px;
+            font-family: inherit;
+        }
+        .match-table thead tr {
+            background: #1F4788;
+        }
+        .match-table th {
+            color: #b8cde8;
+            padding: 10px 10px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .match-table th.mt-left { text-align: left; }
+        .match-table tbody tr { border-bottom: 1px solid #e8eef7; transition: background .12s; }
+        .match-table tbody tr:last-child { border-bottom: none; }
+        .match-table td { padding: 9px 10px; text-align: center; color: #2d3a50; }
+        .match-table td.mt-left { text-align: left; }
+
+        /* qualified rows */
+        .mt-qual { background: rgba(34,201,154,.07); border-left: 3px solid #22c99a !important; }
+        .mt-qual:hover { background: rgba(34,201,154,.14) !important; }
+        .mt-last-qual { border-bottom: 2px dashed rgba(34,201,154,.4) !important; }
+
+        /* eliminated rows */
+        .mt-elim { opacity: .48; border-left: 3px solid transparent !important; }
+        .mt-elim:hover { opacity: .75; }
+
+        /* rank badges */
+        .mt-rank {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 24px; height: 24px; border-radius: 4px;
+            font-weight: 700; font-size: 13px;
+        }
+        .mt-rank.r1 { background: rgba(255,215,0,.15); color: #c8900a; border: 1px solid rgba(200,144,10,.35); }
+        .mt-rank.r2 { background: rgba(150,160,180,.12); color: #6b7a96; border: 1px solid rgba(150,160,180,.3); }
+        .mt-rank.rn { color: #94a3b8; font-size: 12px; }
+
+        /* pass badge */
+        .mt-pass {
+            display: inline-block;
+            font-size: 9px; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #22c99a;
+            border: 1px solid rgba(34,201,154,.45);
+            border-radius: 3px;
+            padding: 1px 5px;
+            margin-left: 7px;
+            vertical-align: middle;
+        }
+
+        /* stat colors */
+        .mt-w  { color: #1a7a4e; font-weight: 600; }
+        .mt-d  { color: #b68000; }
+        .mt-l  { color: #b94040; }
+        .mt-pos  { color: #1a7a4e; font-weight: 600; }
+        .mt-neg  { color: #c0392b; font-weight: 600; }
+        .mt-zero { color: #94a3b8; }
+        .mt-pts  { color: #1F4788; font-weight: 700; font-size: 15px; }
     </style>
 
     <script>
+        // ===== Match Standings Sub-tabs =====
+        function switchMatchTab(id, btn) {
+            document.querySelectorAll('.match-section').forEach(s => s.style.display = 'none');
+            document.querySelectorAll('.match-tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).style.display = 'block';
+            btn.classList.add('active');
+        }
         // ===== Service Worker Registration =====
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
