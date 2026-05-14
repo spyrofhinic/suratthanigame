@@ -57,6 +57,7 @@
                 <button class="tab-btn active" onclick="switchTab(event, 'summary')">📈 สรุป</button>
                 <button class="tab-btn" onclick="switchTab(event, 'details')">📋 รายชื่อ</button>
                 <button class="tab-btn" onclick="switchTab(event, 'chart')">📊 กราฟแถบ</button>
+                <button class="tab-btn" onclick="switchTab(event, 'ranking')">🏆 สรุปอันดับ</button>
                 <button class="tab-btn" onclick="switchTab(event, 'schedule')">🗓️ ตารางแข่งขัน</button>
                 <button class="tab-btn" onclick="switchTab(event, 'transport')">🚌 การเดินทาง</button>
                 <button class="tab-btn" onclick="switchTab(event, 'aboutsurat')">🌴 สุราษฎร์ธานี</button>
@@ -2081,191 +2082,9 @@
                     </tbody>
                 </table>
                 </div>
-                <!-- ===== ตารางคะแนนแมตช์แยกเกม ===== -->
-                <h2 class="section-title" style="margin-top:36px;">ตารางคะแนนแมตช์ แยกตามประเภทกีฬา</h2>
-                <p style="margin-bottom:16px; color:#555; font-size:14px;">อันดับ 1–2 ของแต่ละกลุ่มผ่านเข้ารอบต่อไป</p>
+                <!-- ตารางคะแนนแมตช์ถูกย้ายไปที่แท็บ "สรุปอันดับ" -->
 
-                <!-- SUB TABS -->
-                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:18px;" id="matchTabBar">
-                  <button class="match-tab-btn active" onclick="switchMatchTab('mt-aov-m',this)">AOV ทีมชาย</button>
-                  <button class="match-tab-btn" onclick="switchMatchTab('mt-aov-f',this)">AOV ทีมหญิง</button>
-                  <button class="match-tab-btn" onclick="switchMatchTab('mt-sf6',this)">SF6 ชาย</button>
-                  <button class="match-tab-btn" onclick="switchMatchTab('mt-fc',this)">FC Online ชาย</button>
-                </div>
 
-                <!-- legend -->
-                <div style="display:flex;gap:18px;align-items:center;margin-bottom:14px;flex-wrap:wrap;">
-                  <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#555;">
-                    <span style="width:10px;height:10px;border-radius:2px;background:#22c99a;display:inline-block;"></span> ผ่านรอบ (อันดับ 1–2)
-                  </div>
-                  <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#555;">
-                    <span style="width:10px;height:10px;border-radius:2px;background:#c7d4e8;display:inline-block;opacity:.6;"></span> ตกรอบ
-                  </div>
-                </div>
-
-                <!-- AOV ทีมชาย -->
-                <div id="mt-aov-m" class="match-section">
-                  <div class="match-group-header">
-                    <span class="match-group-badge" style="background:#1F4788;">Group A</span>
-                    <span class="match-group-line"></span>
-                  </div>
-                  <div class="match-table-wrap">
-                  <table class="match-table">
-                    <thead><tr>
-                      <th style="width:38px">#</th><th class="mt-left">ทีม</th>
-                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
-                    </tr></thead>
-                    <tbody>
-                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>A6 ชลบุรี</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">3</td><td class="mt-d">2</td><td class="mt-l">0</td><td>8</td><td>2</td><td class="mt-pos">+6</td><td class="mt-pts">8</td></tr>
-                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>A3 เชียงใหม่</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">2</td><td class="mt-d">3</td><td class="mt-l">0</td><td>7</td><td>3</td><td class="mt-pos">+4</td><td class="mt-pts">7</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">A4 กรุงเทพฯ</td><td>5</td><td class="mt-w">1</td><td class="mt-d">4</td><td class="mt-l">0</td><td>6</td><td>4</td><td class="mt-zero">0</td><td class="mt-pts">6</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">A1 นครปฐม</td><td>5</td><td class="mt-w">1</td><td class="mt-d">3</td><td class="mt-l">1</td><td>5</td><td>5</td><td class="mt-zero">0</td><td class="mt-pts">5</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">A2 สุโขทัย</td><td>5</td><td class="mt-w">1</td><td class="mt-d">2</td><td class="mt-l">2</td><td>4</td><td>6</td><td class="mt-neg">−2</td><td class="mt-pts">4</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">6</span></td><td class="mt-left">A5 ปัตตานี</td><td>5</td><td class="mt-w">0</td><td class="mt-d">0</td><td class="mt-l">5</td><td>2</td><td>8</td><td class="mt-neg">−6</td><td class="mt-pts">0</td></tr>
-                    </tbody>
-                  </table></div>
-                  <div class="match-group-header" style="margin-top:20px;">
-                    <span class="match-group-badge" style="background:#c0392b;">Group B</span>
-                    <span class="match-group-line"></span>
-                  </div>
-                  <div class="match-table-wrap">
-                  <table class="match-table">
-                    <thead><tr>
-                      <th style="width:38px">#</th><th class="mt-left">ทีม</th>
-                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
-                    </tr></thead>
-                    <tbody>
-                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>B4 อ่างทอง</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>8</td><td>0</td><td class="mt-pos">+8</td><td class="mt-pts">8</td></tr>
-                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>B2 หนองคาย</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">2</td><td class="mt-d">1</td><td class="mt-l">1</td><td>5</td><td>3</td><td class="mt-pos">+2</td><td class="mt-pts">5</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">B1 สุรินทร์</td><td>4</td><td class="mt-w">1</td><td class="mt-d">2</td><td class="mt-l">1</td><td>4</td><td>4</td><td class="mt-zero">0</td><td class="mt-pts">4</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">B5 สตูล</td><td>4</td><td class="mt-w">0</td><td class="mt-d">2</td><td class="mt-l">2</td><td>2</td><td>6</td><td class="mt-neg">−4</td><td class="mt-pts">2</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">B3 สุราษฎร์ธานี</td><td>4</td><td class="mt-w">0</td><td class="mt-d">1</td><td class="mt-l">3</td><td>1</td><td>7</td><td class="mt-neg">−6</td><td class="mt-pts">1</td></tr>
-                    </tbody>
-                  </table></div>
-                </div>
-
-                <!-- AOV ทีมหญิง -->
-                <div id="mt-aov-f" class="match-section" style="display:none;">
-                  <div class="match-group-header">
-                    <span class="match-group-badge" style="background:#1F4788;">Group A</span>
-                    <span class="match-group-line"></span>
-                  </div>
-                  <div class="match-table-wrap">
-                  <table class="match-table">
-                    <thead><tr>
-                      <th style="width:38px">#</th><th class="mt-left">ทีม</th>
-                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
-                    </tr></thead>
-                    <tbody>
-                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>A3 ชลบุรี</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>8</td><td>0</td><td class="mt-pos">+8</td><td class="mt-pts">8</td></tr>
-                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>A5 ปราจีนบุรี</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">3</td><td class="mt-d">0</td><td class="mt-l">1</td><td>8</td><td>0</td><td class="mt-pos">+8</td><td class="mt-pts">6</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">A1 เชียงใหม่</td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>4</td><td>4</td><td class="mt-zero">0</td><td class="mt-pts">4</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">A2 ลำปาง</td><td>4</td><td class="mt-w">0</td><td class="mt-d">1</td><td class="mt-l">3</td><td>1</td><td>7</td><td class="mt-neg">−6</td><td class="mt-pts">1</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">A4 สระบุรี</td><td>4</td><td class="mt-w">0</td><td class="mt-d">1</td><td class="mt-l">3</td><td>1</td><td>7</td><td class="mt-neg">−6</td><td class="mt-pts">1</td></tr>
-                    </tbody>
-                  </table></div>
-                  <div class="match-group-header" style="margin-top:20px;">
-                    <span class="match-group-badge" style="background:#c0392b;">Group B</span>
-                    <span class="match-group-line"></span>
-                  </div>
-                  <div class="match-table-wrap">
-                  <table class="match-table">
-                    <thead><tr>
-                      <th style="width:38px">#</th><th class="mt-left">ทีม</th>
-                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
-                    </tr></thead>
-                    <tbody>
-                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>B3 กระบี่</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>8</td><td>0</td><td class="mt-pos">+8</td><td class="mt-pts">8</td></tr>
-                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>B4 ภูเก็ต</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">2</td><td class="mt-d">1</td><td class="mt-l">1</td><td>5</td><td>3</td><td class="mt-pos">+2</td><td class="mt-pts">5</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">B1 กาญจนบุรี</td><td>4</td><td class="mt-w">1</td><td class="mt-d">1</td><td class="mt-l">2</td><td>3</td><td>5</td><td class="mt-neg">−2</td><td class="mt-pts">3</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">B2 ศรีสะเกษ</td><td>4</td><td class="mt-w">0</td><td class="mt-d">2</td><td class="mt-l">2</td><td>2</td><td>6</td><td class="mt-neg">−4</td><td class="mt-pts">2</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">B5 หนองคาย</td><td>4</td><td class="mt-w">0</td><td class="mt-d">2</td><td class="mt-l">2</td><td>2</td><td>6</td><td class="mt-neg">−4</td><td class="mt-pts">2</td></tr>
-                    </tbody>
-                  </table></div>
-                </div>
-
-                <!-- SF6 ชาย -->
-                <div id="mt-sf6" class="match-section" style="display:none;">
-                  <div class="match-group-header">
-                    <span class="match-group-badge" style="background:#1F4788;">Group A</span>
-                    <span class="match-group-line"></span>
-                  </div>
-                  <div class="match-table-wrap">
-                  <table class="match-table">
-                    <thead><tr>
-                      <th style="width:38px">#</th><th class="mt-left">นักกีฬา</th>
-                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
-                    </tr></thead>
-                    <tbody>
-                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>A1 สุราษฎร์ธานี</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">5</td><td class="mt-d">0</td><td class="mt-l">0</td><td>20</td><td>3</td><td class="mt-pos">+17</td><td class="mt-pts">15</td></tr>
-                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>A2 กระบี่</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">1</td><td>19</td><td>14</td><td class="mt-pos">+5</td><td class="mt-pts">12</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">A4 กาญจนบุรี</td><td>5</td><td class="mt-w">3</td><td class="mt-d">0</td><td class="mt-l">2</td><td>17</td><td>10</td><td class="mt-pos">+7</td><td class="mt-pts">9</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">A6 เชียงใหม่</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>10</td><td>18</td><td class="mt-neg">−8</td><td class="mt-pts">3</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">A5 ปัตตานี</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>8</td><td>18</td><td class="mt-neg">−10</td><td class="mt-pts">3</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">6</span></td><td class="mt-left">A3 สระบุรี</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>9</td><td>20</td><td class="mt-neg">−11</td><td class="mt-pts">3</td></tr>
-                    </tbody>
-                  </table></div>
-                  <div class="match-group-header" style="margin-top:20px;">
-                    <span class="match-group-badge" style="background:#c0392b;">Group B</span>
-                    <span class="match-group-line"></span>
-                  </div>
-                  <div class="match-table-wrap">
-                  <table class="match-table">
-                    <thead><tr>
-                      <th style="width:38px">#</th><th class="mt-left">นักกีฬา</th>
-                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
-                    </tr></thead>
-                    <tbody>
-                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>B3 สมุทรปราการ</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>14</td><td>3</td><td class="mt-pos">+11</td><td class="mt-pts">12</td></tr>
-                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>B4 นครราชสีมา</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>13</td><td>11</td><td class="mt-pos">+2</td><td class="mt-pts">6</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">B2 กรุงเทพฯ</td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>11</td><td>13</td><td class="mt-neg">−2</td><td class="mt-pts">6</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">B5 สุรินทร์</td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>10</td><td>13</td><td class="mt-neg">−3</td><td class="mt-pts">6</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">B1 พิษณุโลก</td><td>4</td><td class="mt-w">0</td><td class="mt-d">0</td><td class="mt-l">4</td><td>6</td><td>14</td><td class="mt-neg">−8</td><td class="mt-pts">0</td></tr>
-                    </tbody>
-                  </table></div>
-                </div>
-
-                <!-- FC Online ชาย -->
-                <div id="mt-fc" class="match-section" style="display:none;">
-                  <div class="match-group-header">
-                    <span class="match-group-badge" style="background:#1F4788;">Group A</span>
-                    <span class="match-group-line"></span>
-                  </div>
-                  <div class="match-table-wrap">
-                  <table class="match-table">
-                    <thead><tr>
-                      <th style="width:38px">#</th><th class="mt-left">นักกีฬา</th>
-                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
-                    </tr></thead>
-                    <tbody>
-                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>A4 ยะลา</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">5</td><td class="mt-d">0</td><td class="mt-l">0</td><td>30</td><td>5</td><td class="mt-pos">+25</td><td class="mt-pts">15</td></tr>
-                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>A6 เชียงใหม่</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">1</td><td>15</td><td>14</td><td class="mt-pos">+1</td><td class="mt-pts">12</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">A2 อ่างทอง</td><td>5</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">3</td><td>14</td><td>12</td><td class="mt-pos">+2</td><td class="mt-pts">6</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">A5 นครปฐม</td><td>5</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">3</td><td>9</td><td>12</td><td class="mt-neg">−3</td><td class="mt-pts">6</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">A1 นนทบุรี</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>12</td><td>21</td><td class="mt-neg">−9</td><td class="mt-pts">3</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">6</span></td><td class="mt-left">A3 พิจิตร</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>10</td><td>22</td><td class="mt-neg">−12</td><td class="mt-pts">3</td></tr>
-                    </tbody>
-                  </table></div>
-                  <div class="match-group-header" style="margin-top:20px;">
-                    <span class="match-group-badge" style="background:#c0392b;">Group B</span>
-                    <span class="match-group-line"></span>
-                  </div>
-                  <div class="match-table-wrap">
-                  <table class="match-table">
-                    <thead><tr>
-                      <th style="width:38px">#</th><th class="mt-left">นักกีฬา</th>
-                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
-                    </tr></thead>
-                    <tbody>
-                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>B4 ศรีสะเกษ</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>16</td><td>7</td><td class="mt-pos">+9</td><td class="mt-pts">12</td></tr>
-                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>B5 กรุงเทพฯ</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">3</td><td class="mt-d">0</td><td class="mt-l">1</td><td>17</td><td>11</td><td class="mt-pos">+6</td><td class="mt-pts">9</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">B1 ขอนแก่น</td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>15</td><td>7</td><td class="mt-pos">+8</td><td class="mt-pts">6</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">B3 ชุมพร</td><td>4</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">3</td><td>7</td><td>14</td><td class="mt-neg">−7</td><td class="mt-pts">3</td></tr>
-                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">B2 สุราษฎร์ธานี</td><td>4</td><td class="mt-w">0</td><td class="mt-d">0</td><td class="mt-l">4</td><td>5</td><td>17</td><td class="mt-neg">−12</td><td class="mt-pts">0</td></tr>
-                    </tbody>
-                  </table></div>
-                </div>
-                <!-- /ตารางคะแนนแมตช์ -->
 
                 <h2 class="section-title">กราฟแสดงจำนวนนักกีฬา (ทั้งหมด)</h2>
                 
@@ -2597,6 +2416,195 @@
 
                 
             </div>
+        </div>
+
+
+        <!-- RANKING TAB -->
+        <div id="ranking" class="tab-content">
+            <h2 class="section-title">ตารางคะแนนแมตช์ แยกตามประเภทกีฬา</h2>
+            <p style="margin-bottom:16px; color:#555; font-size:14px;">อันดับ 1–2 ของแต่ละกลุ่มผ่านเข้ารอบต่อไป</p>
+
+            <!-- SUB TABS -->
+            <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:18px;" id="matchTabBar">
+              <button class="match-tab-btn active" onclick="switchMatchTab('mt-aov-m',this)">AOV ทีมชาย</button>
+              <button class="match-tab-btn" onclick="switchMatchTab('mt-aov-f',this)">AOV ทีมหญิง</button>
+              <button class="match-tab-btn" onclick="switchMatchTab('mt-sf6',this)">SF6 ชาย</button>
+              <button class="match-tab-btn" onclick="switchMatchTab('mt-fc',this)">FC Online ชาย</button>
+            </div>
+
+                <!-- legend -->
+                <div style="display:flex;gap:18px;align-items:center;margin-bottom:14px;flex-wrap:wrap;">
+                  <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#555;">
+                    <span style="width:10px;height:10px;border-radius:2px;background:#22c99a;display:inline-block;"></span> ผ่านรอบ (อันดับ 1–2)
+                  </div>
+                  <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#555;">
+                    <span style="width:10px;height:10px;border-radius:2px;background:#c7d4e8;display:inline-block;opacity:.6;"></span> ตกรอบ
+                  </div>
+                </div>
+
+                <!-- AOV ทีมชาย -->
+                <div id="mt-aov-m" class="match-section">
+                  <div class="match-group-header">
+                    <span class="match-group-badge" style="background:#1F4788;">Group A</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">ทีม</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>A6 ชลบุรี</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">3</td><td class="mt-d">2</td><td class="mt-l">0</td><td>8</td><td>2</td><td class="mt-pos">+6</td><td class="mt-pts">8</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>A3 เชียงใหม่</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">2</td><td class="mt-d">3</td><td class="mt-l">0</td><td>7</td><td>3</td><td class="mt-pos">+4</td><td class="mt-pts">7</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">A4 กรุงเทพฯ</td><td>5</td><td class="mt-w">1</td><td class="mt-d">4</td><td class="mt-l">0</td><td>6</td><td>4</td><td class="mt-zero">0</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">A1 นครปฐม</td><td>5</td><td class="mt-w">1</td><td class="mt-d">3</td><td class="mt-l">1</td><td>5</td><td>5</td><td class="mt-zero">0</td><td class="mt-pts">5</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">A2 สุโขทัย</td><td>5</td><td class="mt-w">1</td><td class="mt-d">2</td><td class="mt-l">2</td><td>4</td><td>6</td><td class="mt-neg">−2</td><td class="mt-pts">4</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">6</span></td><td class="mt-left">A5 ปัตตานี</td><td>5</td><td class="mt-w">0</td><td class="mt-d">0</td><td class="mt-l">5</td><td>2</td><td>8</td><td class="mt-neg">−6</td><td class="mt-pts">0</td></tr>
+                    </tbody>
+                  </table></div>
+                  <div class="match-group-header" style="margin-top:20px;">
+                    <span class="match-group-badge" style="background:#c0392b;">Group B</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">ทีม</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>B4 อ่างทอง</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>8</td><td>0</td><td class="mt-pos">+8</td><td class="mt-pts">8</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>B2 หนองคาย</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">2</td><td class="mt-d">1</td><td class="mt-l">1</td><td>5</td><td>3</td><td class="mt-pos">+2</td><td class="mt-pts">5</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">B1 สุรินทร์</td><td>4</td><td class="mt-w">1</td><td class="mt-d">2</td><td class="mt-l">1</td><td>4</td><td>4</td><td class="mt-zero">0</td><td class="mt-pts">4</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">B5 สตูล</td><td>4</td><td class="mt-w">0</td><td class="mt-d">2</td><td class="mt-l">2</td><td>2</td><td>6</td><td class="mt-neg">−4</td><td class="mt-pts">2</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">B3 สุราษฎร์ธานี</td><td>4</td><td class="mt-w">0</td><td class="mt-d">1</td><td class="mt-l">3</td><td>1</td><td>7</td><td class="mt-neg">−6</td><td class="mt-pts">1</td></tr>
+                    </tbody>
+                  </table></div>
+                </div>
+
+                <!-- AOV ทีมหญิง -->
+                <div id="mt-aov-f" class="match-section" style="display:none;">
+                  <div class="match-group-header">
+                    <span class="match-group-badge" style="background:#1F4788;">Group A</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">ทีม</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>A3 ชลบุรี</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>8</td><td>0</td><td class="mt-pos">+8</td><td class="mt-pts">8</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>A5 ปราจีนบุรี</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">3</td><td class="mt-d">0</td><td class="mt-l">1</td><td>8</td><td>0</td><td class="mt-pos">+8</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">A1 เชียงใหม่</td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>4</td><td>4</td><td class="mt-zero">0</td><td class="mt-pts">4</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">A2 ลำปาง</td><td>4</td><td class="mt-w">0</td><td class="mt-d">1</td><td class="mt-l">3</td><td>1</td><td>7</td><td class="mt-neg">−6</td><td class="mt-pts">1</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">A4 สระบุรี</td><td>4</td><td class="mt-w">0</td><td class="mt-d">1</td><td class="mt-l">3</td><td>1</td><td>7</td><td class="mt-neg">−6</td><td class="mt-pts">1</td></tr>
+                    </tbody>
+                  </table></div>
+                  <div class="match-group-header" style="margin-top:20px;">
+                    <span class="match-group-badge" style="background:#c0392b;">Group B</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">ทีม</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>B3 กระบี่</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>8</td><td>0</td><td class="mt-pos">+8</td><td class="mt-pts">8</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>B4 ภูเก็ต</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">2</td><td class="mt-d">1</td><td class="mt-l">1</td><td>5</td><td>3</td><td class="mt-pos">+2</td><td class="mt-pts">5</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">B1 กาญจนบุรี</td><td>4</td><td class="mt-w">1</td><td class="mt-d">1</td><td class="mt-l">2</td><td>3</td><td>5</td><td class="mt-neg">−2</td><td class="mt-pts">3</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">B2 ศรีสะเกษ</td><td>4</td><td class="mt-w">0</td><td class="mt-d">2</td><td class="mt-l">2</td><td>2</td><td>6</td><td class="mt-neg">−4</td><td class="mt-pts">2</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">B5 หนองคาย</td><td>4</td><td class="mt-w">0</td><td class="mt-d">2</td><td class="mt-l">2</td><td>2</td><td>6</td><td class="mt-neg">−4</td><td class="mt-pts">2</td></tr>
+                    </tbody>
+                  </table></div>
+                </div>
+
+                <!-- SF6 ชาย -->
+                <div id="mt-sf6" class="match-section" style="display:none;">
+                  <div class="match-group-header">
+                    <span class="match-group-badge" style="background:#1F4788;">Group A</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">นักกีฬา</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>A1 สุราษฎร์ธานี</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">5</td><td class="mt-d">0</td><td class="mt-l">0</td><td>20</td><td>3</td><td class="mt-pos">+17</td><td class="mt-pts">15</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>A2 กระบี่</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">1</td><td>19</td><td>14</td><td class="mt-pos">+5</td><td class="mt-pts">12</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">A4 กาญจนบุรี</td><td>5</td><td class="mt-w">3</td><td class="mt-d">0</td><td class="mt-l">2</td><td>17</td><td>10</td><td class="mt-pos">+7</td><td class="mt-pts">9</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">A6 เชียงใหม่</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>10</td><td>18</td><td class="mt-neg">−8</td><td class="mt-pts">3</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">A5 ปัตตานี</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>8</td><td>18</td><td class="mt-neg">−10</td><td class="mt-pts">3</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">6</span></td><td class="mt-left">A3 สระบุรี</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>9</td><td>20</td><td class="mt-neg">−11</td><td class="mt-pts">3</td></tr>
+                    </tbody>
+                  </table></div>
+                  <div class="match-group-header" style="margin-top:20px;">
+                    <span class="match-group-badge" style="background:#c0392b;">Group B</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">นักกีฬา</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>B3 สมุทรปราการ</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>14</td><td>3</td><td class="mt-pos">+11</td><td class="mt-pts">12</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>B4 นครราชสีมา</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>13</td><td>11</td><td class="mt-pos">+2</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">B2 กรุงเทพฯ</td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>11</td><td>13</td><td class="mt-neg">−2</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">B5 สุรินทร์</td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>10</td><td>13</td><td class="mt-neg">−3</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">B1 พิษณุโลก</td><td>4</td><td class="mt-w">0</td><td class="mt-d">0</td><td class="mt-l">4</td><td>6</td><td>14</td><td class="mt-neg">−8</td><td class="mt-pts">0</td></tr>
+                    </tbody>
+                  </table></div>
+                </div>
+
+                <!-- FC Online ชาย -->
+                <div id="mt-fc" class="match-section" style="display:none;">
+                  <div class="match-group-header">
+                    <span class="match-group-badge" style="background:#1F4788;">Group A</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">นักกีฬา</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>A4 ยะลา</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">5</td><td class="mt-d">0</td><td class="mt-l">0</td><td>30</td><td>5</td><td class="mt-pos">+25</td><td class="mt-pts">15</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>A6 เชียงใหม่</b><span class="mt-pass">ผ่านรอบ</span></td><td>5</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">1</td><td>15</td><td>14</td><td class="mt-pos">+1</td><td class="mt-pts">12</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">A2 อ่างทอง</td><td>5</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">3</td><td>14</td><td>12</td><td class="mt-pos">+2</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">A5 นครปฐม</td><td>5</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">3</td><td>9</td><td>12</td><td class="mt-neg">−3</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">A1 นนทบุรี</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>12</td><td>21</td><td class="mt-neg">−9</td><td class="mt-pts">3</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">6</span></td><td class="mt-left">A3 พิจิตร</td><td>5</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">4</td><td>10</td><td>22</td><td class="mt-neg">−12</td><td class="mt-pts">3</td></tr>
+                    </tbody>
+                  </table></div>
+                  <div class="match-group-header" style="margin-top:20px;">
+                    <span class="match-group-badge" style="background:#c0392b;">Group B</span>
+                    <span class="match-group-line"></span>
+                  </div>
+                  <div class="match-table-wrap">
+                  <table class="match-table">
+                    <thead><tr>
+                      <th style="width:38px">#</th><th class="mt-left">นักกีฬา</th>
+                      <th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>+/−</th><th>คะแนน</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="mt-qual"><td><span class="mt-rank r1">1</span></td><td class="mt-left"><b>B4 ศรีสะเกษ</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">4</td><td class="mt-d">0</td><td class="mt-l">0</td><td>16</td><td>7</td><td class="mt-pos">+9</td><td class="mt-pts">12</td></tr>
+                      <tr class="mt-qual mt-last-qual"><td><span class="mt-rank r2">2</span></td><td class="mt-left"><b>B5 กรุงเทพฯ</b><span class="mt-pass">ผ่านรอบ</span></td><td>4</td><td class="mt-w">3</td><td class="mt-d">0</td><td class="mt-l">1</td><td>17</td><td>11</td><td class="mt-pos">+6</td><td class="mt-pts">9</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">3</span></td><td class="mt-left">B1 ขอนแก่น</td><td>4</td><td class="mt-w">2</td><td class="mt-d">0</td><td class="mt-l">2</td><td>15</td><td>7</td><td class="mt-pos">+8</td><td class="mt-pts">6</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">4</span></td><td class="mt-left">B3 ชุมพร</td><td>4</td><td class="mt-w">1</td><td class="mt-d">0</td><td class="mt-l">3</td><td>7</td><td>14</td><td class="mt-neg">−7</td><td class="mt-pts">3</td></tr>
+                      <tr class="mt-elim"><td><span class="mt-rank rn">5</span></td><td class="mt-left">B2 สุราษฎร์ธานี</td><td>4</td><td class="mt-w">0</td><td class="mt-d">0</td><td class="mt-l">4</td><td>5</td><td>17</td><td class="mt-neg">−12</td><td class="mt-pts">0</td></tr>
+                    </tbody>
+                  </table></div>
+                </div>
+                <!-- /ตารางคะแนนแมตช์ -->
         </div>
 
         <!-- SCHEDULE TAB -->
