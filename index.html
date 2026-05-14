@@ -3139,6 +3139,17 @@
             document.getElementById(id).style.display = 'block';
             btn.classList.add('active');
         }
+
+        function switchTab(event, tabId) {
+    // ซ่อน tab ทั้งหมด
+    document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+    // เอา active ออกจากปุ่มทั้งหมด
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    // แสดง tab ที่เลือก
+    document.getElementById(tabId).style.display = 'block';
+    // ใส่ active ให้ปุ่มที่กด
+    event.currentTarget.classList.add('active');
+}
         // ===== Service Worker Registration =====
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
